@@ -58,16 +58,16 @@ class File : public Stream {
  public:
   File() = default;
   ~File() {
-    //if (is_open) close();
+    if (is_open) close();
   }
 
   virtual size_t write(uint8_t ch) {
-    if (&file == nullptr) return 0;
+    if (fs == nullptr) return 0;
     int rc = fs->f_putc(ch, &file);
     return rc == EOF ? 0 : 1;
   }
   virtual size_t write(const uint8_t *buf, size_t size) {
-    if (&file == nullptr) return 0;
+    if (fs == nullptr) return 0;
     UINT result;
     FRESULT rc = fs->f_write(&file, buf, size, &result);
     return rc == FR_OK ? result : 0;
@@ -92,11 +92,16 @@ class File : public Stream {
     if (!isDirectory()) fs->f_sync(&file);
   }
 
-  int read(void *buf, uint16_t nbyte) {
+  size_t readBytes(uint8_t *data, size_t len) override { 
     if (isDirectory()) return 0;
     UINT result;
-    auto rc = fs->f_read(&file, buf, nbyte, &result);
+    auto rc = fs->f_read(&file, data, len, &result);
     return rc == FR_OK ? result : 0;
+
+  }
+
+  int read(void *buf, size_t nbyte) {
+    return readBytes((uint8_t*)buf, nbyte);
   }
 
   bool seek(uint32_t pos) {
@@ -172,7 +177,6 @@ class File : public Stream {
 
   /// update fs, info and is_open
   bool update_stat(FatFs &fat_fs, const char *filepath) {
-    fs = &fat_fs;
     is_open = fat_fs.f_stat(filepath, &info) == FR_OK;
     return is_open;
   }
@@ -234,6 +238,7 @@ class SDClass {
         result = fat_fs.f_open(&file.file, filename, mode);
       }
       file.is_open = handleError(result);
+      file.fs = &fat_fs;
     }
     return file;
   }

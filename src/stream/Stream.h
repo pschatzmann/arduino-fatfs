@@ -55,15 +55,17 @@ class Print {
   }
 
   virtual int println(const char *msg = "") {
-    int result = print(msg);
-    write('\n');
-    return result + 1;
+    size_t len = strlen(msg)+1;
+    char tmp[len];
+    strcpy(tmp, msg);
+    tmp[len-1]='\n';
+    return write(tmp, len);
   }
 
   virtual int println(int n32) {
-    int result = print(n32);
-    write('\n');
-    return result + 1;
+    char buffer[100] = {0};
+    int result = snprintf(buffer, 100,"%d\n", n32);
+    return write(buffer, result);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) {

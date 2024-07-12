@@ -9,10 +9,10 @@ void setup() {
   while(!Serial);
   Serial.println("SD begin");
   SD.setDriver(drv);
-  if (!SD.mkfs()){
-    Serial.println("mkfs error");
-    while(true);
-  }
+  // if (!SD.mkfs()){
+  //   Serial.println("mkfs error");
+  //   while(true);
+  // }
 
   // start SD
   if (!SD.begin()){
@@ -20,7 +20,7 @@ void setup() {
     while(true);
   }
 
-  Serial.println("Opening file");
+  Serial.println("Opening file...");
   file = SD.open("test", FILE_WRITE);
   if (!file){
     Serial.println("Could not create file");
@@ -31,12 +31,15 @@ void setup() {
   file.println("test");
   file.flush();
 
-  Serial.println("Reading file");
+  Serial.println("Reading file...");
   file.seek(0);
   uint8_t data[100] = {0};
-  file.readBytes(data, 100);
+  int len = file.readBytes(data, 100);
+  Serial.print("bytes read: ");
+  Serial.println(len);
+  Serial.print("data: ");
   Serial.println((char*)data);
-
+  Serial.print("file size: ");
   Serial.println(file.size());
 
   file.close();

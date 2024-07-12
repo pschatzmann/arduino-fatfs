@@ -1,10 +1,8 @@
 #pragma once
 
 #include <stdlib.h>
-
 #include <cstring>
 #include <vector>
-
 #include "IO.h"
 
 namespace fatfs {
@@ -26,7 +24,11 @@ class RamIO : public IO {
     for (int j = 0; j <= sector_count; j++) {
       free(sectors[j]);
     }
+    delete[]work_buffer;
   }
+
+  // custom logic on mount: we need to format the drive 
+  FRESULT mount(FatFs& fs) override;
 
   DSTATUS disk_initialize(BYTE pdrv) override {
     if (pdrv != 0) return STA_NODISK;
@@ -122,6 +124,7 @@ class RamIO : public IO {
   DSTATUS status = STA_NOINIT;
   int sector_size = 512;
   size_t sector_count = 0;
+  uint8_t *work_buffer = nullptr;
 };
 
 }  // namespace fatfs
