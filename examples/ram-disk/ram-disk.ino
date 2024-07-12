@@ -9,10 +9,6 @@ void setup() {
   while(!Serial);
   Serial.println("SD begin");
   SD.setDriver(drv);
-  // if (!SD.mkfs()){
-  //   Serial.println("mkfs error");
-  //   while(true);
-  // }
 
   // start SD
   if (!SD.begin()){
@@ -27,10 +23,11 @@ void setup() {
     while(true);
   }
 
-
+  // printing data
   file.println("test");
   file.flush();
 
+  // reading back the result
   Serial.println("Reading file...");
   file.seek(0);
   uint8_t data[100] = {0};
