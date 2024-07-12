@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> system driver which supports multiple drives: Add the drivers by calling add() then call <a class="el" href="classfatfs_1_1MultiIO.html#a318ad12b490ffe733a22a1d3c1e49788" title="mount all the added drivers">mount()</a> to mount the drives.  
+<p><a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> system driver which supports multiple drives: Add the drivers by calling add() then call <a class="el" href="classfatfs_1_1MultiIO.html#aba9e355b466152bbe4eb38508dd00c5a" title="mount all the added drivers">mount()</a> to mount the drives.  
  <a href="classfatfs_1_1MultiIO.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="MultiIO_8h_source.html">MultiIO.h</a>&gt;</code></p>
@@ -104,29 +104,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07f4be56930f0166fc8aa9a98cf6d447"><td class="memItemLeft" align="right" valign="top"><a id="a07f4be56930f0166fc8aa9a98cf6d447"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classfatfs_1_1IO.html">IO</a> &amp;io)</td></tr>
 <tr class="separator:a07f4be56930f0166fc8aa9a98cf6d447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a318ad12b490ffe733a22a1d3c1e49788"><td class="memItemLeft" align="right" valign="top"><a id="a318ad12b490ffe733a22a1d3c1e49788"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1MultiIO.html#a318ad12b490ffe733a22a1d3c1e49788">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs) override</td></tr>
-<tr class="memdesc:a318ad12b490ffe733a22a1d3c1e49788"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount all the added drivers <br /></td></tr>
-<tr class="separator:a318ad12b490ffe733a22a1d3c1e49788"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4794287d3fe945da26494a5e484df04f"><td class="memItemLeft" align="right" valign="top"><a id="a4794287d3fe945da26494a5e484df04f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1MultiIO.html#a4794287d3fe945da26494a5e484df04f">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs) override</td></tr>
-<tr class="memdesc:a4794287d3fe945da26494a5e484df04f"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount all drivers <br /></td></tr>
-<tr class="separator:a4794287d3fe945da26494a5e484df04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83be4447c54ca5fea5c71aa4e433531e"><td class="memItemLeft" align="right" valign="top"><a id="a83be4447c54ca5fea5c71aa4e433531e"></a>
-DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_initialize</b> (BYTE pdrv)</td></tr>
-<tr class="separator:a83be4447c54ca5fea5c71aa4e433531e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa162f571b1007edde35bcb5398d15b2b"><td class="memItemLeft" align="right" valign="top"><a id="aa162f571b1007edde35bcb5398d15b2b"></a>
-DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_status</b> (BYTE pdrv)</td></tr>
-<tr class="separator:aa162f571b1007edde35bcb5398d15b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69d65b2d2bf80bae8de9d971d0589e08"><td class="memItemLeft" align="right" valign="top"><a id="a69d65b2d2bf80bae8de9d971d0589e08"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_read</b> (BYTE pdrv, BYTE *buff, LBA_t sector, UINT count)</td></tr>
-<tr class="separator:a69d65b2d2bf80bae8de9d971d0589e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa47d2da31070103d421428751ca11a28"><td class="memItemLeft" align="right" valign="top"><a id="aa47d2da31070103d421428751ca11a28"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_write</b> (BYTE pdrv, const BYTE *buff, LBA_t sector, UINT count)</td></tr>
-<tr class="separator:aa47d2da31070103d421428751ca11a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad71c43030a388dd012cd658736b7d2a1"><td class="memItemLeft" align="right" valign="top"><a id="ad71c43030a388dd012cd658736b7d2a1"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE pdrv, ioctl_cmd_t cmd, void *buff)</td></tr>
-<tr class="separator:ad71c43030a388dd012cd658736b7d2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba9e355b466152bbe4eb38508dd00c5a"><td class="memItemLeft" align="right" valign="top"><a id="aba9e355b466152bbe4eb38508dd00c5a"></a>
+FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1MultiIO.html#aba9e355b466152bbe4eb38508dd00c5a">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs) override</td></tr>
+<tr class="memdesc:aba9e355b466152bbe4eb38508dd00c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount all the added drivers <br /></td></tr>
+<tr class="separator:aba9e355b466152bbe4eb38508dd00c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ff93fdfe0c9d2cf1aa57e14d63a61f"><td class="memItemLeft" align="right" valign="top"><a id="a38ff93fdfe0c9d2cf1aa57e14d63a61f"></a>
+FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1MultiIO.html#a38ff93fdfe0c9d2cf1aa57e14d63a61f">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs) override</td></tr>
+<tr class="memdesc:a38ff93fdfe0c9d2cf1aa57e14d63a61f"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount all drivers <br /></td></tr>
+<tr class="separator:a38ff93fdfe0c9d2cf1aa57e14d63a61f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad54c46484be41e6c79f4716f8a4c321a"><td class="memItemLeft" align="right" valign="top"><a id="ad54c46484be41e6c79f4716f8a4c321a"></a>
+DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_initialize</b> (BYTE pdrv) override</td></tr>
+<tr class="separator:ad54c46484be41e6c79f4716f8a4c321a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090d405374c293a4ce4355b7fe7b6771"><td class="memItemLeft" align="right" valign="top"><a id="a090d405374c293a4ce4355b7fe7b6771"></a>
+DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_status</b> (BYTE pdrv) override</td></tr>
+<tr class="separator:a090d405374c293a4ce4355b7fe7b6771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9534166b7c4f96cc47ea373f653e3a79"><td class="memItemLeft" align="right" valign="top"><a id="a9534166b7c4f96cc47ea373f653e3a79"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_read</b> (BYTE pdrv, BYTE *buff, LBA_t sector, UINT count) override</td></tr>
+<tr class="separator:a9534166b7c4f96cc47ea373f653e3a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0538529f211337a4e1d93b78f34851b"><td class="memItemLeft" align="right" valign="top"><a id="aa0538529f211337a4e1d93b78f34851b"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_write</b> (BYTE pdrv, const BYTE *buff, LBA_t sector, UINT count) override</td></tr>
+<tr class="separator:aa0538529f211337a4e1d93b78f34851b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb61bc69a9f03e5dd338f8168b2d7399"><td class="memItemLeft" align="right" valign="top"><a id="afb61bc69a9f03e5dd338f8168b2d7399"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE pdrv, ioctl_cmd_t cmd, void *buff) override</td></tr>
+<tr class="separator:afb61bc69a9f03e5dd338f8168b2d7399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -141,7 +141,7 @@ std::vector&lt; <a class="el" href="classfatfs_1_1IO.html">IO</a> * &gt;&#160;</
 <tr class="separator:a96f5639ba4822391deab464beac59914"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> system driver which supports multiple drives: Add the drivers by calling add() then call <a class="el" href="classfatfs_1_1MultiIO.html#a318ad12b490ffe733a22a1d3c1e49788" title="mount all the added drivers">mount()</a> to mount the drives. </p>
+<div class="textblock"><p><a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> system driver which supports multiple drives: Add the drivers by calling add() then call <a class="el" href="classfatfs_1_1MultiIO.html#aba9e355b466152bbe4eb38508dd00c5a" title="mount all the added drivers">mount()</a> to mount the drives. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/driver/<a class="el" href="MultiIO_8h_source.html">MultiIO.h</a></li>
 </ul>

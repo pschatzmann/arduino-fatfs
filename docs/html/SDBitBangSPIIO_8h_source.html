@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/-------------------------------------------------------------------------*/</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;../ff/ff.h&quot;</span>     <span class="comment">/* Obtains integer types for FatFs */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;../ff/ff.h&quot;</span> <span class="comment">/* Obtains integer types for FatFs */</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;BaseIO.h&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;sdcommon.h&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
@@ -125,18 +125,18 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> setCS(<span class="keywordtype">int</span> cs) { this-&gt;cs = cs; }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  DSTATUS disk_status(BYTE drv) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  DSTATUS disk_status(BYTE drv)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (drv) <span class="keywordflow">return</span> STA_NOINIT;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> Stat;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  DSTATUS disk_initialize(BYTE drv) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  DSTATUS disk_initialize(BYTE drv)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    BYTE n, ty, cmd, buf[4];</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    UINT tmr;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    DSTATUS s;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> (drv != 0) <span class="keywordflow">return</span> STA_NODISK;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (miso==-1 || mosi==-1 || clk==-1) <span class="keywordflow">return</span> STA_NODISK;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (miso == -1 || mosi == -1 || clk == -1) <span class="keywordflow">return</span> STA_NODISK;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    delay(10); <span class="comment">/* 10ms */</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    setup_pins();</div>
@@ -191,7 +191,7 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      BYTE *buff,   <span class="comment">/* Pointer to the data buffer to store read data */</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      LBA_t sector, <span class="comment">/* Start sector number (LBA) */</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      UINT count    <span class="comment">/* Sector count (1..128) */</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  ) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      )<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    BYTE cmd;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    DWORD sect = (DWORD)sector;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
@@ -217,7 +217,7 @@ $(function() {
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                     <span class="keyword">const</span> BYTE *buff, <span class="comment">/* Pointer to the data to be written */</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                     LBA_t sector,     <span class="comment">/* Start sector number (LBA) */</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                     UINT count        <span class="comment">/* Sector count (1..128) */</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  ) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                     )<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    DWORD sect = (DWORD)sector;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">if</span> (disk_status(drv) &amp; STA_NOINIT) <span class="keywordflow">return</span> RES_NOTRDY;</div>
@@ -247,7 +247,7 @@ $(function() {
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  DRESULT disk_ioctl(BYTE drv,  <span class="comment">/* Physical drive nmuber (0) */</span></div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                     BYTE ctrl, <span class="comment">/* Control code */</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                     <span class="keywordtype">void</span> *buff <span class="comment">/* Buffer to send/receive control data */</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  ) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                     )<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    DRESULT res;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    BYTE n, csd[16];</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    DWORD cs;</div>
@@ -530,8 +530,7 @@ $(function() {
 <div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;  }</div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;};</div>
 <div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;}</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;}  <span class="comment">// namespace fatfs</span></div>
 <div class="ttc" id="aclassfatfs_1_1BaseIO_html"><div class="ttname"><a href="classfatfs_1_1BaseIO.html">fatfs::BaseIO</a></div><div class="ttdoc">Empty IO implementation that we can use to test the compilation.</div><div class="ttdef"><b>Definition:</b> BaseIO.h:10</div></div>
 <div class="ttc" id="aclassfatfs_1_1SDBitBangSPIIO_html"><div class="ttname"><a href="classfatfs_1_1SDBitBangSPIIO.html">fatfs::SDBitBangSPIIO</a></div><div class="ttdoc">Accessing a SD card via SPI using bit banging.</div><div class="ttdef"><b>Definition:</b> SDBitBangSPIIO.h:41</div></div>
 <div class="ttc" id="aclassfatfs_1_1SDBitBangSPIIO_html_a2a93105c4a08d6f58ede80717aa7430a"><div class="ttname"><a href="classfatfs_1_1SDBitBangSPIIO.html#a2a93105c4a08d6f58ede80717aa7430a">fatfs::SDBitBangSPIIO::send_cmd</a></div><div class="ttdeci">BYTE send_cmd(BYTE cmd, DWORD arg)</div><div class="ttdoc">Send a command packet to the card *‍/.</div><div class="ttdef"><b>Definition:</b> SDBitBangSPIIO.h:435</div></div>

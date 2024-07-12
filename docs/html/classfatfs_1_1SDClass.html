@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfatfs_1_1SDClass-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,12 +84,10 @@ Collaboration diagram for fatfs::SDClass:</div>
 <div class="dyncontent">
 <div class="center"><img src="classfatfs_1_1SDClass__coll__graph.png" border="0" usemap="#afatfs_1_1SDClass_coll__map" alt="Collaboration graph"/></div>
 <map name="afatfs_1_1SDClass_coll__map" id="afatfs_1_1SDClass_coll__map">
-<area shape="rect" title="SDClass: starting driver, access to files." alt="" coords="121,363,235,389"/>
-<area shape="rect" href="classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="137,95,211,121"/>
-<area shape="rect" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="5,184,100,211"/>
-<area shape="rect" href="classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="125,184,231,211"/>
-<area shape="rect" href="structfatfs_1_1FATFS.html" title=" " alt="" coords="27,5,124,32"/>
-<area shape="rect" href="classfatfs_1_1SDArduinoSPIIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="97,273,259,300"/>
+<area shape="rect" title="SDClass: starting driver, access to files." alt="" coords="16,273,129,300"/>
+<area shape="rect" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,184,120,211"/>
+<area shape="rect" href="classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,95,189,121"/>
+<area shape="rect" href="structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -105,10 +104,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#ad4f8035dca50117eef9f9d36085b548f">begin</a> ()</td></tr>
 <tr class="memdesc:ad4f8035dca50117eef9f9d36085b548f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of SD card. We use the SPI SD driver if nothing has been defined in the constructor. <br /></td></tr>
 <tr class="separator:ad4f8035dca50117eef9f9d36085b548f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba8e4e1db86528c42320c732dfc8a923"><td class="memItemLeft" align="right" valign="top"><a id="aba8e4e1db86528c42320c732dfc8a923"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#aba8e4e1db86528c42320c732dfc8a923">begin</a> (int cs, SPIClass &amp;spi=SPI)</td></tr>
-<tr class="memdesc:aba8e4e1db86528c42320c732dfc8a923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility with SD library: we use the Arduino SPI SD driver. <br /></td></tr>
-<tr class="separator:aba8e4e1db86528c42320c732dfc8a923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a148e640a514a8f1abec78b26c77b42b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a148e640a514a8f1abec78b26c77b42b3">end</a> ()</td></tr>
 <tr class="separator:a148e640a514a8f1abec78b26c77b42b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65eed368dd00b0bcc4c3eb7a9cf02d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfatfs_1_1File.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a65eed368dd00b0bcc4c3eb7a9cf02d25">open</a> (const char *filename, uint8_t mode=FILE_READ)</td></tr>
@@ -151,6 +146,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a2d684f0350c8aa398376a924e126c4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66cd303525b8815a6d075c3068223e26"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a66cd303525b8815a6d075c3068223e26">getcwd</a> (char *buff, size_t len)</td></tr>
 <tr class="separator:a66cd303525b8815a6d075c3068223e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9e12d066073cd76406d056c7f9daf2"><td class="memItemLeft" align="right" valign="top"><a id="a5a9e12d066073cd76406d056c7f9daf2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a5a9e12d066073cd76406d056c7f9daf2">mkfs</a> (int workBufferSize=FF_MAX_SS)</td></tr>
+<tr class="memdesc:a5a9e12d066073cd76406d056c7f9daf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">format drive <br /></td></tr>
+<tr class="separator:a5a9e12d066073cd76406d056c7f9daf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6a0671302c66095bb7cae9d3f664616"><td class="memItemLeft" align="right" valign="top"><a id="ad6a0671302c66095bb7cae9d3f664616"></a>
 <a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#ad6a0671302c66095bb7cae9d3f664616">getFatFs</a> ()</td></tr>
 <tr class="memdesc:ad6a0671302c66095bb7cae9d3f664616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to low level FatFS api to use functionality not exposed by this API. <br /></td></tr>
@@ -164,17 +163,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:ae0db98f7c0c2f9181e61bbc3d6cc019b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access lo low level driver. <br /></td></tr>
 <tr class="separator:ae0db98f7c0c2f9181e61bbc3d6cc019b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a06b3501759a9b4a6af8e82de80c9c354"><td class="memItemLeft" align="right" valign="top"><a id="a06b3501759a9b4a6af8e82de80c9c354"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleError</b> (FRESULT rc)</td></tr>
+<tr class="separator:a06b3501759a9b4a6af8e82de80c9c354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2acd692f1d6b8e8a54e097b1f9fbb7ae"><td class="memItemLeft" align="right" valign="top"><a id="a2acd692f1d6b8e8a54e097b1f9fbb7ae"></a>
-<a class="el" href="classfatfs_1_1SDArduinoSPIIO.html">fatfs::SDArduinoSPIIO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>drv</b></td></tr>
-<tr class="separator:a2acd692f1d6b8e8a54e097b1f9fbb7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a807afd9468627a2175503e24562e9f03"><td class="memItemLeft" align="right" valign="top"><a id="a807afd9468627a2175503e24562e9f03"></a>
-<a class="el" href="classfatfs_1_1IO.html">IO</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_io</b> = &amp;drv</td></tr>
-<tr class="separator:a807afd9468627a2175503e24562e9f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd50cc6f22c73248b86e9258ca35422b"><td class="memItemLeft" align="right" valign="top"><a id="abd50cc6f22c73248b86e9258ca35422b"></a>
 <a class="el" href="classfatfs_1_1FatFs.html">FatFs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fat_fs</b></td></tr>
 <tr class="separator:abd50cc6f22c73248b86e9258ca35422b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa3890988a436e0ec259444e013f227"><td class="memItemLeft" align="right" valign="top"><a id="a2aa3890988a436e0ec259444e013f227"></a>
+uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> = nullptr</td></tr>
+<tr class="separator:a2aa3890988a436e0ec259444e013f227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classfatfs_1_1SDClass.html" title="SDClass: starting driver, access to files.">SDClass</a>: starting driver, access to files. </p>

@@ -1,8 +1,6 @@
 <map id="fatfs::SDClass" name="fatfs::SDClass">
-<area shape="rect" id="node1" title="SDClass: starting driver, access to files." alt="" coords="121,363,235,389"/>
-<area shape="rect" id="node2" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="137,95,211,121"/>
-<area shape="rect" id="node4" href="$classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="5,184,100,211"/>
-<area shape="rect" id="node6" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="125,184,231,211"/>
-<area shape="rect" id="node3" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="27,5,124,32"/>
-<area shape="rect" id="node5" href="$classfatfs_1_1SDArduinoSPIIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="97,273,259,300"/>
+<area shape="rect" id="node1" title="SDClass: starting driver, access to files." alt="" coords="16,273,129,300"/>
+<area shape="rect" id="node2" href="$classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,184,120,211"/>
+<area shape="rect" id="node3" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,95,189,121"/>
+<area shape="rect" id="node4" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,32"/>
 </map>

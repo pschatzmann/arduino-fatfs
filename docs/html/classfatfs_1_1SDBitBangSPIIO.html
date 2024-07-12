@@ -122,32 +122,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCLK</b> (int clk)<
 <tr class="memitem:a690e8e53f9af028cb7dd5907eb3026fd"><td class="memItemLeft" align="right" valign="top"><a id="a690e8e53f9af028cb7dd5907eb3026fd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCS</b> (int cs)</td></tr>
 <tr class="separator:a690e8e53f9af028cb7dd5907eb3026fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac6df7d33a88162688f80c35ff24ac4d"><td class="memItemLeft" align="right" valign="top"><a id="aac6df7d33a88162688f80c35ff24ac4d"></a>
-DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_status</b> (BYTE drv)</td></tr>
-<tr class="separator:aac6df7d33a88162688f80c35ff24ac4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab02ff2e448e2e8b4f64ee07ef59ba852"><td class="memItemLeft" align="right" valign="top"><a id="ab02ff2e448e2e8b4f64ee07ef59ba852"></a>
-DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_initialize</b> (BYTE drv)</td></tr>
-<tr class="separator:ab02ff2e448e2e8b4f64ee07ef59ba852"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92c833b59608bcdb52fa8b1d85935bab"><td class="memItemLeft" align="right" valign="top"><a id="a92c833b59608bcdb52fa8b1d85935bab"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_read</b> (BYTE drv, BYTE *buff, LBA_t sector, UINT count)</td></tr>
-<tr class="separator:a92c833b59608bcdb52fa8b1d85935bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4561bee87a38de62e77dedab4191b82"><td class="memItemLeft" align="right" valign="top"><a id="ab4561bee87a38de62e77dedab4191b82"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_write</b> (BYTE drv, const BYTE *buff, LBA_t sector, UINT count)</td></tr>
-<tr class="separator:ab4561bee87a38de62e77dedab4191b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1cd53ba158ab00312509dfdc598edf2"><td class="memItemLeft" align="right" valign="top"><a id="af1cd53ba158ab00312509dfdc598edf2"></a>
-DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE drv, BYTE ctrl, void *buff)</td></tr>
-<tr class="separator:af1cd53ba158ab00312509dfdc598edf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7bc9cd133aa4335c38a97a0190f5cb7"><td class="memItemLeft" align="right" valign="top"><a id="af7bc9cd133aa4335c38a97a0190f5cb7"></a>
+DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_status</b> (BYTE drv) override</td></tr>
+<tr class="separator:af7bc9cd133aa4335c38a97a0190f5cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618dbb73cccae67f04d34159863c4e91"><td class="memItemLeft" align="right" valign="top"><a id="a618dbb73cccae67f04d34159863c4e91"></a>
+DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_initialize</b> (BYTE drv) override</td></tr>
+<tr class="separator:a618dbb73cccae67f04d34159863c4e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a859b6857f46486985d940559e6e11"><td class="memItemLeft" align="right" valign="top"><a id="a60a859b6857f46486985d940559e6e11"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_read</b> (BYTE drv, BYTE *buff, LBA_t sector, UINT count) override</td></tr>
+<tr class="separator:a60a859b6857f46486985d940559e6e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb522d5ecdae4c8f3c45d02c655e79d9"><td class="memItemLeft" align="right" valign="top"><a id="acb522d5ecdae4c8f3c45d02c655e79d9"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_write</b> (BYTE drv, const BYTE *buff, LBA_t sector, UINT count) override</td></tr>
+<tr class="separator:acb522d5ecdae4c8f3c45d02c655e79d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44df4d09473ebcaeba99a9d3aa285854"><td class="memItemLeft" align="right" valign="top"><a id="a44df4d09473ebcaeba99a9d3aa285854"></a>
+DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE drv, BYTE ctrl, void *buff) override</td></tr>
+<tr class="separator:a44df4d09473ebcaeba99a9d3aa285854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2709ab05eef26faf89f9f5745260bd17"><td class="memItemLeft" align="right" valign="top"><a id="a2709ab05eef26faf89f9f5745260bd17"></a>
 virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE pdrv, ioctl_cmd_t cmd, void *buff)</td></tr>
 <tr class="separator:a2709ab05eef26faf89f9f5745260bd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa39e9989c2ca79c904b097509540566b"><td class="memItemLeft" align="right" valign="top"><a id="aa39e9989c2ca79c904b097509540566b"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#aa39e9989c2ca79c904b097509540566b">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
-<tr class="memdesc:aa39e9989c2ca79c904b097509540566b"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system <br /></td></tr>
-<tr class="separator:aa39e9989c2ca79c904b097509540566b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1570d45918f0ef4928bc55fe6f062fee"><td class="memItemLeft" align="right" valign="top"><a id="a1570d45918f0ef4928bc55fe6f062fee"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a1570d45918f0ef4928bc55fe6f062fee">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
-<tr class="memdesc:a1570d45918f0ef4928bc55fe6f062fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system <br /></td></tr>
-<tr class="separator:a1570d45918f0ef4928bc55fe6f062fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94ba9b7008533195be252507facba6ad"><td class="memItemLeft" align="right" valign="top"><a id="a94ba9b7008533195be252507facba6ad"></a>
+virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
+<tr class="memdesc:a94ba9b7008533195be252507facba6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system <br /></td></tr>
+<tr class="separator:a94ba9b7008533195be252507facba6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a789ece18313e9462ce3284944cc02856"><td class="memItemLeft" align="right" valign="top"><a id="a789ece18313e9462ce3284944cc02856"></a>
+virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
+<tr class="memdesc:a789ece18313e9462ce3284944cc02856"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system <br /></td></tr>
+<tr class="separator:a789ece18313e9462ce3284944cc02856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>

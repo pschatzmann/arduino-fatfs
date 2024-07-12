@@ -68,14 +68,12 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a> There are quite a few SD Arduino libraries out there: the most important is the <a href="https://github.com/arduino-libraries/SD">SD.h provided by Arduino</a> which is a wrapper for <a href="https://github.com/greiman/SdFat">SdFat from Bill Greiman</a> which itself is quite friendly, powerfull and fast.</p>
 <p>Bill's library provides some alternative SPI drivers to access the SD functionality, but it does not provide the functionality to store the data anywhere else and you can't use multiple SD drives that are attached to different SPI ports.</p>
 <p>I am providing the <a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs library</a> developed by ChaN that I have converted to C++ classes so that we can flexibly support multiple data access drivers and scenarios at the same time.</p>
-<p>The advantage of this library is that it provides quite a few configuration options and has a flexible driver concept, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc...</p>
-<p>The FatFs library stops at the driver interfaces and does not provide any implementation.</p>
-<p>I have added the most important drivers to this project: The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc).</p>
-<p>We currently provide the following implementations:</p>
+<p>The advantage of this library is, that it provides quite a few <b><a href="http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs">configuration options</a></b> and has a flexible <b>driver concept</b>, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. The FatFs library stops at the driver interface and does not provide any implementation.</p>
+<p>I have added the most important drivers to this project: The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following <b>driver implementations</b>:</p>
 <ul>
-<li>The data is stored in RAM (or PSRAM) (RamIO)</li>
-<li>SD via Arduino SPI (SDArduinoSPIIO)</li>
-<li>SD via Arduino GPIO using Bitbang (SDBitBangSPIIO)</li>
+<li>The data is stored in <b>RAM (or PSRAM)</b> (RamIO)</li>
+<li>SD via Arduino <b>SPI</b> (SDArduinoSPIIO)</li>
+<li>SD via Arduino <b>GPIO using Bitbanging</b> (SDBitBangSPIIO)</li>
 <li>Arduino Stream class (StreamIO) which needs to support the following additonal methods:<ul>
 <li>begin()</li>
 <li>seek()</li>
@@ -83,9 +81,9 @@ $(function() {
 <li>eraseSector(from, to)</li>
 </ul>
 </li>
-<li>Support for multiple drives with different drivers (MultiIO)</li>
+<li>Support for <b>multiple drives</b> with different drivers (MultiIO)</li>
 </ul>
-<p>It is very easy to add new drivers...</p>
+<p>It is very easy to add new drivers, so any contribution will be welcome...</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 SPI SD</h1>
 <p>Here is an example of setting up a SD drive using the Arduino ESP32 SPI API:</p>
@@ -204,7 +202,13 @@ Mutliple Drives</h1>
 Documentaion</h1>
 <ul>
 <li><a href="https://www.arduino.cc/reference/en/libraries/sd/">Arduino SD API</a></li>
-<li><a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFS Documentation</a> </li>
+<li><a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFS Documentation</a></li>
+<li>Class Documentation<ul>
+<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html">Arduino API</a></li>
+<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html">FatFs API</a></li>
+<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__io.html">Media Access</a> </li>
+</ul>
+</li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
