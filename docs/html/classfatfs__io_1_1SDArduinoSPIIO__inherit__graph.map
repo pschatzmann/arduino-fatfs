@@ -1,0 +1,5 @@
+<map id="fatfs_io::SDArduinoSPIIO" name="fatfs_io::SDArduinoSPIIO">
+<area shape="rect" id="node1" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,155,187,181"/>
+<area shape="rect" id="node2" href="$classfatfs__io_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="33,80,159,107"/>
+<area shape="rect" id="node3" href="$classfatfs__io_1_1IO.html" title=" " alt="" coords="49,5,143,32"/>
+</map>

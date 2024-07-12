@@ -1,0 +1,5 @@
+<map id="MultiIO" name="MultiIO">
+<area shape="rect" id="node1" title="File system driver which supports multiple drives: Add the drivers by calling add() then call mount()..." alt="" coords="5,171,75,197"/>
+<area shape="rect" id="node2" href="$classIO.html" title="FatFS interface definition &lt;&gt;" alt="" coords="21,95,59,121"/>
+<area shape="rect" id="node3" href="$structFATFS.html" title=" " alt="" coords="11,5,69,32"/>
+</map>

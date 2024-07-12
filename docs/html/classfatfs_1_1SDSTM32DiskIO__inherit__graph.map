@@ -1,0 +1,5 @@
+<map id="fatfs::SDSTM32DiskIO" name="fatfs::SDSTM32DiskIO">
+<area shape="rect" id="node1" title="Depending on the usecase, the SD card initialization could be done at the application level,..." alt="" coords="5,155,171,181"/>
+<area shape="rect" id="node2" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="35,80,141,107"/>
+<area shape="rect" id="node3" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="51,5,125,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="BaseIO" name="BaseIO">
+<area shape="rect" id="node1" title="Empty IO implementation that we can use to test the compilation." alt="" coords="256,80,324,107"/>
+<area shape="rect" id="node3" href="$classSDArduinoSPIIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,155,129,181"/>
+<area shape="rect" id="node4" href="$classSDBitBangSPIIO.html" title="Accessing a SD card via SPI using bit banging." alt="" coords="154,155,279,181"/>
+<area shape="rect" id="node5" href="$classSDSPISTM32IO.html" title="SPI interface for STM32 microcontrollers." alt="" coords="304,155,423,181"/>
+<area shape="rect" id="node6" href="$classSDSTM32DiskIO.html" title="Depending on the usecase, the SD card initialization could be done at the application level,..." alt="" coords="447,155,573,181"/>
+<area shape="rect" id="node2" href="$classIO.html" title="FatFS interface definition &lt;&gt;" alt="" coords="271,5,309,32"/>
+</map>

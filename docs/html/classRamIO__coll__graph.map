@@ -1,0 +1,5 @@
+<map id="RamIO" name="RamIO">
+<area shape="rect" id="node1" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="5,171,72,197"/>
+<area shape="rect" id="node2" href="$classIO.html" title="FatFS interface definition &lt;&gt;" alt="" coords="19,95,58,121"/>
+<area shape="rect" id="node3" href="$structFATFS.html" title=" " alt="" coords="9,5,68,32"/>
+</map>

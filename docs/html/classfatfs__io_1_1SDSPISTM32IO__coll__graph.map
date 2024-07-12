@@ -1,0 +1,6 @@
+<map id="fatfs_io::SDSPISTM32IO" name="fatfs_io::SDSPISTM32IO">
+<area shape="rect" id="node1" title="SPI interface for STM32 microcontrollers." alt="" coords="5,247,180,273"/>
+<area shape="rect" id="node2" href="$classfatfs__io_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="30,171,155,197"/>
+<area shape="rect" id="node3" href="$classfatfs__io_1_1IO.html" title=" " alt="" coords="46,95,139,121"/>
+<area shape="rect" id="node4" href="$structFATFS.html" title=" " alt="" coords="63,5,122,32"/>
+</map>

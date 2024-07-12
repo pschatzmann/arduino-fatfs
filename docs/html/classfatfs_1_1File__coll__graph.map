@@ -1,0 +1,11 @@
+<map id="fatfs::File" name="fatfs::File">
+<area shape="rect" id="node1" title="File implementation for fatfs." alt="" coords="203,273,285,300"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,184,75,211"/>
+<area shape="rect" id="node3" href="$structfatfs_1_1FIL.html" title=" " alt="" coords="99,184,178,211"/>
+<area shape="rect" id="node4" href="$structfatfs_1_1FFOBJID.html" title=" " alt="" coords="150,95,263,121"/>
+<area shape="rect" id="node9" href="$structfatfs_1_1DIR.html" title=" " alt="" coords="203,184,285,211"/>
+<area shape="rect" id="node5" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="263,5,361,32"/>
+<area shape="rect" id="node6" href="$classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="310,184,405,211"/>
+<area shape="rect" id="node7" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="393,95,468,121"/>
+<area shape="rect" id="node8" href="$structfatfs_1_1FILINFO.html" title=" " alt="" coords="429,184,539,211"/>
+</map>
