@@ -159,4 +159,4 @@ void loop() {}
 
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
 - [FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
-- [Class Documentation](docs/html/index.html)
+- [Class Documentation](https://pschatzmann.github.io/arduino-fatfs/html/modules.html)
