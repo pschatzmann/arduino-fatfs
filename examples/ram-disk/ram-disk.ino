@@ -8,10 +8,9 @@ void setup() {
   Serial.begin(115200);
   while(!Serial);
   Serial.println("SD begin");
-  SD.setDriver(drv);
 
   // start SD
-  if (!SD.begin()){
+  if (!SD.begin(drv)){
     Serial.println("SD.begin() error");
     while(true);
   }
