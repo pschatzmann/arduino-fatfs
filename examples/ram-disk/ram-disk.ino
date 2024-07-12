@@ -18,9 +18,9 @@ void setup() {
 
   // read back value
   file.seek(0);
-  auto str = file.readStringUntil('\n');
-  Serial.println(str);
-  assert(str == "test");
+  uint8_t data[100] = {0};
+  file.readBytes(data, 100);
+  Serial.println((char*)data);
 
   Serial.println(file.size());
 

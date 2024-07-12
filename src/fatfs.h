@@ -29,7 +29,11 @@
  */
 #pragma once
 
+#ifdef ARDUINO
 #include <Stream.h>
+#else
+#include "stream/Stream.h"
+#endif
 
 #include "fatfs-drivers.h"
 #include "ff/ff.h"
@@ -72,7 +76,7 @@ class File : public Stream {
   virtual int read() {
     UINT result;
     char buf[1] = {0};
-    readBytes(buf, 1);
+    readBytes((uint8_t*)buf, 1);
     return result == 1 ? buf[0] : -1;
   }
   /// Very inefficient: to be avoided
@@ -195,12 +199,13 @@ class SDClass {
   /// been defined in the constructor
   bool begin() { return p_io->mount(fat_fs); }
 
+#ifdef ARDUINO
   /// Compatibility with SD library: we use the Arduino SPI SD driver
   bool begin(int cs, SPIClass &spi = SPI) {
     drv.setSPI(cs, spi);
     return begin();
   }
-
+#endif
   /// call this when a card is removed. It will allow you to insert and
   /// initialise a new card.
   void end() { p_io->un_mount(fat_fs); }
@@ -269,14 +274,18 @@ class SDClass {
   IO *getDriver() { return fat_fs.getDriver(); }
 
  protected:
+#ifdef ARDUINO
   fatfs::SDArduinoSPIIO drv;
+#else
+  fatfs::RamIO drv{20};
+#endif
   IO *p_io = &drv;
   FatFs fat_fs;
 };
 };  // namespace fatfs
 
 // This ensure compatibility with sketches that uses only SD library
-#if defined(ARDUINO) && !defined(FATFS_NO_NAMESPACE)
+#if !defined(FATFS_NO_NAMESPACE)
 using namespace fatfs;
 #endif
 
