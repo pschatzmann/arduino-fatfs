@@ -76,7 +76,7 @@ class File : public Stream {
   virtual int read() {
     UINT result;
     char buf[1] = {0};
-    readBytes((uint8_t*)buf, 1);
+    readBytes((uint8_t *)buf, 1);
     return result == 1 ? buf[0] : -1;
   }
   /// Very inefficient: to be avoided
@@ -197,7 +197,10 @@ class SDClass {
 
   /// @brief Initialization of SD card. We use the SPI SD driver if nothing has
   /// been defined in the constructor
-  bool begin() { return p_io->mount(fat_fs); }
+  bool begin() {
+    if (p_io == nullptr) return false;
+    return p_io->mount(fat_fs);
+  }
 
 #ifdef ARDUINO
   /// Compatibility with SD library: we use the Arduino SPI SD driver
@@ -208,7 +211,9 @@ class SDClass {
 #endif
   /// call this when a card is removed. It will allow you to insert and
   /// initialise a new card.
-  void end() { p_io->un_mount(fat_fs); }
+  void end() {
+    if (p_io != nullptr) p_io->un_mount(fat_fs);
+  }
 
   /// Open the specified file/directory with the supplied mode (e.g. read or
   /// write, etc). Returns a File object for interacting with the file.
@@ -276,10 +281,10 @@ class SDClass {
  protected:
 #ifdef ARDUINO
   fatfs::SDArduinoSPIIO drv;
-#else
-  fatfs::RamIO drv{20};
-#endif
   IO *p_io = &drv;
+#else
+  IO *p_io = nullptr;
+#endif
   FatFs fat_fs;
 };
 };  // namespace fatfs
