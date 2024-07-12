@@ -4,10 +4,10 @@ cmake_minimum_required(VERSION 3.16)
 project(ram_disk LANGUAGES CXX)
 
 set (DCMAKE_CXX_FLAGS -Werror -Wall -Wextra)
-set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
-add_compile_options("-xc++")
+add_compile_options(-xc++ -fsanitize=address)
+add_link_options(-fsanitize=address)
+
 SET_SOURCE_FILES_PROPERTIES(ram-disk.ino PROPERTIES LANGUAGE CXX)
 
 # build sketch as executable  

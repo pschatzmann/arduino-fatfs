@@ -58,7 +58,7 @@ class File : public Stream {
  public:
   File() = default;
   ~File() {
-    if (is_open) close();
+    //if (is_open) close();
   }
 
   virtual size_t write(uint8_t ch) {
@@ -143,7 +143,7 @@ class File : public Stream {
   }
   void rewindDirectory(void) { fs->f_rewinddir(&dir); }
 
-  operator bool() { return is_open && !isEOF(); }
+  operator bool() { return is_open; }
 
   bool isEOF() {
     if (isDirectory()) return false;
@@ -185,7 +185,11 @@ class File : public Stream {
 
 class SDClass {
  public:
-  SDClass() = default;
+  SDClass() {
+#ifdef ARDUINO
+    setDriver(&drv);
+#endif
+  };
   SDClass(IO &driver) { setDriver(driver); }
   ~SDClass() { end(); }
 
@@ -198,8 +202,8 @@ class SDClass {
   /// @brief Initialization of SD card. We use the SPI SD driver if nothing has
   /// been defined in the constructor
   bool begin() {
-    if (p_io == nullptr) return false;
-    return p_io->mount(fat_fs);
+    if (getDriver() == nullptr) return false;
+    return handleError(getDriver()->mount(fat_fs));
   }
 
 #ifdef ARDUINO
@@ -212,7 +216,9 @@ class SDClass {
   /// call this when a card is removed. It will allow you to insert and
   /// initialise a new card.
   void end() {
-    if (p_io != nullptr) p_io->un_mount(fat_fs);
+    if (getDriver() != nullptr) getDriver()->un_mount(fat_fs);
+    delete[] (work_buffer);
+    work_buffer = nullptr;
   }
 
   /// Open the specified file/directory with the supplied mode (e.g. read or
@@ -221,13 +227,13 @@ class SDClass {
   File open(const char *filename, uint8_t mode = FILE_READ) {
     File file;
     FRESULT result;
-    if (file.update_stat(fat_fs, filename)) {
+    if (mode & FA_WRITE || file.update_stat(fat_fs, filename)) {
       if (file.isDirectory()) {
         result = fat_fs.f_opendir(&file.dir, filename);
       } else {
         result = fat_fs.f_open(&file.file, filename, mode);
       }
-      file.is_open = (result == FR_OK);
+      file.is_open = handleError(result);
     }
     return file;
   }
@@ -270,6 +276,14 @@ class SDClass {
   bool getcwd(char *buff, size_t len) {
     return fat_fs.f_getcwd(buff, len) == FR_OK;
   }
+
+#if FF_USE_MKFS == 1
+  /// format drive
+  bool mkfs(int workBufferSize = FF_MAX_SS) {
+    if (work_buffer == nullptr) work_buffer = new uint8_t[workBufferSize];
+    return handleError(fat_fs.f_mkfs("", nullptr, work_buffer, workBufferSize));
+  }
+#endif
   /// Access to low level FatFS api to use functionality not exposed by this API
   FatFs *getFatFs() { return &fat_fs; }
 
@@ -281,11 +295,18 @@ class SDClass {
  protected:
 #ifdef ARDUINO
   fatfs::SDArduinoSPIIO drv;
-  IO *p_io = &drv;
-#else
-  IO *p_io = nullptr;
 #endif
   FatFs fat_fs;
+  uint8_t *work_buffer = nullptr;
+
+  bool handleError(FRESULT rc) {
+    if (rc != FR_OK) {
+      Serial.print("fatfs: error no: ");
+      Serial.println((int)rc);
+      return false;
+    }
+    return true;
+  }
 };
 };  // namespace fatfs
 

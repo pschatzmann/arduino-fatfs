@@ -64,7 +64,7 @@ class SDArduinoSPIIO : public BaseIO {
   }
 
   DSTATUS disk_initialize(BYTE drv /* Physical drive number (0) */
-  ) {
+                          ) override {
     BYTE n, cmd, ty, ocr[4];
 
     if (drv != 0) return STA_NOINIT; /* Supports only drive 0 */
@@ -111,10 +111,10 @@ class SDArduinoSPIIO : public BaseIO {
     CardType = ty; /* Card type */
     despiselect();
 
-    if (ty) {              /* OK */
-      set_spi_fast(true);  /* Set fast clock */
-      stat = STA_CLEAR; /* Clear STA_NOINIT flag */
-    } else {               /* Failed */
+    if (ty) {             /* OK */
+      set_spi_fast(true); /* Set fast clock */
+      stat = STA_CLEAR;   /* Clear STA_NOINIT flag */
+    } else {              /* Failed */
       stat = STA_NOINIT;
     }
 
@@ -126,7 +126,7 @@ class SDArduinoSPIIO : public BaseIO {
   /*-----------------------------------------------------------------------*/
 
   DSTATUS disk_status(BYTE drv /* Physical drive number (0) */
-  ) {
+                      ) override {
     if (drv) return STA_NOINIT; /* Supports only drive 0 */
     return stat;                /* Return disk status */
   }
@@ -140,7 +140,7 @@ class SDArduinoSPIIO : public BaseIO {
       BYTE *buff,   /* Pointer to the data buffer to store read data */
       DWORD sector, /* Start sector number (LBA) */
       UINT count    /* Number of sectors to read (1..128) */
-  ) {
+      ) override {
     if (drv || !count) return RES_PARERR;     /* Check parameter */
     if (stat & STA_NOINIT) return RES_NOTRDY; /* Check if drive is ready */
 
@@ -175,7 +175,7 @@ class SDArduinoSPIIO : public BaseIO {
                      BYTE *buff,   /* Ponter to the data to write */
                      DWORD sector, /* Start sector number (LBA) */
                      UINT count    /* Number of sectors to write (1..128) */
-  ) {
+                     ) override {
     if (drv || !count) return RES_PARERR;     /* Check parameter */
     if (stat & STA_NOINIT) return RES_NOTRDY; /* Check drive status */
     if (stat & STA_PROTECT) return RES_WRPRT; /* Check write protect */
@@ -213,7 +213,7 @@ class SDArduinoSPIIO : public BaseIO {
   DRESULT disk_ioctl(BYTE drv,  /* Physical drive number (0) */
                      BYTE cmd,  /* Control command code */
                      void *buff /* Pointer to the conrtol data */
-  ) {
+                     ) override {
     DRESULT res;
     BYTE n, csd[16];
     DWORD *dp, st, ed, csize;
@@ -462,4 +462,4 @@ class SDArduinoSPIIO : public BaseIO {
   }
 };
 
-}
+}  // namespace fatfs

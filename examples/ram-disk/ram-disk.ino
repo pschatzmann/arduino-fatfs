@@ -1,22 +1,37 @@
 #include "assert.h"
 #include "fatfs.h"
 
-RamIO drv{100, 512};  // 100 sector with 512 bytes
+RamIO drv{200, 512};  // 100 sector with 512 bytes
 File file;
 
 void setup() {
   Serial.begin(115200);
   while(!Serial);
+  Serial.println("SD begin");
+  SD.setDriver(drv);
+  if (!SD.mkfs()){
+    Serial.println("mkfs error");
+    while(true);
+  }
 
   // start SD
-  SD.begin(drv);
+  if (!SD.begin()){
+    Serial.println("SD.begin() error");
+    while(true);
+  }
 
-  // open and write file
+  Serial.println("Opening file");
   file = SD.open("test", FILE_WRITE);
+  if (!file){
+    Serial.println("Could not create file");
+    while(true);
+  }
+
+
   file.println("test");
   file.flush();
 
-  // read back value
+  Serial.println("Reading file");
   file.seek(0);
   uint8_t data[100] = {0};
   file.readBytes(data, 100);

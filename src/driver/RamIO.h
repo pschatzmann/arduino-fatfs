@@ -1,8 +1,10 @@
 #pragma once
 
 #include <stdlib.h>
+
 #include <cstring>
 #include <vector>
+
 #include "IO.h"
 
 namespace fatfs {
@@ -15,7 +17,7 @@ namespace fatfs {
 class RamIO : public IO {
  public:
   //  valid sector sizes are 512, 1024, 2048 and 4096
-  RamIO(int sectorCount, int sectorSize = 512) {
+  RamIO(int sectorCount, int sectorSize = FF_MAX_SS) {
     sector_size = sectorSize;
     sector_count = sectorCount;
   }
@@ -26,51 +28,55 @@ class RamIO : public IO {
     }
   }
 
-  DSTATUS disk_initialize(BYTE pdrv) {
+  DSTATUS disk_initialize(BYTE pdrv) override {
     if (pdrv != 0) return STA_NODISK;
     // allocate sectors
     if (sectors.size() == 0) {
-      sectors.resize(sector_count);
-      for (int j = 0; j < sector_count; j++) {
+      for (int j = 0; j <= sector_count; j++) {
         uint8_t* ptr = nullptr;
 #ifdef ESP32
         ptr = (uint8_t*)ps_malloc(sector_count * sector_size);
 #endif
-        if (ptr == nullptr) ptr = (uint8_t*)malloc(sector_count * sector_size);
-        sectors[j] = ptr;
+        if (ptr == nullptr) ptr = (uint8_t*)malloc(sector_size);
+        memset(ptr, 0, sector_size);
+        sectors.push_back(ptr);
       }
     }
     status = STA_CLEAR;
     return status;
   }
 
-  DSTATUS disk_status(BYTE pdrv) {
+  DSTATUS disk_status(BYTE pdrv) override {
     if (pdrv != 0) return STA_NODISK;
     return status;
   }
 
-  DRESULT disk_read(BYTE pdrv, BYTE* buffer, LBA_t sectorNo, UINT sectorCount) {
+  DRESULT disk_read(BYTE pdrv, BYTE* buffer, LBA_t sectorNo, UINT sectorCount) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
     if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) RES_ERROR;
-    for (int j = 0; j < sectorCount; j++) {
-      memcpy(buffer + (j * sector_size), sectors[j], sector_size);
+    for (int j = sectorNo; j < sectorNo + sectorCount; j++) {
+      int idx = j - sectorNo;
+      uint8_t* source = sectors[j];
+      memcpy(buffer + (idx * sector_size), source , sector_size);
     }
     return RES_OK;
   }
 
   DRESULT disk_write(BYTE pdrv, const BYTE* buffer, LBA_t sectorNo,
-                     UINT sectorCount) {
+                     UINT sectorCount) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
     if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) RES_ERROR;
-    for (int j = 0; j < sectorCount; j++) {
-      memcpy(sectors[j], buffer + (j * sector_size), sector_size);
+    for (int j = sectorNo; j < sectorNo + sectorCount; j++) {
+      int idx = j - sectorNo;
+      uint8_t* target = sectors[j];
+      memcpy(target, buffer + (idx * sector_size), sector_size);
     }
     return RES_OK;
   }
 
-  DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void* buffer) {
+  DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void* buffer) override {
     DRESULT res;
     if (pdrv) return RES_PARERR; /* Check parameter */
     switch (cmd) {
@@ -118,4 +124,4 @@ class RamIO : public IO {
   size_t sector_count = 0;
 };
 
-}
+}  // namespace fatfs

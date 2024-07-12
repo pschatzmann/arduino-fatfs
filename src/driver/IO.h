@@ -74,9 +74,9 @@ enum ioctl_cmd_t {
 class IO {
  public:
   /// mount the file system
-  virtual bool mount(FatFs& fs);
+  virtual FRESULT mount(FatFs& fs);
   /// unmount the file system
-  virtual bool un_mount(FatFs& fs);
+  virtual FRESULT un_mount(FatFs& fs);
 
   virtual DSTATUS disk_initialize(BYTE pdrv) = 0;
   virtual DSTATUS disk_status(BYTE pdrv) = 0;

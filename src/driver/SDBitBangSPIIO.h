@@ -27,7 +27,7 @@
 /-------------------------------------------------------------------------*/
 
 #pragma once
-#include "../ff/ff.h"     /* Obtains integer types for FatFs */
+#include "../ff/ff.h" /* Obtains integer types for FatFs */
 #include "BaseIO.h"
 #include "sdcommon.h"
 
@@ -59,18 +59,18 @@ class SDBitBangSPIIO : public BaseIO {
 
   void setCS(int cs) { this->cs = cs; }
 
-  DSTATUS disk_status(BYTE drv) {
+  DSTATUS disk_status(BYTE drv) override {
     if (drv) return STA_NOINIT;
     return Stat;
   }
 
-  DSTATUS disk_initialize(BYTE drv) {
+  DSTATUS disk_initialize(BYTE drv) override {
     BYTE n, ty, cmd, buf[4];
     UINT tmr;
     DSTATUS s;
 
     if (drv != 0) return STA_NODISK;
-    if (miso==-1 || mosi==-1 || clk==-1) return STA_NODISK;
+    if (miso == -1 || mosi == -1 || clk == -1) return STA_NODISK;
 
     delay(10); /* 10ms */
     setup_pins();
@@ -125,7 +125,7 @@ class SDBitBangSPIIO : public BaseIO {
       BYTE *buff,   /* Pointer to the data buffer to store read data */
       LBA_t sector, /* Start sector number (LBA) */
       UINT count    /* Sector count (1..128) */
-  ) {
+      ) override {
     BYTE cmd;
     DWORD sect = (DWORD)sector;
 
@@ -151,7 +151,7 @@ class SDBitBangSPIIO : public BaseIO {
                      const BYTE *buff, /* Pointer to the data to be written */
                      LBA_t sector,     /* Start sector number (LBA) */
                      UINT count        /* Sector count (1..128) */
-  ) {
+                     ) override {
     DWORD sect = (DWORD)sector;
 
     if (disk_status(drv) & STA_NOINIT) return RES_NOTRDY;
@@ -181,7 +181,7 @@ class SDBitBangSPIIO : public BaseIO {
   DRESULT disk_ioctl(BYTE drv,  /* Physical drive nmuber (0) */
                      BYTE ctrl, /* Control code */
                      void *buff /* Buffer to send/receive control data */
-  ) {
+                     ) override {
     DRESULT res;
     BYTE n, csd[16];
     DWORD cs;
@@ -472,5 +472,4 @@ class SDBitBangSPIIO : public BaseIO {
   }
 };
 
-
-}
+}  // namespace fatfs
