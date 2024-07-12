@@ -6,25 +6,21 @@ Bill's library provides some alternative SPI drivers to access the SD functional
 
 I am providing the [FatFs library](http://elm-chan.org/fsw/ff/00index_e.html) developed by ChaN that I have converted to C++ classes so that we can flexibly support multiple data access drivers and scenarios at the same time.
 
-The advantage of this library is that it provides quite a few configuration options and has a flexible driver concept, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc...
+The advantage of this library is, that it provides quite a few __configuration options__ and has a flexible __driver concept__, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. The FatFs library stops at the driver interface and does not provide any implementation. 
 
-The FatFs library stops at the driver interfaces and does not provide any implementation. 
+I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
-I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc).
-
-We currently provide the following implementations:
-
-- The data is stored in RAM (or PSRAM) (RamIO)
-- SD via Arduino SPI (SDArduinoSPIIO)
-- SD via Arduino GPIO using Bitbang (SDBitBangSPIIO)
+- The data is stored in __RAM (or PSRAM)__ (RamIO)
+- SD via Arduino __SPI__ (SDArduinoSPIIO)
+- SD via Arduino __GPIO using Bitbanging__ (SDBitBangSPIIO)
 - Arduino Stream class (StreamIO) which needs to support the following additonal methods:
     - begin()
     - seek()
     - sectorCount()
     - eraseSector(from, to)
-- Support for multiple drives with different drivers (MultiIO)
+- Support for __multiple drives__ with different drivers (MultiIO)
 
-It is very easy to add new drivers...
+It is very easy to add new drivers, so any contribution will be welcome...
 
 ## SPI SD
 
@@ -163,3 +159,4 @@ void loop() {}
 
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
 - [FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
+- [Class Documentation](docs/html/index.html)
