@@ -57,56 +57,59 @@ class File : public Stream {
 
  public:
   File() = default;
+  File(FatFs *fs) { this->fs = fs; }
   ~File() {
     if (is_open) close();
   }
 
-  virtual size_t write(uint8_t ch) {
+  virtual size_t write(uint8_t ch) override {
     if (fs == nullptr) return 0;
     int rc = fs->f_putc(ch, &file);
     return rc == EOF ? 0 : 1;
   }
-  virtual size_t write(const uint8_t *buf, size_t size) {
+
+  virtual size_t write(const uint8_t *buf, size_t size) override {
     if (fs == nullptr) return 0;
     UINT result;
     FRESULT rc = fs->f_write(&file, buf, size, &result);
     return rc == FR_OK ? result : 0;
   }
-  /// Very inefficient: to be avoided
-  virtual int read() {
+
+  /// Rather inefficient: to be avoided
+  virtual int read() override {
     UINT result;
     char buf[1] = {0};
     readBytes((uint8_t *)buf, 1);
     return result == 1 ? buf[0] : -1;
   }
-  /// Very inefficient: to be avoided
-  virtual int peek() {
+
+  /// Rather inefficient: to be avoided
+  int peek() override {
     uint32_t pos = position();
     int result = read();
     seek(pos);
     return result;
   }
-  virtual int available() { return info.fsize - position(); }
 
-  virtual void flush() {
+  int available() override { return info.fsize - position(); }
+
+  int availableForWrite() override { return get_free_space(); }
+
+  void flush() override {
     if (!isDirectory()) fs->f_sync(&file);
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override { 
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (isDirectory()) return 0;
     UINT result;
     auto rc = fs->f_read(&file, data, len, &result);
     return rc == FR_OK ? result : 0;
-
   }
 
-  int read(void *buf, size_t nbyte) {
-    return readBytes((uint8_t*)buf, nbyte);
-  }
+  int read(void *buf, size_t nbyte) { return readBytes((uint8_t *)buf, nbyte); }
 
   bool seek(uint32_t pos) {
     if (isDirectory()) return 0;
-
     return fs->f_lseek(&file, pos);
   }
 
@@ -143,17 +146,18 @@ class File : public Stream {
         fs->f_opendir(&result.dir, result.name());
       }
     }
-
     return result;
   }
   void rewindDirectory(void) { fs->f_rewinddir(&dir); }
 
-  operator bool() { return is_open; }
+  operator bool() { return is_open && error() == 0; }
 
   bool isEOF() {
     if (isDirectory()) return false;
     return fs->f_eof(&file);
   }
+
+  uint8_t error() { return fs->f_error(&file); }
 
   using Print::print;
   using Print::println;
@@ -177,8 +181,30 @@ class File : public Stream {
 
   /// update fs, info and is_open
   bool update_stat(FatFs &fat_fs, const char *filepath) {
-    is_open = fat_fs.f_stat(filepath, &info) == FR_OK;
+    is_open = fs->f_stat(filepath, &info) == FR_OK;
     return is_open;
+  }
+
+  size_t get_free_space() {
+#if FF_FS_MINIMIZE == 0
+    DWORD fre_clust, fre_sect;
+    FATFS *fatfs;
+
+    // Get volume information and free clusters of default drive
+    auto res = fs->f_getfree("", &fre_clust, &fatfs);
+    if (res) return 0;
+
+#if FF_MAX_SS != FF_MIN_SS
+    size_t sector_size = fil.ssize; /* Sector size (512, 1024, 2048 or 4096) */
+#else
+    size_t sector_size = FF_MAX_SS;
+#endif
+
+    // free sectors * sector size
+    return (fre_clust * fatfs->csize) * sector_size;
+#else
+    return Stream::avaiableForWrite();
+#endif
   }
 };
 
@@ -229,16 +255,15 @@ class SDClass {
   /// write, etc). Returns a File object for interacting with the file.
   /// Note that currently only one file can be open at a time.
   File open(const char *filename, uint8_t mode = FILE_READ) {
-    File file;
-    FRESULT result;
+    File file{&fat_fs};
     if (mode & FA_WRITE || file.update_stat(fat_fs, filename)) {
+      FRESULT result;
       if (file.isDirectory()) {
         result = fat_fs.f_opendir(&file.dir, filename);
       } else {
         result = fat_fs.f_open(&file.file, filename, mode);
       }
       file.is_open = handleError(result);
-      file.fs = &fat_fs;
     }
     return file;
   }
@@ -289,11 +314,18 @@ class SDClass {
     return handleError(fat_fs.f_mkfs("", nullptr, work_buffer, workBufferSize));
   }
 #endif
+
+#if FF_FS_MINIMIZE == 0
+  /// get free space in bytes
+  size_t free() { return File(&fat_fs).availableForWrite(); }
+#endif
+
   /// Access to low level FatFS api to use functionality not exposed by this API
   FatFs *getFatFs() { return &fat_fs; }
 
   /// Set the driver
   void setDriver(IO &driver) { fat_fs.setDriver(driver); }
+
   /// Access lo low level driver
   IO *getDriver() { return fat_fs.getDriver(); }
 
@@ -313,7 +345,8 @@ class SDClass {
     return true;
   }
 };
-};  // namespace fatfs
+
+}  // namespace fatfs
 
 // This ensure compatibility with sketches that uses only SD library
 #if !defined(FATFS_NO_NAMESPACE)
