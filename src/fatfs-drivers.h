@@ -4,5 +4,4 @@
 #ifdef ARDUINO
 #include "driver/StreamIO.h"
 #include "driver/SDArduinoSpiIO.h"
-#include "driver/SDBitBangSpiIO.h"
 #endif

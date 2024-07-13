@@ -30,13 +30,6 @@
 #include "SPI.h"
 #include "sdcommon.h"
 
-#ifndef _USE_WRITE
-#define _USE_WRITE 1 /* 1: Enable disk_write function */
-#endif
-
-#ifndef _USE_IOCTL
-#define _USE_IOCTL 1 /* 1: Enable disk_ioctl function */
-#endif
 
 namespace fatfs {
 
@@ -170,7 +163,7 @@ class SDArduinoSpiIO : public BaseIO {
   /* Write sector(s)                                                       */
   /*-----------------------------------------------------------------------*/
 
-#if _USE_WRITE
+#if FF_IO_USE_WRITE
 
   DRESULT disk_write(BYTE drv,     /* Physical drive number (0) */
                      const BYTE *buff,   /* Ponter to the data to write */
@@ -210,7 +203,7 @@ class SDArduinoSpiIO : public BaseIO {
   /* Miscellaneous drive controls other than data read/write               */
   /*-----------------------------------------------------------------------*/
 
-#if _USE_IOCTL
+#if FF_IO_USE_IOCTL
   DRESULT disk_ioctl(BYTE drv,  /* Physical drive number (0) */
                      ioctl_cmd_t cmd,  /* Control command code */
                      void *buff /* Pointer to the conrtol data */
@@ -398,7 +391,7 @@ class SDArduinoSpiIO : public BaseIO {
 
   /* Send a data packet to the MMC                                         */
 
-#if _USE_WRITE
+#if FF_IO_USE_WRITE
   int xmit_datablock(            /* 1:OK, 0:Failed */
                      BYTE *buff, /* Ponter to 512 byte data to be sent */
                      BYTE token  /* Token */

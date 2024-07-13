@@ -301,6 +301,7 @@ class SDClass {
   }
   bool rmdir(const String &filepath) { return rmdir(filepath.c_str()); }
 
+#if FF_ARDUINO_LEVEL == 1
   /// Change directoy: extended functionality not available in Arduino SD API
   bool chdir(const char *filepath) { return fat_fs.f_chdir(filepath) == FR_OK; }
   /// Change directoy: extended functionality not available in Arduino SD API
@@ -333,6 +334,8 @@ class SDClass {
   /// Access lo low level driver
   IO *getDriver() { return fat_fs.getDriver(); }
 
+#endif
+
  protected:
 #ifdef ARDUINO
   fatfs::SDArduinoSpiIO drv;
@@ -348,12 +351,22 @@ class SDClass {
     }
     return true;
   }
+
+#if FF_ARDUINO_LEVEL == 0
+  /// Set the driver
+  void setDriver(IO &driver) { fat_fs.setDriver(driver); }
+  /// Access lo low level driver
+  IO *getDriver() { return fat_fs.getDriver(); }
+
+#endif
+
+
 };
 
 }  // namespace fatfs
 
 // This ensure compatibility with sketches that uses only SD library
-#if !defined(FATFS_NO_NAMESPACE)
+#if FF_NAMESPACE
 using namespace fatfs;
 #endif
 

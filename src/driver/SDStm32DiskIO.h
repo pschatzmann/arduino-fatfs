@@ -22,8 +22,6 @@
 #include "BaseIO.h"
 #include "stm32/Sd2Card.h"
 
-#define _USE_WRITE 1 /* 1: Enable disk_write function */
-#define _USE_IOCTL 1 /* 1: Enable disk_ioctl function */
 
 /* use the default SD timout as defined in the platform BSP driver*/
 #if defined(SDMMC_DATATIMEOUT)
@@ -167,7 +165,7 @@ class SDStm32DiskIO : public BaseIO {
  * @param  count: Number of sectors to write (1..128)
  * @retval DRESULT: Operation result
  */
-#if _USE_WRITE == 1
+#if FF_IO_USE_WRITE 
 
   DRESULT disk_write(BYTE pdrv, const BYTE *buff, LBA_t sector,
                      UINT count) override {
@@ -185,7 +183,7 @@ class SDStm32DiskIO : public BaseIO {
 
     return res;
   }
-#endif /* _USE_WRITE == 1 */
+#endif /* FF_IO_USE_WRITE == 1 */
 
 /**
  * @brief  I/O control operation
@@ -194,7 +192,7 @@ class SDStm32DiskIO : public BaseIO {
  * @param  *buff: Buffer to send/receive control data
  * @retval DRESULT: Operation result
  */
-#if _USE_IOCTL == 1
+#if FF_IO_USE_IOCTL == 1
   DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void *buff) override {
     (void)pdrv;
     DRESULT res = RES_ERROR;
@@ -234,7 +232,7 @@ class SDStm32DiskIO : public BaseIO {
 
     return res;
   }
-#endif /* _USE_IOCTL == 1 */
+#endif /* FF_IO_USE_IOCTL == 1 */
 
  protected:
   // Disk status

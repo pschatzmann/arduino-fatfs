@@ -303,6 +303,7 @@
 /*---------------------------------------------------------------------------/
 / Arduino API
 /---------------------------------------------------------------------------*/
+
 #define FF_ARDUINO_LEVEL 0
 /* The option FF_ARDUINO_LEVEL defines if we allow some extended function that are
 / not supported by the Arduino SD API: 

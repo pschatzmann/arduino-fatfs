@@ -1,3 +1,4 @@
+// Example to use the Arduino SPI API to access  the SD drive
 #include "SPI.h"
 #include "fatfs.h"
 
@@ -16,7 +17,7 @@ void setup() {
   SPI.begin(SCLK, MISO, MOSI);
 
   // start SD
-  SD.begin(CS);
+  SD.begin(CS); // or use SD.begin(SD, SPI);
 
   // open and write file
   file = SD.open("test", FILE_WRITE);
@@ -27,7 +28,6 @@ void setup() {
   file.seek(0);
   auto str = file.readStringUntil('\n');
   Serial.println(str);
-  assert(str == "test");
 
   Serial.println(file.size());
 

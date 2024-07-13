@@ -29,7 +29,6 @@ void setup() {
   file.seek(0);
   auto str = file.readStringUntil('\n');
   Serial.println(str);
-  assert(str == "test");
 
   Serial.println(file.size());
   file.close();
