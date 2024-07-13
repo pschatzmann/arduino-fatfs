@@ -1,5 +1,6 @@
-#include "RamIO.h"
+// separate cpp is needed because of recursive includes
 
+#include "RamIO.h"
 #include "../ff/ff.h"
 
 namespace fatfs {

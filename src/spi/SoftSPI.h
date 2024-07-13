@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2014, Majenko Technologies
+ *               2024 Phil Schatzmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,7 +52,14 @@ class SoftSPIClass : public SPIClass {
     _ckp = 0;
     _order = MSBFIRST;
   }
-  void begin(uint8_t mosi, uint8_t miso, uint8_t sck) {
+
+  // API used by the RP2040
+  void setMOSI(int pin) { _mosi = pin; }
+  void setMISO(int pin) { _miso = pin; }
+  void setSCK(int pin) { _sck = pin; }
+
+  /// Use pin sequence like the ESP32
+  void begin(uint8_t sck, uint8_t miso, uint8_t mosi ) {
     _mosi = mosi;
     _miso = miso;
     _sck = sck;
