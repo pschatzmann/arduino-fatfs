@@ -11,14 +11,9 @@ The advantage of this library is, that it provides quite a few __[configuration 
 I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
 - The data is stored in __RAM (or PSRAM)__ (RamIO)
+- Support for __multiple drives__ with different drivers (MultiIO)
 - SD via Arduino __SPI__ (SDArduinoSPIIO)
 - SD via Arduino __GPIO using Bitbanging__ (SDBitBangSPIIO)
-- Arduino Stream class (StreamIO) which needs to support the following additonal methods:
-    - begin()
-    - seek()
-    - sectorCount()
-    - eraseSector(from, to)
-- Support for __multiple drives__ with different drivers (MultiIO)
 
 It is very easy to add new drivers, so any contribution will be welcome...
 

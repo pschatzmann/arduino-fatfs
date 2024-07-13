@@ -23,19 +23,19 @@ class MultiIO : public IO {
     FRESULT rc;
     for (int j = 0; j < io_vector.size(); j++) {
       rc = io_vector[j]->mount(fs);
-      if (rc!=FR_OK) break;
+      if (rc != FR_OK) break;
     }
     return rc;
   }
 
   /// unmount all drivers
   FRESULT un_mount(FatFs& fs) override {
-    FRESULT rc;
+    FRESULT result = FR_OK;
     for (int j = 0; j < io_vector.size(); j++) {
-      rc = io_vector[j]->un_mount(fs);
-      if (rc!=FR_OK) break;
+      auto rc = io_vector[j]->un_mount(fs);
+      if (rc != FR_OK) result = rc;
     }
-    return rc;
+    return result;
   }
 
   DSTATUS disk_initialize(BYTE pdrv) override {
@@ -50,7 +50,8 @@ class MultiIO : public IO {
     if (pdrv >= io_vector.size()) return RES_NOTRDY;
     return io_vector[pdrv]->disk_read(0, buff, sector, count);
   }
-  DRESULT disk_write(BYTE pdrv, const BYTE* buff, LBA_t sector, UINT count) override {
+  DRESULT disk_write(BYTE pdrv, const BYTE* buff, LBA_t sector,
+                     UINT count) override {
     if (pdrv >= io_vector.size()) return RES_NOTRDY;
     return io_vector[pdrv]->disk_write(0, buff, sector, count);
   }
@@ -63,4 +64,4 @@ class MultiIO : public IO {
   std::vector<IO*> io_vector;
 };
 
-}
+}  // namespace fatfs

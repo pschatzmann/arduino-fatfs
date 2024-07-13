@@ -125,6 +125,10 @@ class File : public Stream {
       fs->f_closedir(&dir);
     else
       fs->f_close(&file);
+
+    memset(&dir,0,sizeof(dir));
+    memset(&file,0,sizeof(file));
+    memset(&info, 0, sizeof(info));
     is_open = false;
   }
 

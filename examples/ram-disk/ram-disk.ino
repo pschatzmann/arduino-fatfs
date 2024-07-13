@@ -2,7 +2,6 @@
 #include "fatfs.h"
 
 RamIO drv{200, 512};  // 100 sector with 512 bytes
-File file;
 
 void setup() {
   Serial.begin(115200);
@@ -16,7 +15,7 @@ void setup() {
   }
 
   Serial.println("Opening file...");
-  file = SD.open("test", FILE_WRITE);
+  File file = SD.open("test", FILE_WRITE);
   if (!file){
     Serial.println("Could not create file");
     while(true);
