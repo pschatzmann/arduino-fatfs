@@ -9,18 +9,19 @@ namespace fatfs {
  */
 class BaseIO : public IO {
  public:
-  virtual DSTATUS disk_initialize(BYTE pdrv) { return STA_NOINIT; }
-  virtual DSTATUS disk_status(BYTE pdrv) { return STA_NOINIT; }
-  virtual DRESULT disk_read(BYTE pdrv, BYTE* buff, LBA_t sector, UINT count) {
+   DSTATUS disk_initialize(BYTE pdrv) override { return STA_NOINIT; }
+   DSTATUS disk_status(BYTE pdrv) override { return STA_NOINIT; }
+   DRESULT disk_read(BYTE pdrv, BYTE* buff, LBA_t sector,
+                            UINT count) override {
     return RES_ERROR;
   }
-  virtual DRESULT disk_write(BYTE pdrv, const BYTE* buff, LBA_t sector,
-                             UINT count) {
+   DRESULT disk_write(BYTE pdrv, const BYTE* buff, LBA_t sector,
+                             UINT count) override {
     return RES_ERROR;
   }
-  virtual DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void* buff) {
+   DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void* buff) override {
     return RES_ERROR;
   }
 };
 
-}
+}  // namespace fatfs

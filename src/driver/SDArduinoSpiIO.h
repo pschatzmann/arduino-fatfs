@@ -45,10 +45,10 @@ namespace fatfs {
  * @ingroup io
  */
 
-class SDArduinoSPIIO : public BaseIO {
+class SDArduinoSpiIO : public BaseIO {
  public:
-  SDArduinoSPIIO(int cs = -1, SPIClass &spi = SPI) { setSPI(cs, spi); }
-  SDArduinoSPIIO(SPIClass &spi) { setSPI(spi); }
+  SDArduinoSpiIO(int cs = -1, SPIClass &spi = SPI) { setSPI(cs, spi); }
+  SDArduinoSpiIO(SPIClass &spi) { setSPI(spi); }
 
   void setSPI(SPIClass &spi = SPI) {
     this->p_spi = &spi;
@@ -171,9 +171,10 @@ class SDArduinoSPIIO : public BaseIO {
   /*-----------------------------------------------------------------------*/
 
 #if _USE_WRITE
+
   DRESULT disk_write(BYTE drv,     /* Physical drive number (0) */
-                     BYTE *buff,   /* Ponter to the data to write */
-                     DWORD sector, /* Start sector number (LBA) */
+                     const BYTE *buff,   /* Ponter to the data to write */
+                     LBA_t sector, /* Start sector number (LBA) */
                      UINT count    /* Number of sectors to write (1..128) */
                      ) override {
     if (drv || !count) return RES_PARERR;     /* Check parameter */
@@ -185,7 +186,7 @@ class SDArduinoSPIIO : public BaseIO {
 
     if (count == 1) {                    /* Single sector write */
       if ((send_cmd(CMD24, sector) == 0) /* WRITE_BLOCK */
-          && xmit_datablock(buff, 0xFE)) {
+          && xmit_datablock((BYTE*)buff, 0xFE)) {
         count = 0;
       }
     } else { /* Multiple sector write */
@@ -193,7 +194,7 @@ class SDArduinoSPIIO : public BaseIO {
         send_cmd(ACMD23, count);          /* Predefine number of sectors */
       if (send_cmd(CMD25, sector) == 0) { /* WRITE_MULTIPLE_BLOCK */
         do {
-          if (!xmit_datablock(buff, 0xFC)) break;
+          if (!xmit_datablock((BYTE*)buff, 0xFC)) break;
           buff += 512;
         } while (--count);
         if (!xmit_datablock(0, 0xFD)) count = 1; /* STOP_TRAN token */
@@ -211,7 +212,7 @@ class SDArduinoSPIIO : public BaseIO {
 
 #if _USE_IOCTL
   DRESULT disk_ioctl(BYTE drv,  /* Physical drive number (0) */
-                     BYTE cmd,  /* Control command code */
+                     ioctl_cmd_t cmd,  /* Control command code */
                      void *buff /* Pointer to the conrtol data */
                      ) override {
     DRESULT res;

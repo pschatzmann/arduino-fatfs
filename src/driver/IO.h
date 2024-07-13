@@ -8,12 +8,12 @@
 #pragma once
 #include "../ff/ffdef.h"
 
-// forward declaration of FatFs
-namespace fatfs {
-class FatFs;  // forward declaration
-}
 
 namespace fatfs {
+
+// forward declaration of FatFs
+class FatFs;  // forward declaration
+
 
 /// Status of Disk Functions 
 enum DSTATUS {

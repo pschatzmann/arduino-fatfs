@@ -38,9 +38,9 @@ namespace fatfs {
  * @ingroup io
  */
 
-class SDBitBangSPIIO : public BaseIO {
+class SDBitBangSpiIO : public BaseIO {
  public:
-  SDBitBangSPIIO(int miso, int mosi, int clk, int cs = -1) {
+  SDBitBangSpiIO(int miso, int mosi, int clk, int cs = -1) {
     setPins(miso, mosi, clk, cs);
   }
 
@@ -179,7 +179,7 @@ class SDBitBangSPIIO : public BaseIO {
   }
 
   DRESULT disk_ioctl(BYTE drv,  /* Physical drive nmuber (0) */
-                     BYTE ctrl, /* Control code */
+                     ioctl_cmd_t ctrl, /* Control code */
                      void *buff /* Buffer to send/receive control data */
                      ) override {
     DRESULT res;

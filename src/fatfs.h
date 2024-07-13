@@ -99,7 +99,7 @@ class File : public Stream {
     if (!isDirectory()) fs->f_sync(&file);
   }
 
-  size_t readBytes(uint8_t *data, size_t len) override {
+  virtual size_t readBytes(uint8_t *data, size_t len)  {
     if (isDirectory()) return 0;
     UINT result;
     auto rc = fs->f_read(&file, data, len, &result);
@@ -221,7 +221,7 @@ class SDClass {
  public:
   SDClass() {
 #ifdef ARDUINO
-    setDriver(&drv);
+    setDriver(drv);
 #endif
   };
   SDClass(IO &driver) { setDriver(driver); }
@@ -335,7 +335,7 @@ class SDClass {
 
  protected:
 #ifdef ARDUINO
-  fatfs::SDArduinoSPIIO drv;
+  fatfs::SDArduinoSpiIO drv;
 #endif
   FatFs fat_fs;
   uint8_t *work_buffer = nullptr;

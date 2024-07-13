@@ -43,7 +43,7 @@ extern SPI_HandleTypeDef hspi1;
  * @brief SPI interface for STM32 microcontrollers
  * @ingroup io
  */
-class SDSPISTM32IO : public BaseIO {
+class SDStm32SpiIO : public BaseIO {
  public:
   DSTATUS disk_initialize(BYTE drv /* Physical drive number (0) */
   ) {
@@ -120,7 +120,7 @@ class SDSPISTM32IO : public BaseIO {
   DRESULT disk_read(
       BYTE drv,     /* Physical drive number (0) */
       BYTE *buff,   /* Pointer to the data buffer to store read data */
-      DWORD sector, /* Start sector number (LBA) */
+      LBA_t sector, /* Start sector number (LBA) */
       UINT count    /* Number of sectors to read (1..128) */
   ) {
     if (drv || !count) return RES_PARERR;     /* Check parameter */
@@ -155,7 +155,7 @@ class SDSPISTM32IO : public BaseIO {
 #if _USE_WRITE
   DRESULT disk_write(BYTE drv,         /* Physical drive number (0) */
                      const BYTE *buff, /* Ponter to the data to write */
-                     DWORD sector,     /* Start sector number (LBA) */
+                     LBA_t sector,     /* Start sector number (LBA) */
                      UINT count        /* Number of sectors to write (1..128) */
   ) {
     if (drv || !count) return RES_PARERR;     /* Check parameter */

@@ -20,6 +20,7 @@
 #pragma once
 
 #include "BaseIO.h"
+#include "stm32/Sd2Card.h"
 
 #define _USE_WRITE 1 /* 1: Enable disk_write function */
 #define _USE_IOCTL 1 /* 1: Enable disk_ioctl function */
@@ -44,44 +45,107 @@ namespace fatfs {
  * @ingroup io
  */
 
-class SDSTM32DiskIO : public BaseIO {
+class SDStm32DiskIO : public BaseIO {
  public:
+#if defined(SDMMC1) || defined(SDMMC2)
+  SDStm32DiskIO(uint32_t data0, uint32_t data1, uint32_t data2, uint32_t data3,
+                uint32_t ck, uint32_t cmd, uint32_t ckin, uint32_t cdir,
+                uint32_t d0dir, uint32_t d123dir) {
+    card.init(SD_DETECT_NONE, data0, data1, data2, data3, ck, cmd, ckin, cdir,
+              d0dir, d123dir);
+  }
+#else
+  SDStm32DiskIO(uint32_t data0, uint32_t data1, uint32_t data2, uint32_t data3,
+                uint32_t ck, uint32_t cmd) {
+    card.init(SD_DETECT_NONE, data0, data1, data2, data3, ck, cmd);
+  }
+#endif
+
+#if defined(SDMMC1) || defined(SDMMC2)
+  SDStm32DiskIO(uint32_t detect, uint32_t data0, uint32_t data1, uint32_t data2,
+                uint32_t data3, uint32_t ck, uint32_t cmd, uint32_t ckin,
+                uint32_t cdir, uint32_t d0dir, uint32_t d123dir)
+#else
+  SDStm32DiskIO(uint32_t detect, uint32_t data0, uint32_t data1, uint32_t data2,
+                uint32_t data3, uint32_t ck, uint32_t cmd)
+#endif
+  {
+    card.setDx(data0, data1, data2, data3);
+    card.setCK(ck);
+    card.setCMD(cmd);
+#if defined(SDMMC1) || defined(SDMMC2)
+    card.setCKIN(ckin);
+    card.setCDIR(cdir);
+    card.setDxDIR(d0dir, d123dir);
+#endif
+    if (detect != SD_DETECT_NONE) {
+      PinName p = digitalPinToPinName(detect);
+      if ((p == NC) || BSP_SD_DetectPin(set_GPIO_Port_Clock(STM_PORT(p)),
+                                        STM_LL_GPIO_PIN(p)) != MSD_OK) {
+        return;
+      }
+    }
+#if defined(USE_SD_TRANSCEIVER) && (USE_SD_TRANSCEIVER != 0U)
+    PinName sd_en = digitalPinToPinName(SD_TRANSCEIVER_EN);
+    PinName sd_sel = digitalPinToPinName(SD_TRANSCEIVER_SEL);
+    if (BSP_SD_TransceiverPin(set_GPIO_Port_Clock(STM_PORT(sd_en)),
+                              STM_LL_GPIO_PIN(sd_en),
+                              set_GPIO_Port_Clock(STM_PORT(sd_sel)),
+                              STM_LL_GPIO_PIN(sd_sel)) == MSD_ERROR) {
+      return;
+    }
+#endif
+    if (BSP_SD_Init() == MSD_OK) {
+      BSP_SD_GetCardInfo(&cardInfo);
+      return;
+    }
+    return;
+  }
+
   /**
    * @brief  Initializes a Drive
-   * @param  lun : not used
+   * @param  pdrv : not used
    * @retval DSTATUS: Operation status
    */
-  DSTATUS disk_initialize(BYTE lun) override {
-    stat = STA_NOINIT;
+  DSTATUS disk_initialize(BYTE pdrv) override {
+    status = STA_NOINIT;
 #if !defined(DISABLE_SD_INIT)
 
     if (BSP_SD_Init() == MSD_OK) {
-      stat = SD_CheckStatus(lun);
+      status = disk_status(pdrv);
     }
 
 #else
-    Stat = SD_CheckStatus(lun);
+    Stat = disk_status(pdrv);
 #endif
-    return stat;
+    return status;
   }
 
   /**
    * @brief  Gets Disk Status
-   * @param  lun : not used
+   * @param  pdrv : not used
    * @retval DSTATUS: Operation status
    */
-  DSTATUS disk_status(BYTE lun) override { return SD_CheckStatus(lun); }
+  DSTATUS disk_status(BYTE pdrv) override {
+    if (pdrv != 0) return STA_NODISK;
+    status = STA_NOINIT;
+    if (BSP_SD_GetCardState() == MSD_OK) {
+      status = STA_CLEAR;
+    }
+    return status;
+  }
 
   /**
    * @brief  Reads Sector(s)
-   * @param  lun : not used
+   * @param  pdrv : not used
    * @param  *buff: Data buffer to store read data
    * @param  sector: Sector address (LBA)
    * @param  count: Number of sectors to read (1..128)
    * @retval DRESULT: Operation result
    */
-  DRESULT disk_read(BYTE lun, BYTE *buff, DWORD sector, UINT count) {
-    (void)lun;
+  DRESULT disk_read(BYTE pdrv, BYTE *buff, LBA_t sector, UINT count) override {
+    if (pdrv != 0) return RES_NOTRDY;
+    if (status == STA_NOINIT) return RES_NOTRDY;
     DRESULT res = RES_ERROR;
 
     if (BSP_SD_ReadBlocks((uint32_t *)buff, (uint32_t)(sector), count,
@@ -97,15 +161,18 @@ class SDSTM32DiskIO : public BaseIO {
 
 /**
  * @brief  Writes Sector(s)
- * @param  lun : not used
+ * @param  pdrv : not used
  * @param  *buff: Data to be written
  * @param  sector: Sector address (LBA)
  * @param  count: Number of sectors to write (1..128)
  * @retval DRESULT: Operation result
  */
 #if _USE_WRITE == 1
-  DRESULT disk_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count) {
-    (void)lun;
+
+  DRESULT disk_write(BYTE pdrv, const BYTE *buff, LBA_t sector,
+                     UINT count) override {
+    if (pdrv != 0) return RES_NOTRDY;
+    if (status == STA_NOINIT) return RES_NOTRDY;
     DRESULT res = RES_ERROR;
 
     if (BSP_SD_WriteBlocks((uint32_t *)buff, (uint32_t)(sector), count,
@@ -122,18 +189,17 @@ class SDSTM32DiskIO : public BaseIO {
 
 /**
  * @brief  I/O control operation
- * @param  lun : not used
+ * @param  pdrv : not used
  * @param  cmd: Control code
  * @param  *buff: Buffer to send/receive control data
  * @retval DRESULT: Operation result
  */
 #if _USE_IOCTL == 1
-  DRESULT disk_ioctl(BYTE lun, ioctl_cmd_t cmd, void *buff) {
-    (void)lun;
+  DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void *buff) override {
+    (void)pdrv;
     DRESULT res = RES_ERROR;
-    BSP_SD_CardInfo CardInfo;
 
-    if (stat & STA_NOINIT) return RES_NOTRDY;
+    if (status & STA_NOINIT) return RES_NOTRDY;
 
     switch (cmd) {
       /* Make sure that no pending write process */
@@ -143,22 +209,22 @@ class SDSTM32DiskIO : public BaseIO {
 
       /* Get number of sectors on the disk (DWORD) */
       case GET_SECTOR_COUNT:
-        BSP_SD_GetCardInfo(&CardInfo);
-        *(DWORD *)buff = CardInfo.LogBlockNbr;
+        BSP_SD_GetCardInfo(&cardInfo);
+        *(DWORD *)buff = cardInfo.LogBlockNbr;
         res = RES_OK;
         break;
 
       /* Get R/W sector size (WORD) */
       case GET_SECTOR_SIZE:
-        BSP_SD_GetCardInfo(&CardInfo);
-        *(WORD *)buff = CardInfo.LogBlockSize;
+        BSP_SD_GetCardInfo(&cardInfo);
+        *(WORD *)buff = cardInfo.LogBlockSize;
         res = RES_OK;
         break;
 
       /* Get erase block size in unit of sector (DWORD) */
       case GET_BLOCK_SIZE:
-        BSP_SD_GetCardInfo(&CardInfo);
-        *(DWORD *)buff = CardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
+        BSP_SD_GetCardInfo(&cardInfo);
+        *(DWORD *)buff = cardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
         res = RES_OK;
         break;
 
@@ -170,20 +236,11 @@ class SDSTM32DiskIO : public BaseIO {
   }
 #endif /* _USE_IOCTL == 1 */
 
-protected:
-  /* Disk status */
-  volatile DSTATUS stat = STA_NOINIT;
-
-  DSTATUS SD_CheckStatus(BYTE lun) {
-    (void)lun;
-    stat = STA_NOINIT;
-
-    if (BSP_SD_GetCardState() == MSD_OK) {
-      stat &= ~STA_NOINIT;
-    }
-
-    return stat;
-  }
+ protected:
+  // Disk status
+  volatile DSTATUS status = STA_NOINIT;
+  Sd2Card card;
+  BSP_SD_CardInfo cardInfo;
 };
 
 }  // namespace fatfs
