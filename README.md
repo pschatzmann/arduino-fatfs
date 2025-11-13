@@ -13,7 +13,6 @@ I have added the most important drivers to this project:  The drivers are writte
 - The data is stored in __RAM (or PSRAM)__ (RamIO)
 - Support for __multiple drives__ with different drivers (MultiIO)
 - SD via Arduino __SPI__ (SDArduinoSPIIO)
-- SD via Arduino __GPIO using Bitbanging__ (SDBitBangSPIIO)
 
 It is very easy to add new drivers, so any contribution will be welcome...
 
