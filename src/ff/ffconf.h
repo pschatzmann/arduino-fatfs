@@ -324,4 +324,6 @@
 #define FF_IO_USE_WRITE 1 /* 1: Enable disk_write function */
 #define FF_IO_USE_IOCTL 1 /* 1: Enable disk_ioctl function */
 
+#define FF_SPI_SPEED_FAST 20000000 /* SPI fast speed in Hz for SD card access */
+
 /*--- End of configuration options ---*/

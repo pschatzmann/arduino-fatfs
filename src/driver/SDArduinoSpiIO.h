@@ -304,8 +304,8 @@ class SDArduinoSpiIO : public BaseIO {
   BYTE CardType;                      /* Card type flags */
   SPIClass *p_spi = &SPI;
   SPISettings spi_slow{280000, MSBFIRST, SPI_MODE0};
-  SPISettings spi_fast{4500000, MSBFIRST, SPI_MODE0};
-  SPISettings spi_settings = spi_slow;
+  SPISettings spi_fast{FF_SPI_SPEED_FAST, MSBFIRST, SPI_MODE0};
+  SPISettings spi_settings;
   uint32_t spi_timeout;
   int cs = -1;
 
