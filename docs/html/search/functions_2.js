@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['deselect_121',['deselect',['../classfatfs_1_1SDBitBangSPIIO.html#a4ea8bd656c3e773162f97c2a6d12353f',1,'fatfs::SDBitBangSPIIO']]],
-  ['disk_5finitialize_122',['disk_initialize',['../classfatfs_1_1SDSTM32DiskIO.html#a5e0fc4cda299f876c9b1b9ff5d9e9406',1,'fatfs::SDSTM32DiskIO']]],
-  ['disk_5fioctl_123',['disk_ioctl',['../classfatfs_1_1SDSTM32DiskIO.html#a2d76bcb863679501ecfc08dd6972d69b',1,'fatfs::SDSTM32DiskIO']]],
-  ['disk_5fread_124',['disk_read',['../classfatfs_1_1SDSTM32DiskIO.html#a5b4a2a2945f1b64df42878facfecab60',1,'fatfs::SDSTM32DiskIO']]],
-  ['disk_5fstatus_125',['disk_status',['../classfatfs_1_1SDSTM32DiskIO.html#ab34fc0d2887ded33938335afaba0e5e2',1,'fatfs::SDSTM32DiskIO']]],
-  ['disk_5fwrite_126',['disk_write',['../classfatfs_1_1SDSTM32DiskIO.html#a7e5511722e77e07a091931f59881a5c4',1,'fatfs::SDSTM32DiskIO']]]
+  ['disk_5finitialize_0',['disk_initialize',['../classfatfs_1_1SDStm32DiskIO.html#a10733531147ba2e914ef8c5b2f4285e8',1,'fatfs::SDStm32DiskIO']]],
+  ['disk_5fioctl_1',['disk_ioctl',['../classfatfs_1_1SDStm32DiskIO.html#ab5279c0d6b836cbb8a78ac4b0564e360',1,'fatfs::SDStm32DiskIO']]],
+  ['disk_5fread_2',['disk_read',['../classfatfs_1_1SDStm32DiskIO.html#a82fcd1908c33b960443ffd9eba6ec44a',1,'fatfs::SDStm32DiskIO']]],
+  ['disk_5fstatus_3',['disk_status',['../classfatfs_1_1SDStm32DiskIO.html#aaab1d71d0cfe3ce9eec3d3d7426cb08e',1,'fatfs::SDStm32DiskIO']]],
+  ['disk_5fwrite_4',['disk_write',['../classfatfs_1_1SDStm32DiskIO.html#ac80b86c9ddf04c6af266ae871ab5b970',1,'fatfs::SDStm32DiskIO']]]
 ];

@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['select_179',['select',['../classfatfs_1_1SDBitBangSPIIO.html#a4169b67d5d7d4cb8c00dfcd0e88d74f6',1,'fatfs::SDBitBangSPIIO']]],
-  ['send_5fcmd_180',['send_cmd',['../classfatfs_1_1SDBitBangSPIIO.html#a2a93105c4a08d6f58ede80717aa7430a',1,'fatfs::SDBitBangSPIIO']]],
-  ['set_5fcs_181',['set_cs',['../classfatfs_1_1SDArduinoSPIIO.html#aeaca2408857e12c92ce5781401bbfab6',1,'fatfs::SDArduinoSPIIO']]],
-  ['set_5fspi_5ffast_182',['set_spi_fast',['../classfatfs_1_1SDArduinoSPIIO.html#a723c1ff9afea3cfc011b80a387d13a45',1,'fatfs::SDArduinoSPIIO']]],
-  ['setdriver_183',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]]
+  ['set_5fcs_0',['set_cs',['../classfatfs_1_1SDArduinoSpiIO.html#aba23437e48abea37607e6e768c315a6c',1,'fatfs::SDArduinoSpiIO']]],
+  ['set_5fspi_5ffast_1',['set_spi_fast',['../classfatfs_1_1SDArduinoSpiIO.html#a15ca57add15055f0f1f7594dc5efc073',1,'fatfs::SDArduinoSpiIO']]],
+  ['setdriver_2',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]]
 ];

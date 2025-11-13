@@ -1,5 +1,7 @@
 <map id="fatfs::FIL" name="fatfs::FIL">
-<area shape="rect" id="node1" title=" " alt="" coords="23,184,101,211"/>
-<area shape="rect" id="node2" href="$structfatfs_1_1FFOBJID.html" title=" " alt="" coords="5,95,119,121"/>
-<area shape="rect" id="node3" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="13,5,111,32"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="23,181,101,207"/>
+<area shape="rect" id="Node000002" href="$structfatfs_1_1FFOBJID.html" title=" " alt="" coords="5,93,119,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,133,65,181,59,181,59,133"/>
+<area shape="rect" id="Node000003" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="13,5,111,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,45,65,93,59,93,59,45"/>
 </map>

@@ -1,11 +1,15 @@
 <map id="fatfs::IO" name="fatfs::IO">
-<area shape="rect" id="node1" title="FatFS interface definition." alt="" coords="5,157,80,184"/>
-<area shape="rect" id="node2" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="154,81,261,108"/>
-<area shape="rect" id="node7" href="$classfatfs_1_1MultiIO.html" title="File system driver which supports multiple drives: Add the drivers by calling add() then call mount()..." alt="" coords="154,132,261,159"/>
-<area shape="rect" id="node8" href="$classfatfs_1_1RamIO.html" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="155,183,259,209"/>
-<area shape="rect" id="node9" href="$classfatfs_1_1StreamIO.html" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="128,233,287,260"/>
-<area shape="rect" id="node3" href="$classfatfs_1_1SDArduinoSPIIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="336,5,499,32"/>
-<area shape="rect" id="node4" href="$classfatfs_1_1SDBitBangSPIIO.html" title="Accessing a SD card via SPI using bit banging." alt="" coords="336,56,499,83"/>
-<area shape="rect" id="node5" href="$classfatfs_1_1SDSPISTM32IO.html" title="SPI interface for STM32 microcontrollers." alt="" coords="339,107,495,133"/>
-<area shape="rect" id="node6" href="$classfatfs_1_1SDSTM32DiskIO.html" title="Depending on the usecase, the SD card initialization could be done at the application level,..." alt="" coords="335,157,500,184"/>
+<area shape="rect" id="Node000001" title="FatFS interface definition." alt="" coords="337,5,412,31"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="127,79,233,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="332,38,213,81,211,76,330,33"/>
+<area shape="rect" id="Node000005" href="$classfatfs_1_1MultiIO.html" title="File system driver which supports multiple drives: Add the drivers by calling add() then call mount()..." alt="" coords="257,79,364,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="357,43,323,80,319,77,353,39"/>
+<area shape="rect" id="Node000006" href="$classfatfs_1_1RamIO.html" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="388,79,492,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="397,39,431,77,427,80,393,43"/>
+<area shape="rect" id="Node000007" href="$classfatfs_1_1StreamIO.html" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="517,79,675,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="424,32,561,76,559,81,422,37"/>
+<area shape="rect" id="Node000003" href="$classfatfs_1_1SDArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,152,168,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="156,114,104,154,100,150,153,110"/>
+<area shape="rect" id="Node000004" href="$classfatfs_1_1SDStm32DiskIO.html" title="Depending on the usecase, the SD card initialization could be done at the application level,..." alt="" coords="192,152,355,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="207,110,260,150,256,154,204,114"/>
 </map>

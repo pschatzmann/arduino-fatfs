@@ -1,5 +1,8 @@
 <map id="fatfs::FatFs" name="fatfs::FatFs">
-<area shape="rect" id="node1" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,184,120,211"/>
-<area shape="rect" id="node2" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,95,189,121"/>
-<area shape="rect" id="node3" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,32"/>
+<area shape="rect" id="Node000001" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,181,120,207"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,93,189,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,131,86,183,82,179,130,127"/>
+<area shape="rect" id="Node000003" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="50,45,46,80,47,118,57,152,69,180,64,182,52,154,42,119,40,80,45,44"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="79,38,140,91,136,95,76,42"/>
 </map>

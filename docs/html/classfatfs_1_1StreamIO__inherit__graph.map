@@ -1,4 +1,5 @@
 <map id="fatfs::StreamIO&lt; T &gt;" name="fatfs::StreamIO&lt; T &gt;">
-<area shape="rect" id="node1" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="5,80,164,107"/>
-<area shape="rect" id="node2" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="47,5,122,32"/>
+<area shape="rect" id="Node000001" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="5,79,164,104"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="47,5,122,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,44,87,79,82,79,82,44"/>
 </map>

@@ -1,15 +1,12 @@
 var searchData=
 [
-  ['sd_82',['sd',['../group__sd.html',1,'']]],
-  ['sdarduinospiio_83',['SDArduinoSPIIO',['../classfatfs_1_1SDArduinoSPIIO.html',1,'fatfs']]],
-  ['sdbitbangspiio_84',['SDBitBangSPIIO',['../classfatfs_1_1SDBitBangSPIIO.html',1,'fatfs']]],
-  ['sdclass_85',['SDClass',['../classfatfs_1_1SDClass.html',1,'fatfs']]],
-  ['sdspistm32io_86',['SDSPISTM32IO',['../classfatfs_1_1SDSPISTM32IO.html',1,'fatfs']]],
-  ['sdstm32diskio_87',['SDSTM32DiskIO',['../classfatfs_1_1SDSTM32DiskIO.html',1,'fatfs']]],
-  ['select_88',['select',['../classfatfs_1_1SDBitBangSPIIO.html#a4169b67d5d7d4cb8c00dfcd0e88d74f6',1,'fatfs::SDBitBangSPIIO']]],
-  ['send_5fcmd_89',['send_cmd',['../classfatfs_1_1SDBitBangSPIIO.html#a2a93105c4a08d6f58ede80717aa7430a',1,'fatfs::SDBitBangSPIIO']]],
-  ['set_5fcs_90',['set_cs',['../classfatfs_1_1SDArduinoSPIIO.html#aeaca2408857e12c92ce5781401bbfab6',1,'fatfs::SDArduinoSPIIO']]],
-  ['set_5fspi_5ffast_91',['set_spi_fast',['../classfatfs_1_1SDArduinoSPIIO.html#a723c1ff9afea3cfc011b80a387d13a45',1,'fatfs::SDArduinoSPIIO']]],
-  ['setdriver_92',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]],
-  ['streamio_93',['StreamIO',['../classfatfs_1_1StreamIO.html',1,'fatfs']]]
+  ['sd_0',['sd',['../group__sd.html',1,'sd'],['../index.html#autotoc_md1',1,'SPI SD']]],
+  ['sdarduinospiio_1',['SDArduinoSpiIO',['../classfatfs_1_1SDArduinoSpiIO.html',1,'fatfs']]],
+  ['sdclass_2',['SDClass',['../classfatfs_1_1SDClass.html',1,'fatfs']]],
+  ['sdstm32diskio_3',['SDStm32DiskIO',['../classfatfs_1_1SDStm32DiskIO.html',1,'fatfs']]],
+  ['set_5fcs_4',['set_cs',['../classfatfs_1_1SDArduinoSpiIO.html#aba23437e48abea37607e6e768c315a6c',1,'fatfs::SDArduinoSpiIO']]],
+  ['set_5fspi_5ffast_5',['set_spi_fast',['../classfatfs_1_1SDArduinoSpiIO.html#a15ca57add15055f0f1f7594dc5efc073',1,'fatfs::SDArduinoSpiIO']]],
+  ['setdriver_6',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]],
+  ['spi_20sd_7',['SPI SD',['../index.html#autotoc_md1',1,'']]],
+  ['streamio_8',['StreamIO',['../classfatfs_1_1StreamIO.html',1,'fatfs']]]
 ];

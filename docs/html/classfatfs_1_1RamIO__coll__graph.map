@@ -1,5 +1,7 @@
 <map id="fatfs::RamIO" name="fatfs::RamIO">
-<area shape="rect" id="node1" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="5,171,109,197"/>
-<area shape="rect" id="node2" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="20,95,95,121"/>
-<area shape="rect" id="node3" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="9,5,106,32"/>
+<area shape="rect" id="Node000001" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="5,168,109,193"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="20,93,95,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,133,60,168,55,168,55,133"/>
+<area shape="rect" id="Node000003" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="9,5,106,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="60,45,60,93,55,93,55,45"/>
 </map>

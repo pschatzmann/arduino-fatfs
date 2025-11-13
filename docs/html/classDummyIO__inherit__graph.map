@@ -1,8 +1,0 @@
-<map id="BaseIO" name="BaseIO">
-<area shape="rect" id="node1" title=" " alt="" coords="246,80,334,107"/>
-<area shape="rect" id="node3" href="$classSDArduinoSPIIO.html" title=" " alt="" coords="5,155,129,181"/>
-<area shape="rect" id="node4" href="$classSDBitBangSPIIO.html" title=" " alt="" coords="154,155,279,181"/>
-<area shape="rect" id="node5" href="$classSDSPISTM32IO.html" title=" " alt="" coords="304,155,423,181"/>
-<area shape="rect" id="node6" href="$classSDSTM32DiskIO.html" title=" " alt="" coords="447,155,573,181"/>
-<area shape="rect" id="node2" href="$classIO.html" title=" " alt="" coords="271,5,309,32"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="fatfs_io::BaseIO" name="fatfs_io::BaseIO">
-<area shape="rect" id="node1" title="Empty IO implementation that we can use to test the compilation." alt="" coords="147,81,272,108"/>
-<area shape="rect" id="node3" href="$classfatfs__io_1_1SDArduinoSPIIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="321,5,503,32"/>
-<area shape="rect" id="node4" href="$classfatfs__io_1_1SDBitBangSPIIO.html" title="Accessing a SD card via SPI using bit banging." alt="" coords="321,56,503,83"/>
-<area shape="rect" id="node5" href="$classfatfs__io_1_1SDSPISTM32IO.html" title="SPI interface for STM32 microcontrollers." alt="" coords="325,107,499,133"/>
-<area shape="rect" id="node6" href="$classfatfs__io_1_1SDSTM32DiskIO.html" title=" " alt="" coords="320,157,504,184"/>
-<area shape="rect" id="node2" href="$classfatfs__io_1_1IO.html" title=" " alt="" coords="5,81,99,108"/>
-</map>

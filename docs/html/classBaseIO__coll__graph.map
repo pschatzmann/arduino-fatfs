@@ -1,5 +1,0 @@
-<map id="BaseIO" name="BaseIO">
-<area shape="rect" id="node1" title="Empty IO implementation that we can use to test the compilation." alt="" coords="5,171,73,197"/>
-<area shape="rect" id="node2" href="$classIO.html" title="FatFS interface definition &lt;&gt;" alt="" coords="20,95,59,121"/>
-<area shape="rect" id="node3" href="$structFATFS.html" title=" " alt="" coords="10,5,69,32"/>
-</map>

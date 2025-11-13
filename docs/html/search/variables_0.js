@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['fatfsdir_189',['FatFsDir',['../classfatfs_1_1FatFs.html#aa9df6f05cfc015db08454d6aab2e9673',1,'fatfs::FatFs']]],
-  ['fsid_190',['Fsid',['../classfatfs_1_1FatFs.html#a406ba551e272cf71ab886439034178de',1,'fatfs::FatFs']]]
+  ['dirbuf_0',['DirBuf',['../classfatfs_1_1FatFs.html#a2d39c2dcf99d67310fcae82548458d2b',1,'fatfs::FatFs']]]
 ];
