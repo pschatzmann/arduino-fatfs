@@ -350,14 +350,14 @@ DWORD ff_wtoupper(DWORD uni);         /*!< Unicode upper-case conversion */
 #define FATFS_HEADER_ONLY_IMPL
 
 // Include FatFs core implementation
-#include "ff.inc"
+#include "ff-inc.h"
 
 // Include system functions (memory allocation, locking)
-#include "ffsystem.inc"
+#include "ffsystem-inc.h"
 
 // Include Unicode conversion tables (if LFN support enabled)
 #if FF_USE_LFN >= 1
-#include "ffunicode.inc"
+#include "ffunicode-inc.h"
 #endif
 
 #endif  // FATFS_HEADER_ONLY_IMPL

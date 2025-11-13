@@ -1,3 +1,8 @@
+/*
+  Implementation header for FatFs system glue (header-only build)
+  This file is intended to be included by ff.h only. Do not include directly
+  from application code.
+*/
 /*------------------------------------------------------------------------*/
 /* Sample Code of OS Dependent Functions for FatFs                        */
 /* (C)ChaN, 2018                                                          */

@@ -1,3 +1,9 @@
+/*
+	Implementation header for FatFs core (header-only build)
+	This file is intended to be included by ff.h only. Do not include directly
+	from application code. The header-only pattern pulls this implementation into
+	each translation unit that includes ff.h.
+*/
 /*----------------------------------------------------------------------------/
 /  FatFs - Generic FAT Filesystem Module  R0.14                               /
 /-----------------------------------------------------------------------------/

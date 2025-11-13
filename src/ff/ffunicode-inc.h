@@ -1,3 +1,8 @@
+/*
+	Implementation header for FatFs Unicode support (header-only build)
+	This file is intended to be included by ff.h only. Do not include directly
+	from application code. It contains large static data tables for LFN/Unicode.
+*/
 /*------------------------------------------------------------------------*/
 /* Unicode handling functions for FatFs R0.13+                            */
 /*------------------------------------------------------------------------*/
