@@ -234,7 +234,7 @@
 /  buffer in the filesystem object (FATFS) is used for the file data transfer. */
 
 
-#define FF_FS_EXFAT		0
+#define FF_FS_EXFAT		1
 /* This option switches support for exFAT filesystem. (0:Disable or 1:Enable)
 /  To enable exFAT, also LFN needs to be enabled. (FF_USE_LFN >= 1)
 /  Note that enabling exFAT discards ANSI C (C89) compatibility. */
@@ -303,7 +303,7 @@
 /*---------------------------------------------------------------------------/
 / Arduino API
 /---------------------------------------------------------------------------*/
-#define FF_ARDUINO_LEVEL 0
+#define FF_ARDUINO_LEVEL 1
 /* The option FF_ARDUINO_LEVEL defines if we allow some extended function that are
 / not supported by the Arduino SD API: 
 / 0 = Provide only the core API
