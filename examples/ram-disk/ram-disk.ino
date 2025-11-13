@@ -5,7 +5,7 @@ RamIO drv{200, 512};  // 100 sector with 512 bytes
 
 void setup() {
   Serial.begin(115200);
-  while(!Serial);
+  delay(3000);
   Serial.println("SD begin");
 
   // start SD

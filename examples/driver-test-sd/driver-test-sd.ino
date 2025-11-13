@@ -4,11 +4,18 @@
 / WARNING: The data on the target drive will be lost!
 */
 
+#include <SPI.h>
 #include <stdio.h>
 #include <string.h>
 #include "fatfs.h"
 
-RamIO drv{100, 512};  // 100 sector with 512 bytes
+// pins for audiokit
+#define MISO 2
+#define MOSI 15
+#define SCLK 14
+#define CS 13
+
+SDArduinoSpiIO drv{CS, SPI};  // driver managing CS and assign SPI
 
 
 static DWORD pn(          /* Pseudo random number generator */
@@ -298,8 +305,20 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
 }
 
 void setup() {
+  Serial.begin(115200);
+  delay(3000);
+  Serial.println("Disk I/O Test");
   int rc;
   DWORD buff[FF_MAX_SS]; /* Working buffer (4 sector in size) */
+ 
+  // start SPI and setup pins
+  SPI.begin(SCLK, MISO, MOSI);
+  
+  // start SD
+  if (!SD.begin(CS, SPI)) {
+    Serial.println("SD.begin() failed!");
+  }
+ 
 
   /* Check function/compatibility of the physical drive #0 */
   rc = test_diskio(0, 3, buff, sizeof buff);

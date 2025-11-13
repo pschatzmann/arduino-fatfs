@@ -1,12 +1,12 @@
 #include "SPI.h"
 #include "fatfs.h"
 
-#define MISO 12
-#define MOSI 13
+#define MISO 2
+#define MOSI 15
 #define SCLK 14
-#define CS 15
+#define CS 13
 
-SDArduinoSPIIO sd{CS, SPI};  // driver managing CS and assign SPI
+SDArduinoSpiIO sd{CS, SPI};  // driver managing CS and assign SPI
 SDClass SD1{sd};             // SD and assign driver
 File file;
 
@@ -18,10 +18,17 @@ void setup() {
   SPI.begin(SCLK, MISO, MOSI);
 
   // start SD
-  SD1.begin(drv);
+  if (!SD1.begin()) {
+    Serial.println("SD.begin() failed!");
+    while (true);
+  }
 
   // open and write file
   file = SD1.open("test", FILE_WRITE);
+  if (!file) {
+    Serial.println("Failed to open file!");
+    while (true);
+  }
   file.println("test");
   file.flush();
 
@@ -30,6 +37,7 @@ void setup() {
   auto str = file.readStringUntil('\n');
   Serial.println(str);
 
+  Serial.print("File size: ");
   Serial.println(file.size());
   file.close();
 }

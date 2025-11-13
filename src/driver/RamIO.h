@@ -5,6 +5,10 @@
 #include <vector>
 #include "IO.h"
 
+#ifdef ESP32
+#include "Arduino.h"
+#endif
+
 namespace fatfs {
 
 /**

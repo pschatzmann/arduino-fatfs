@@ -8,10 +8,10 @@ set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fs
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 add_compile_options("-xc++")
-SET_SOURCE_FILES_PROPERTIES(driver-test.ino PROPERTIES LANGUAGE CXX)
+SET_SOURCE_FILES_PROPERTIES(driver-test-sd.ino PROPERTIES LANGUAGE CXX)
 
 # build sketch as executable  
-add_executable (driver_test driver-test.ino )
+add_executable (driver_test driver-test-sd.ino )
 
 # link with fatfs
 target_link_libraries(driver_test arduino_fatfs)

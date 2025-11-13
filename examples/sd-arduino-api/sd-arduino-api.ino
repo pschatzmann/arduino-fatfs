@@ -2,25 +2,34 @@
 #include "SPI.h"
 #include "fatfs.h"
 
-#define MISO 12
-#define MOSI 13
+// pins for audiokit
+#define MISO 2
+#define MOSI 15
 #define SCLK 14
-#define CS 15
+#define CS 13
 
 File file;
 
 void setup() {
   Serial.begin(115200);
-  while(!Serial);
+  delay(3000);
 
   // start SPI and setup pins
   SPI.begin(SCLK, MISO, MOSI);
-
+  
   // start SD
-  SD.begin(CS); // or use SD.begin(SD, SPI);
+  if (!SD.begin(CS, SPI)) {
+    Serial.println("SD.begin() failed!");
+  }
+
+  Serial.println("SD card initialized successfully!");
 
   // open and write file
   file = SD.open("test", FILE_WRITE);
+  if (!file) {
+    Serial.println("Failed to open file!");
+    while(true);
+  }
   file.println("test");
   file.flush();
 
@@ -29,6 +38,7 @@ void setup() {
   auto str = file.readStringUntil('\n');
   Serial.println(str);
 
+  Serial.print("File size: ");
   Serial.println(file.size());
 
   file.close();

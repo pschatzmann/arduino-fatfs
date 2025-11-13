@@ -152,6 +152,7 @@ class SDArduinoSpiIO : public BaseIO {
           buff += 512;
         } while (--count);
         send_cmd(CMD12, 0); /* STOP_TRANSMISSION */
+        wait_ready(500);     /* Wait for card to be ready after stop transmission */
       }
     }
     despiselect();
@@ -304,7 +305,7 @@ class SDArduinoSpiIO : public BaseIO {
   SPIClass *p_spi = &SPI;
   SPISettings spi_slow{280000, MSBFIRST, SPI_MODE0};
   SPISettings spi_fast{4500000, MSBFIRST, SPI_MODE0};
-  SPISettings spi_settings;
+  SPISettings spi_settings = spi_slow;
   uint32_t spi_timeout;
   int cs = -1;
 
@@ -324,7 +325,17 @@ class SDArduinoSpiIO : public BaseIO {
   inline BYTE xchg_spi(BYTE dat) { return p_spi->transfer(dat); }
 
   /* Receive multiple byte */
-  void xchg_spi_multi(BYTE *buff, UINT btr) { p_spi->transfer(buff, btr); }
+  void rcvr_spi_multi(BYTE *buff, UINT btr) { 
+    // For receiving from SD card, send 0xFF dummy bytes while reading
+    for (UINT i = 0; i < btr; i++) {
+      buff[i] = xchg_spi(0xFF);
+    }
+  }
+  
+  /* Send multiple bytes */
+  void xmit_spi_multi(BYTE *buff, UINT btr) {
+    p_spi->transfer(buff, btr);
+  }
 
   /* Wait for card ready                                                   */
   int wait_ready(        /* 1:Ready, 0:Timeout */
@@ -382,7 +393,7 @@ class SDArduinoSpiIO : public BaseIO {
     if (token != 0xFE)
       return 0; /* Function fails if invalid DataStart token or timeout */
 
-    xchg_spi_multi(buff, btr); /* Store trailing data to the buffer */
+    rcvr_spi_multi(buff, btr); /* Receive data from card */
     xchg_spi(0xFF);
     xchg_spi(0xFF); /* Discard CRC */
 
@@ -402,7 +413,7 @@ class SDArduinoSpiIO : public BaseIO {
 
     xchg_spi(token);             /* Send token */
     if (token != 0xFD) {         /* Send data if token is other than StopTran */
-      xchg_spi_multi(buff, 512); /* Data */
+      xmit_spi_multi(buff, 512); /* Data */
       xchg_spi(0xFF);
       xchg_spi(0xFF); /* Dummy CRC */
 
