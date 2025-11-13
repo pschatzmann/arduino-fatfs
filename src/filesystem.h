@@ -10,6 +10,11 @@
 
 namespace fatfs {
 
+
+/**
+ * @brief Representation of a directory entry
+ * @ingroup iterator
+ */
 struct directory_entry {
   std::string path;
   bool is_directory;
@@ -24,7 +29,7 @@ inline fatfs::FatFs* get_fatfs() { return SD.getFatFs(); }
  * 
  * Iterates through entries in a single directory level without descending
  * into subdirectories. Uses FatFs f_opendir/f_readdir API directly.
- * 
+ * @ingroup iterator
  * @code
  * for (auto it = directory_iterator("/mydir"); 
  *      it != directory_iterator::end(); 
@@ -111,6 +116,7 @@ class directory_iterator {
  * Automatically traverses all subdirectories in depth-first order. Maintains
  * a stack of open directory handles to track the current position in the tree.
  * Uses FatFs f_opendir/f_readdir API directly.
+ * @ingroup iterator
  * 
  * @code
  * // Walk entire directory tree with one simple loop

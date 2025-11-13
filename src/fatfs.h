@@ -26,6 +26,11 @@
  * @defgroup ff ff
  * @brief fatfs basic API
  * @ingroup main
+ * 
+  *@defgroup iterator iterator
+ * @brief directory iterators 
+ * @ingroup main
+* 
  */
 #pragma once
 
