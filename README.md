@@ -156,5 +156,6 @@ void loop() {}
 - Class Documentation
     - [Arduino API](https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html)
     - [FatFs API](https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html)
+    - [Directory Iterators](https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html)
     - [Media Access](https://pschatzmann.github.io/arduino-fatfs/html/group__io.html)
 
