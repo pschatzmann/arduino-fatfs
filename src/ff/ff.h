@@ -343,4 +343,21 @@ WCHAR ff_uni2oem(DWORD uni, WORD cp); /*!< Unicode to OEM code conversion */
 DWORD ff_wtoupper(DWORD uni);         /*!< Unicode upper-case conversion */
 #endif
 
-}
+}  // namespace fatfs
+
+// Header-only library: include implementations
+#ifndef FATFS_HEADER_ONLY_IMPL
+#define FATFS_HEADER_ONLY_IMPL
+
+// Include FatFs core implementation
+#include "ff.inc"
+
+// Include system functions (memory allocation, locking)
+#include "ffsystem.inc"
+
+// Include Unicode conversion tables (if LFN support enabled)
+#if FF_USE_LFN >= 1
+#include "ffunicode.inc"
+#endif
+
+#endif  // FATFS_HEADER_ONLY_IMPL

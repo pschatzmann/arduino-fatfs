@@ -73,9 +73,9 @@ enum ioctl_cmd_t {
 
 class IO {
  public:
-  /// mount the file system
+  /// mount the file system - implementation at end of header to avoid recursive include
   virtual FRESULT mount(FatFs& fs);
-  /// unmount the file system
+  /// unmount the file system - implementation at end of header to avoid recursive include
   virtual FRESULT un_mount(FatFs& fs);
 
   virtual DSTATUS disk_initialize(BYTE pdrv) = 0;
@@ -88,5 +88,16 @@ class IO {
 
   FATFS fatfs;
 };
+
+}  // namespace fatfs
+
+// Include FatFs header now to resolve the forward declaration
+#include "../ff/ff.h"
+
+namespace fatfs {
+
+// Inline implementations (moved from IO.cpp)
+inline FRESULT IO::mount(FatFs& fs) { return fs.f_mount(&fatfs, "", 0); }
+inline FRESULT IO::un_mount(FatFs& fs) { return fs.f_unmount(""); }
 
 }  // namespace fatfs
