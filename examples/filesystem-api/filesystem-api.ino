@@ -9,9 +9,6 @@
 #include "fatfs.h"
 #include "filesystem.h"
 
-// Use the filesystem shim namespace
-using namespace fatfs_fs;
-
 // pins for SD card
 #define MISO 2
 #define MOSI 15

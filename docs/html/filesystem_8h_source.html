@@ -91,10 +91,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>fatfs_fs {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>fatfs {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structfatfs__fs_1_1directory__entry.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structfatfs__fs_1_1directory__entry.html">directory_entry</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structfatfs_1_1directory__entry.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structfatfs_1_1directory__entry.html">directory_entry</a> {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  std::string path;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">bool</span> is_directory;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  uint64_t size;  <span class="comment">// File size in bytes (0 for directories)</span></div>
@@ -105,10 +105,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">inline</span> <a class="code hl_class" href="classfatfs_1_1FatFs.html">fatfs::FatFs</a>* get_fatfs() { <span class="keywordflow">return</span> SD.getFatFs(); }</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classfatfs__fs_1_1directory__iterator.html">   37</a></span><span class="keyword">class </span><a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classfatfs_1_1directory__iterator.html">   37</a></span><span class="keyword">class </span><a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a> {</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a>() : end_flag(<span class="keyword">true</span>) {}</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a>(<span class="keyword">const</span> std::string&amp; rootPath)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a>() : end_flag(<span class="keyword">true</span>) {}</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a>(<span class="keyword">const</span> std::string&amp; rootPath)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      : root(rootPath), end_flag(<span class="keyword">false</span>) {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">auto</span> fs = get_fatfs();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (!fs) {</div>
@@ -126,19 +126,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">~directory_iterator</a>() {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">~directory_iterator</a>() {</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (!end_flag &amp;&amp; fs) {</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      fs-&gt;<a class="code hl_function" href="classfatfs_1_1FatFs.html#acfae92e177b4325da3b8643cd02763a9">f_closedir</a>(&amp;dir);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a>&amp; operator++() {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a>&amp; operator++() {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    advance();</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_struct" href="structfatfs__fs_1_1directory__entry.html">directory_entry</a> operator*()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_struct" href="structfatfs__fs_1_1directory__entry.html">directory_entry</a> e;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <a class="code hl_struct" href="structfatfs_1_1directory__entry.html">directory_entry</a> operator*()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_struct" href="structfatfs_1_1directory__entry.html">directory_entry</a> e;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    e.path = root;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">if</span> (!root.empty() &amp;&amp; root.back() != <span class="charliteral">&#39;/&#39;</span>) e.path += <span class="stringliteral">&quot;/&quot;</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    e.path += info.fname;</div>
@@ -147,11 +147,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> e;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a>&amp; other)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span> end_flag != other.end_flag;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keyword">static</span> <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a> end() { <span class="keywordflow">return</span> <a class="code hl_class" href="classfatfs__fs_1_1directory__iterator.html">directory_iterator</a>(); }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keyword">static</span> <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a> end() { <span class="keywordflow">return</span> <a class="code hl_class" href="classfatfs_1_1directory__iterator.html">directory_iterator</a>(); }</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordtype">void</span> advance() {</div>
@@ -178,10 +178,10 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="foldopen" id="foldopen00129" data-start="{" data-end="};">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classfatfs__fs_1_1recursive__directory__iterator.html">  129</a></span><span class="keyword">class </span><a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a> {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classfatfs_1_1recursive__directory__iterator.html">  129</a></span><span class="keyword">class </span><a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a> {</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>() : end_flag(<span class="keyword">true</span>) {}</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>(<span class="keyword">const</span> std::string&amp; rootPath)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>() : end_flag(<span class="keyword">true</span>) {}</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>(<span class="keyword">const</span> std::string&amp; rootPath)</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      : end_flag(<span class="keyword">false</span>) {</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keyword">auto</span> fs = get_fatfs();</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span> (!fs) {</div>
@@ -198,7 +198,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  }</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">~recursive_directory_iterator</a>() {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">~recursive_directory_iterator</a>() {</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="comment">// Close all open directories</span></div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">while</span> (!stack.empty()) {</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>      <span class="keywordflow">if</span> (fs) fs-&gt;<a class="code hl_function" href="classfatfs_1_1FatFs.html#acfae92e177b4325da3b8643cd02763a9">f_closedir</a>(&amp;stack.back().dir);</div>
@@ -206,19 +206,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  }</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>&amp; operator++() {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>&amp; operator++() {</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    advance();</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  }</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <a class="code hl_struct" href="structfatfs__fs_1_1directory__entry.html">directory_entry</a> operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> current_entry; }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <a class="code hl_struct" href="structfatfs_1_1directory__entry.html">directory_entry</a> operator*()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> current_entry; }</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>&amp; other)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">return</span> end_flag != other.end_flag;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keyword">static</span> <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a> end() {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classfatfs__fs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keyword">static</span> <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a> end() {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classfatfs_1_1recursive__directory__iterator.html">recursive_directory_iterator</a>();</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  }</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> <span class="keyword">private</span>:</div>
@@ -291,7 +291,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <a class="code hl_class" href="classfatfs_1_1FatFs.html">fatfs::FatFs</a>* fs = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  std::vector&lt;DirLevel&gt; stack;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <a class="code hl_struct" href="structfatfs__fs_1_1directory__entry.html">directory_entry</a> current_entry;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <a class="code hl_struct" href="structfatfs_1_1directory__entry.html">directory_entry</a> current_entry;</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  <span class="keywordtype">bool</span> end_flag{<span class="keyword">true</span>};</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>};</div>
 </div>
@@ -301,11 +301,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassfatfs_1_1FatFs_html_a01c956cbb4677869ac51d1d27185e4ec"><div class="ttname"><a href="classfatfs_1_1FatFs.html#a01c956cbb4677869ac51d1d27185e4ec">fatfs::FatFs::f_readdir</a></div><div class="ttdeci">FRESULT f_readdir(DIR *dp, FILINFO *fno)</div><div class="ttdef"><b>Definition</b> ff-inc.h:4543</div></div>
 <div class="ttc" id="aclassfatfs_1_1FatFs_html_a500842878c651f1346fc002c3e75b6d0"><div class="ttname"><a href="classfatfs_1_1FatFs.html#a500842878c651f1346fc002c3e75b6d0">fatfs::FatFs::f_opendir</a></div><div class="ttdeci">FRESULT f_opendir(DIR *dp, const TCHAR *path)</div><div class="ttdef"><b>Definition</b> ff-inc.h:4449</div></div>
 <div class="ttc" id="aclassfatfs_1_1FatFs_html_acfae92e177b4325da3b8643cd02763a9"><div class="ttname"><a href="classfatfs_1_1FatFs.html#acfae92e177b4325da3b8643cd02763a9">fatfs::FatFs::f_closedir</a></div><div class="ttdeci">FRESULT f_closedir(DIR *dp)</div><div class="ttdef"><b>Definition</b> ff-inc.h:4515</div></div>
-<div class="ttc" id="aclassfatfs__fs_1_1directory__iterator_html"><div class="ttname"><a href="classfatfs__fs_1_1directory__iterator.html">fatfs_fs::directory_iterator</a></div><div class="ttdoc">Iterator for non-recursive directory traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:37</div></div>
-<div class="ttc" id="aclassfatfs__fs_1_1recursive__directory__iterator_html"><div class="ttname"><a href="classfatfs__fs_1_1recursive__directory__iterator.html">fatfs_fs::recursive_directory_iterator</a></div><div class="ttdoc">Iterator for recursive directory tree traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:129</div></div>
+<div class="ttc" id="aclassfatfs_1_1directory__iterator_html"><div class="ttname"><a href="classfatfs_1_1directory__iterator.html">fatfs::directory_iterator</a></div><div class="ttdoc">Iterator for non-recursive directory traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:37</div></div>
+<div class="ttc" id="aclassfatfs_1_1recursive__directory__iterator_html"><div class="ttname"><a href="classfatfs_1_1recursive__directory__iterator.html">fatfs::recursive_directory_iterator</a></div><div class="ttdoc">Iterator for recursive directory tree traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:129</div></div>
 <div class="ttc" id="astructfatfs_1_1DIR_html"><div class="ttname"><a href="structfatfs_1_1DIR.html">fatfs::DIR</a></div><div class="ttdef"><b>Definition</b> ffdef.h:200</div></div>
 <div class="ttc" id="astructfatfs_1_1FILINFO_html"><div class="ttname"><a href="structfatfs_1_1FILINFO.html">fatfs::FILINFO</a></div><div class="ttdef"><b>Definition</b> ffdef.h:218</div></div>
-<div class="ttc" id="astructfatfs__fs_1_1directory__entry_html"><div class="ttname"><a href="structfatfs__fs_1_1directory__entry.html">fatfs_fs::directory_entry</a></div><div class="ttdef"><b>Definition</b> filesystem.h:13</div></div>
+<div class="ttc" id="astructfatfs_1_1directory__entry_html"><div class="ttname"><a href="structfatfs_1_1directory__entry.html">fatfs::directory_entry</a></div><div class="ttdef"><b>Definition</b> filesystem.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

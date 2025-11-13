@@ -8,7 +8,7 @@
 #include <string>
 #include "fatfs.h"
 
-namespace fatfs_fs {
+namespace fatfs {
 
 struct directory_entry {
   std::string path;
