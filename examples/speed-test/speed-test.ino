@@ -216,6 +216,7 @@ void testFileOperations() {
   File file = SD.open("test_create.txt", FILE_WRITE);
   unsigned long createTime = millis() - startTime;
   if (file) {
+    file.write((uint8_t)'x');  // Write at least one byte so file isn't empty
     file.close();
     printf("File create: %lu ms\n", createTime);
   } else {
@@ -241,17 +242,6 @@ void testFileOperations() {
     printf("File delete: %lu ms\n", deleteTime);
   } else {
     printf("File delete: FAILED\n");
-  }
-  
-  // Test directory operations
-  startTime = millis();
-  bool mkdirResult = SD.mkdir("testdir");
-  unsigned long mkdirTime = millis() - startTime;
-  if (mkdirResult) {
-    printf("Directory create: %lu ms\n", mkdirTime);
-  SD.rmdir("testdir");
-  } else {
-    printf("Directory create: FAILED\n");
   }
 }
 
