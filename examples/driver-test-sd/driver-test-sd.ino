@@ -9,6 +9,11 @@
 #include <string.h>
 #include "fatfs.h"
 
+#ifndef ARDUINO
+#include <thread>
+#include <chrono>
+#endif
+
 // pins for audiokit
 #define MISO 2
 #define MOSI 15
@@ -50,8 +55,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
   DSTATUS ds;
   DRESULT dr;
 
-  printf("test_diskio(%u, %u, 0x%08X, 0x%08X)\n", pdrv, ncyc, (UINT)buff,
-         sz_buff);
+  printf("test_diskio(%u, %u, %p, %u)\n", pdrv, ncyc, (void*)buff, sz_buff);
 
   if (sz_buff < FF_MAX_SS + 8) {
     printf("Insufficient work area to run the program.\n");
@@ -71,7 +75,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
     }
 
     printf("**** Get drive size ****\n");
-    printf(" drv.disk_ioctl(%u, GET_SECTOR_COUNT, 0x%08X)", pdrv, (UINT)&sz_drv);
+  printf(" drv.disk_ioctl(%u, GET_SECTOR_COUNT, %p)", pdrv, (void*)&sz_drv);
     sz_drv = 0;
     dr = drv.disk_ioctl(pdrv, GET_SECTOR_COUNT, &sz_drv);
     if (dr == RES_OK) {
@@ -84,11 +88,11 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
       printf("Failed: Insufficient drive size to test.\n");
       return 4;
     }
-    printf(" Number of sectors on the drive %u is %lu.\n", pdrv, sz_drv);
+  printf(" Number of sectors on the drive %u is %u.\n", pdrv, sz_drv);
 
 #if FF_MAX_SS != FF_MIN_SS
     printf("**** Get sector size ****\n");
-    printf(" drv.disk_ioctl(%u, GET_SECTOR_SIZE, 0x%X)", pdrv, (UINT)&sz_sect);
+  printf(" drv.disk_ioctl(%u, GET_SECTOR_SIZE, %p)", pdrv, (void*)&sz_sect);
     sz_sect = 0;
     dr = drv.disk_ioctl(pdrv, GET_SECTOR_SIZE, &sz_sect);
     if (dr == RES_OK) {
@@ -103,7 +107,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
 #endif
 
     printf("**** Get block size ****\n");
-    printf(" drv.disk_ioctl(%u, GET_BLOCK_SIZE, 0x%X)", pdrv, (UINT)&sz_eblk);
+  printf(" drv.disk_ioctl(%u, GET_BLOCK_SIZE, %p)", pdrv, (void*)&sz_eblk);
     sz_eblk = 0;
     dr = drv.disk_ioctl(pdrv, GET_BLOCK_SIZE, &sz_eblk);
     if (dr == RES_OK) {
@@ -112,7 +116,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
       printf(" - failed.\n");
     }
     if (dr == RES_OK || sz_eblk >= 2) {
-      printf(" Size of the erase block is %lu sectors.\n", sz_eblk);
+  printf(" Size of the erase block is %u sectors.\n", sz_eblk);
     } else {
       printf(" Size of the erase block is unknown.\n");
     }
@@ -121,7 +125,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
     printf("**** Single sector write test ****\n");
     lba = 0;
     for (n = 0, pn(pns); n < sz_sect; n++) pbuff[n] = (BYTE)pn(0);
-    printf(" drv.disk_write(%u, 0x%X, %lu, 1)", pdrv, (UINT)pbuff, lba);
+  printf(" drv.disk_write(%u, %p, %u, 1)", pdrv, (void*)pbuff, lba);
     dr = drv.disk_write(pdrv, pbuff, lba, 1);
     if (dr == RES_OK) {
       printf(" - ok.\n");
@@ -138,7 +142,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
       return 7;
     }
     memset(pbuff, 0, sz_sect);
-    printf(" drv.disk_read(%u, 0x%X, %lu, 1)", pdrv, (UINT)pbuff, lba);
+  printf(" drv.disk_read(%u, %p, %u, 1)", pdrv, (void*)pbuff, lba);
     dr = drv.disk_read(pdrv, pbuff, lba, 1);
     if (dr == RES_OK) {
       printf(" - ok.\n");
@@ -162,7 +166,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
     if (ns > 1) {
       for (n = 0, pn(pns); n < (UINT)(sz_sect * ns); n++)
         pbuff[n] = (BYTE)pn(0);
-      printf(" drv.disk_write(%u, 0x%X, %lu, %u)", pdrv, (UINT)pbuff, lba, ns);
+  printf(" drv.disk_write(%u, %p, %u, %u)", pdrv, (void*)pbuff, lba, ns);
       dr = drv.disk_write(pdrv, pbuff, lba, ns);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -179,7 +183,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
         return 12;
       }
       memset(pbuff, 0, sz_sect * ns);
-      printf(" drv.disk_read(%u, 0x%X, %lu, %u)", pdrv, (UINT)pbuff, lba, ns);
+  printf(" drv.disk_read(%u, %p, %u, %u)", pdrv, (void*)pbuff, lba, ns);
       dr = drv.disk_read(pdrv, pbuff, lba, ns);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -203,7 +207,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
     printf("**** Single sector write test (unaligned buffer address) ****\n");
     lba = 5;
     for (n = 0, pn(pns); n < sz_sect; n++) pbuff[n + 3] = (BYTE)pn(0);
-    printf(" drv.disk_write(%u, 0x%X, %lu, 1)", pdrv, (UINT)(pbuff + 3), lba);
+  printf(" drv.disk_write(%u, %p, %u, 1)", pdrv, (void*)(pbuff + 3), lba);
     dr = drv.disk_write(pdrv, pbuff + 3, lba, 1);
     if (dr == RES_OK) {
       printf(" - ok.\n");
@@ -220,7 +224,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
       return 16;
     }
     memset(pbuff + 5, 0, sz_sect);
-    printf(" drv.disk_read(%u, 0x%X, %lu, 1)", pdrv, (UINT)(pbuff + 5), lba);
+  printf(" drv.disk_read(%u, %p, %u, 1)", pdrv, (void*)(pbuff + 5), lba);
     dr = drv.disk_read(pdrv, pbuff + 5, lba, 1);
     if (dr == RES_OK) {
       printf(" - ok.\n");
@@ -242,7 +246,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
       lba = 6;
       lba2 = lba + 0x80000000 / (sz_sect / 2);
       for (n = 0, pn(pns); n < (UINT)(sz_sect * 2); n++) pbuff[n] = (BYTE)pn(0);
-      printf(" drv.disk_write(%u, 0x%X, %lu, 1)", pdrv, (UINT)pbuff, lba);
+  printf(" drv.disk_write(%u, %p, %u, 1)", pdrv, (void*)pbuff, lba);
       dr = drv.disk_write(pdrv, pbuff, lba, 1);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -250,8 +254,8 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
         printf(" - failed.\n");
         return 19;
       }
-      printf(" drv.disk_write(%u, 0x%X, %lu, 1)", pdrv, (UINT)(pbuff + sz_sect),
-             lba2);
+      printf(" drv.disk_write(%u, %p, %u, 1)", pdrv, (void*)(pbuff + sz_sect),
+        lba2);
       dr = drv.disk_write(pdrv, pbuff + sz_sect, lba2, 1);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -268,7 +272,7 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
         return 21;
       }
       memset(pbuff, 0, sz_sect * 2);
-      printf(" drv.disk_read(%u, 0x%X, %lu, 1)", pdrv, (UINT)pbuff, lba);
+  printf(" drv.disk_read(%u, %p, %u, 1)", pdrv, (void*)pbuff, lba);
       dr = drv.disk_read(pdrv, pbuff, lba, 1);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -276,8 +280,8 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
         printf(" - failed.\n");
         return 22;
       }
-      printf(" drv.disk_read(%u, 0x%X, %lu, 1)", pdrv, (UINT)(pbuff + sz_sect),
-             lba2);
+      printf(" drv.disk_read(%u, %p, %u, 1)", pdrv, (void*)(pbuff + sz_sect),
+        lba2);
       dr = drv.disk_read(pdrv, pbuff + sz_sect, lba2, 1);
       if (dr == RES_OK) {
         printf(" - ok.\n");
@@ -306,7 +310,11 @@ int test_diskio(BYTE pdrv,   /* Physical drive number to be checked (all data on
 
 void setup() {
   Serial.begin(115200);
+  #ifdef ARDUINO
   delay(3000);
+  #else
+  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+  #endif
   Serial.println("Disk I/O Test");
   int rc;
   DWORD buff[FF_MAX_SS]; /* Working buffer (4 sector in size) */
