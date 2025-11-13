@@ -1,6 +1,7 @@
 <map id="Main" name="Main">
-<area shape="rect" id="Node000003" href="$group__ff.html" title="fatfs basic API" alt="" coords="108,5,147,31"/>
-<area shape="rect" id="Node000004" href="$group__io.html" title="Data drivers for fatfs." alt="" coords="108,55,147,80"/>
-<area shape="rect" id="Node000001" title="Arduino fatfs library." alt="" coords="5,55,60,80"/>
-<area shape="rect" id="Node000002" href="$group__sd.html" title="Arduino SD API." alt="" coords="108,104,147,129"/>
+<area shape="rect" id="Node000003" href="$group__ff.html" title="fatfs basic API" alt="" coords="124,5,163,31"/>
+<area shape="rect" id="Node000005" href="$group__io.html" title="Data drivers for fatfs." alt="" coords="124,55,163,80"/>
+<area shape="rect" id="Node000004" href="$group__iterator.html" title="directory iterators" alt="" coords="108,104,179,129"/>
+<area shape="rect" id="Node000001" title="Arduino fatfs library." alt="" coords="5,80,60,105"/>
+<area shape="rect" id="Node000002" href="$group__sd.html" title="Arduino SD API." alt="" coords="124,153,163,179"/>
 </map>
