@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['sd_0',['sd',['../group__sd.html',1,'sd'],['../index.html#autotoc_md1',1,'SPI SD']]],
-  ['sdclass_1',['SDClass',['../classfatfs_1_1SDClass.html',1,'fatfs']]],
-  ['set_5fcs_2',['set_cs',['../classfatfs_1_1ArduinoSpiIO.html#afb2f2b2b331e7de86cdaf22b585d08c8',1,'fatfs::ArduinoSpiIO']]],
-  ['set_5fspi_5ffast_3',['set_spi_fast',['../classfatfs_1_1ArduinoSpiIO.html#afb5f1e40502e47665072a2c683304cb4',1,'fatfs::ArduinoSpiIO']]],
-  ['setdriver_4',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]],
-  ['spi_20sd_5',['SPI SD',['../index.html#autotoc_md1',1,'']]],
-  ['streamio_6',['StreamIO',['../classfatfs_1_1StreamIO.html',1,'fatfs']]]
+  ['ram_20drive_0',['RAM Drive',['../index.html#autotoc_md2',1,'']]],
+  ['ramio_1',['RamIO',['../classfatfs_1_1RamIO.html',1,'fatfs']]],
+  ['read_2',['read',['../classfatfs_1_1File.html#af993177e068fd4b8e356475aaecf6c98',1,'fatfs::File']]],
+  ['recursive_5fdirectory_5fiterator_3',['recursive_directory_iterator',['../classfatfs_1_1recursive__directory__iterator.html',1,'fatfs']]],
+  ['remove_4',['remove',['../classfatfs_1_1SDClass.html#afcc8463314ce1c3755dca187837355e1',1,'fatfs::SDClass']]]
 ];

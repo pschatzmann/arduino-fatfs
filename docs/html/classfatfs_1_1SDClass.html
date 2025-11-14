@@ -91,14 +91,19 @@ Collaboration diagram for fatfs::SDClass:</div>
 <div class="dyncontent">
 <div class="center"><img src="classfatfs_1_1SDClass__coll__graph.png" border="0" usemap="#afatfs_1_1SDClass_coll__map" alt="Collaboration graph"/></div>
 <map name="afatfs_1_1SDClass_coll__map" id="afatfs_1_1SDClass_coll__map">
-<area shape="rect" title="SDClass: starting driver, access to files." alt="" coords="16,269,129,295"/>
-<area shape="rect" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,181,120,207"/>
-<area shape="poly" title=" " alt="" coords="75,221,75,269,70,269,70,221"/>
-<area shape="rect" href="classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,93,189,119"/>
-<area shape="poly" title=" " alt="" coords="134,131,86,183,82,179,130,127"/>
-<area shape="rect" href="structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,31"/>
-<area shape="poly" title=" " alt="" coords="50,45,46,80,47,118,57,152,69,180,64,182,52,154,42,119,40,80,45,44"/>
-<area shape="poly" title=" " alt="" coords="79,38,140,91,136,95,76,42"/>
+<area shape="rect" title="SDClass: starting driver, access to files." alt="" coords="81,344,194,369"/>
+<area shape="rect" href="classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,256,149,281"/>
+<area shape="poly" title=" " alt="" coords="96,291,131,342,127,345,91,294"/>
+<area shape="rect" href="classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="20,181,127,207"/>
+<area shape="poly" title=" " alt="" coords="77,221,79,256,74,256,72,221"/>
+<area shape="rect" href="classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="76,93,151,119"/>
+<area shape="poly" title=" " alt="" coords="105,132,81,182,76,180,100,130"/>
+<area shape="rect" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="151,181,246,207"/>
+<area shape="poly" title=" " alt="" coords="129,129,150,155,180,179,177,183,146,159,125,132"/>
+<area shape="rect" href="structfatfs_1_1FATFS.html" title=" " alt="" coords="107,5,205,31"/>
+<area shape="poly" title=" " alt="" coords="147,44,122,94,117,92,142,42"/>
+<area shape="poly" title=" " alt="" coords="174,42,180,54,190,89,196,125,201,181,196,181,191,126,185,91,175,56,169,44"/>
+<area shape="poly" title=" " alt="" coords="192,220,144,345,139,343,187,219"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -115,6 +120,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="memdesc:ad4f8035dca50117eef9f9d36085b548f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of SD card. We use the SPI SD driver if nothing has been defined in the constructor. <br /></td></tr>
 <tr class="separator:ad4f8035dca50117eef9f9d36085b548f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba8e4e1db86528c42320c732dfc8a923" id="r_aba8e4e1db86528c42320c732dfc8a923"><td class="memItemLeft" align="right" valign="top"><a id="aba8e4e1db86528c42320c732dfc8a923" name="aba8e4e1db86528c42320c732dfc8a923"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int cs, SPIClass &amp;spi=SPI)</td></tr>
+<tr class="memdesc:aba8e4e1db86528c42320c732dfc8a923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatibility with SD library: we use the Arduino SPI SD driver. <br /></td></tr>
+<tr class="separator:aba8e4e1db86528c42320c732dfc8a923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a148e640a514a8f1abec78b26c77b42b3" id="r_a148e640a514a8f1abec78b26c77b42b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a148e640a514a8f1abec78b26c77b42b3">end</a> ()</td></tr>
 <tr class="separator:a148e640a514a8f1abec78b26c77b42b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65eed368dd00b0bcc4c3eb7a9cf02d25" id="r_a65eed368dd00b0bcc4c3eb7a9cf02d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfatfs_1_1File.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1SDClass.html#a65eed368dd00b0bcc4c3eb7a9cf02d25">open</a> (const char *filename, uint8_t mode=FILE_READ)</td></tr>
@@ -186,6 +195,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleError</b> (FRES
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a12d043c4c749b8cc71c96202461e9168" id="r_a12d043c4c749b8cc71c96202461e9168"><td class="memItemLeft" align="right" valign="top"><a id="a12d043c4c749b8cc71c96202461e9168" name="a12d043c4c749b8cc71c96202461e9168"></a>
+<a class="el" href="classfatfs_1_1ArduinoSpiIO.html">fatfs::ArduinoSpiIO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>drv</b></td></tr>
+<tr class="separator:a12d043c4c749b8cc71c96202461e9168"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd50cc6f22c73248b86e9258ca35422b" id="r_abd50cc6f22c73248b86e9258ca35422b"><td class="memItemLeft" align="right" valign="top"><a id="abd50cc6f22c73248b86e9258ca35422b" name="abd50cc6f22c73248b86e9258ca35422b"></a>
 <a class="el" href="classfatfs_1_1FatFs.html">FatFs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fat_fs</b></td></tr>
 <tr class="separator:abd50cc6f22c73248b86e9258ca35422b"><td class="memSeparator" colspan="2">&#160;</td></tr>

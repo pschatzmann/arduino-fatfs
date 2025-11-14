@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fatfsdir_0',['FatFsDir',['../classfatfs_1_1FatFs.html#aa9df6f05cfc015db08454d6aab2e9673',1,'fatfs::FatFs']]],
-  ['fsid_1',['Fsid',['../classfatfs_1_1FatFs.html#a406ba551e272cf71ab886439034178de',1,'fatfs::FatFs']]]
+  ['card_0',['card',['../classfatfs_1_1Esp32SdmmcIO.html#a2b84d8590513b0c75070cb7f7f33a9cd',1,'fatfs::Esp32SdmmcIO']]],
+  ['cardtype_1',['CardType',['../classfatfs_1_1Esp32SdmmcIO.html#a24a7c4549e955c2d319dd6747d57c0d5',1,'fatfs::Esp32SdmmcIO']]]
 ];

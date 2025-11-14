@@ -1,10 +1,15 @@
 <map id="fatfs::SDClass" name="fatfs::SDClass">
-<area shape="rect" id="Node000001" title="SDClass: starting driver, access to files." alt="" coords="16,269,129,295"/>
-<area shape="rect" id="Node000002" href="$classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="25,181,120,207"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,221,75,269,70,269,70,221"/>
-<area shape="rect" id="Node000003" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="114,93,189,119"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,131,86,183,82,179,130,127"/>
-<area shape="rect" id="Node000004" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="5,5,103,31"/>
-<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="50,45,46,80,47,118,57,152,69,180,64,182,52,154,42,119,40,80,45,44"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="79,38,140,91,136,95,76,42"/>
+<area shape="rect" id="Node000001" title="SDClass: starting driver, access to files." alt="" coords="81,344,194,369"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,256,149,281"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,291,131,342,127,345,91,294"/>
+<area shape="rect" id="Node000003" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="20,181,127,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,221,79,256,74,256,72,221"/>
+<area shape="rect" id="Node000004" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="76,93,151,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="105,132,81,182,76,180,100,130"/>
+<area shape="rect" id="Node000006" href="$classfatfs_1_1FatFs.html" title="API for FatFS See http://elm&#45;chan.org/fsw/ff/00index_e.html." alt="" coords="151,181,246,207"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="129,129,150,155,180,179,177,183,146,159,125,132"/>
+<area shape="rect" id="Node000005" href="$structfatfs_1_1FATFS.html" title=" " alt="" coords="107,5,205,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="147,44,122,94,117,92,142,42"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="174,42,180,54,190,89,196,125,201,181,196,181,191,126,185,91,175,56,169,44"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="192,220,144,345,139,343,187,219"/>
 </map>

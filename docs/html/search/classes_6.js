@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['putbuff_0',['putbuff',['../structfatfs_1_1putbuff.html',1,'fatfs']]]
+  ['mkfs_5fparm_0',['MKFS_PARM',['../structfatfs_1_1MKFS__PARM.html',1,'fatfs']]],
+  ['multiio_1',['MultiIO',['../classfatfs_1_1MultiIO.html',1,'fatfs']]]
 ];

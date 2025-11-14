@@ -73,6 +73,8 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle"><div class="title">Esp32SdmmcIO.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -80,14 +82,26 @@ $(function() {
 <p>FatFs driver for ESP32 SDMMC interface using low-level API.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;BaseIO.h&quot;</code><br />
+<code>#include &lt;driver/sdmmc_host.h&gt;</code><br />
+<code>#include &lt;driver/sdmmc_defs.h&gt;</code><br />
+<code>#include &lt;sdmmc_cmd.h&gt;</code><br />
+<code>#include &quot;sdcommon.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Esp32SdmmcIO.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Esp32SdmmcIO_8h__incl.png" border="0" usemap="#asrc_2driver_2Esp32SdmmcIO_8h" alt=""/></div>
 <map name="asrc_2driver_2Esp32SdmmcIO_8h" id="asrc_2driver_2Esp32SdmmcIO_8h">
-<area shape="rect" title="FatFs driver for ESP32 SDMMC interface using low&#45;level API." alt="" coords="191,5,393,31"/>
+<area shape="rect" title="FatFs driver for ESP32 SDMMC interface using low&#45;level API." alt="" coords="518,5,719,31"/>
 <area shape="rect" href="BaseIO_8h_source.html" title=" " alt="" coords="252,79,332,104"/>
-<area shape="poly" title=" " alt="" coords="295,31,295,65,289,65,289,31"/>
+<area shape="poly" title=" " alt="" coords="567,33,346,81,345,76,566,28"/>
+<area shape="rect" title=" " alt="" coords="357,79,515,104"/>
+<area shape="poly" title=" " alt="" coords="590,33,480,76,478,71,588,28"/>
+<area shape="rect" title=" " alt="" coords="539,79,698,104"/>
+<area shape="poly" title=" " alt="" coords="621,31,621,65,616,65,616,31"/>
+<area shape="rect" title=" " alt="" coords="723,79,840,104"/>
+<area shape="poly" title=" " alt="" coords="646,28,743,71,741,75,644,33"/>
+<area shape="rect" href="sdcommon_8h_source.html" title=" " alt="" coords="864,79,971,104"/>
+<area shape="poly" title=" " alt="" coords="667,28,856,73,855,78,666,33"/>
 <area shape="rect" href="IO_8h_source.html" title=" " alt="" coords="268,152,316,177"/>
 <area shape="poly" title=" " alt="" coords="295,104,295,138,289,138,289,104"/>
 <area shape="rect" href="ffdef_8h_source.html" title=" " alt="" coords="5,299,93,324"/>
@@ -115,8 +129,32 @@ Include dependency graph for Esp32SdmmcIO.h:</div>
 <area shape="poly" title=" " alt="" coords="513,301,339,253,340,248,514,296"/>
 </map>
 </div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="Esp32SdmmcIO_8h__dep__incl.png" border="0" usemap="#asrc_2driver_2Esp32SdmmcIO_8hdep" alt=""/></div>
+<map name="asrc_2driver_2Esp32SdmmcIO_8hdep" id="asrc_2driver_2Esp32SdmmcIO_8hdep">
+<area shape="rect" title="FatFs driver for ESP32 SDMMC interface using low&#45;level API." alt="" coords="18,5,219,31"/>
+<area shape="rect" href="fatfs-drivers_8h_source.html" title=" " alt="" coords="50,79,187,104"/>
+<area shape="poly" title=" " alt="" coords="121,44,121,79,116,79,116,44"/>
+<area shape="rect" href="fatfs_8h_source.html" title=" " alt="" coords="117,152,203,177"/>
+<area shape="poly" title=" " alt="" coords="135,115,156,151,151,153,130,117"/>
+<area shape="rect" href="MultiIO_8h_source.html" title=" " alt="" coords="5,225,152,251"/>
+<area shape="poly" title=" " alt="" coords="138,188,94,227,90,223,135,184"/>
+<area shape="rect" href="filesystem_8h_source.html" title=" " alt="" coords="176,225,301,251"/>
+<area shape="poly" title=" " alt="" coords="185,185,228,223,224,227,181,189"/>
+<area shape="poly" title=" " alt="" coords="83,211,113,104,118,105,88,213"/>
+</map>
+</div>
 </div>
 <p><a href="Esp32SdmmcIO_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1Esp32SdmmcIO.html">fatfs::Esp32SdmmcIO</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessing an SD card via the ESP32 SDMMC interface using low-level API.  <a href="classfatfs_1_1Esp32SdmmcIO.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FatFs driver for ESP32 SDMMC interface using low-level API. </p>
 <p>This software is free software and there is NO WARRANTY. No restriction on use. You can use, modify and redistribute it for personal, non-profit or commercial products UNDER YOUR RESPONSIBILITY. </p>

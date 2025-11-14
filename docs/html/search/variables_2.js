@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['lfnbuf_0',['LfnBuf',['../classfatfs_1_1FatFs.html#a9fa78a3117b50eed28db028897cb56b1',1,'fatfs::FatFs']]],
-  ['lfnofs_1',['LfnOfs',['../classfatfs_1_1FatFs.html#ada5fabfebca783faabf23eacac9dc232',1,'fatfs::FatFs']]]
+  ['dirbuf_0',['DirBuf',['../classfatfs_1_1FatFs.html#a2d39c2dcf99d67310fcae82548458d2b',1,'fatfs::FatFs']]]
 ];

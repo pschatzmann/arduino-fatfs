@@ -1,7 +1,9 @@
 <map id="fatfs::BaseIO" name="fatfs::BaseIO">
-<area shape="rect" id="Node000001" title="Empty IO implementation that we can use to test the compilation." alt="" coords="24,79,131,104"/>
+<area shape="rect" id="Node000001" title="Empty IO implementation that we can use to test the compilation." alt="" coords="112,79,219,104"/>
 <area shape="rect" id="Node000003" href="$classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,152,149,177"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="80,118,80,152,75,152,75,118"/>
-<area shape="rect" id="Node000002" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="40,5,115,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,44,80,79,75,79,75,44"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,115,93,154,90,150,139,110"/>
+<area shape="rect" id="Node000004" href="$classfatfs_1_1Esp32SdmmcIO.html" title="Accessing an SD card via the ESP32 SDMMC interface using low&#45;level API." alt="" coords="173,152,336,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,110,242,150,238,154,189,115"/>
+<area shape="rect" id="Node000002" href="$classfatfs_1_1IO.html" title="FatFS interface definition." alt="" coords="128,5,203,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,44,168,79,163,79,163,44"/>
 </map>

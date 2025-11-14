@@ -90,17 +90,19 @@ Inheritance diagram for fatfs::IO:</div>
 <div class="dyncontent">
 <div class="center"><img src="classfatfs_1_1IO__inherit__graph.png" border="0" usemap="#afatfs_1_1IO_inherit__map" alt="Inheritance graph"/></div>
 <map name="afatfs_1_1IO_inherit__map" id="afatfs_1_1IO_inherit__map">
-<area shape="rect" title="FatFS interface definition." alt="" coords="235,5,309,31"/>
-<area shape="rect" href="classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="24,79,131,104"/>
-<area shape="poly" title=" " alt="" coords="229,38,110,81,108,76,227,33"/>
-<area shape="rect" href="classfatfs_1_1MultiIO.html" title="File system driver which supports multiple drives: Add the drivers by calling add() then call mount()..." alt="" coords="155,79,261,104"/>
-<area shape="poly" title=" " alt="" coords="254,43,220,80,216,77,250,39"/>
-<area shape="rect" href="classfatfs_1_1RamIO.html" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="285,79,389,104"/>
-<area shape="poly" title=" " alt="" coords="294,39,329,77,325,80,290,43"/>
-<area shape="rect" href="classfatfs_1_1StreamIO.html" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="414,79,573,104"/>
-<area shape="poly" title=" " alt="" coords="321,32,458,76,457,81,320,37"/>
+<area shape="rect" title="FatFS interface definition." alt="" coords="323,5,397,31"/>
+<area shape="rect" href="classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="112,79,219,104"/>
+<area shape="poly" title=" " alt="" coords="317,38,198,81,196,76,315,33"/>
+<area shape="rect" href="classfatfs_1_1MultiIO.html" title="File system driver which supports multiple drives: Add the drivers by calling add() then call mount()..." alt="" coords="243,79,349,104"/>
+<area shape="poly" title=" " alt="" coords="342,43,308,80,304,77,338,39"/>
+<area shape="rect" href="classfatfs_1_1RamIO.html" title="The data is stored in RAM. In a ESP32 when PSRAM has been activated we store it is PSRAM." alt="" coords="373,79,477,104"/>
+<area shape="poly" title=" " alt="" coords="382,39,417,77,413,80,378,43"/>
+<area shape="rect" href="classfatfs_1_1StreamIO.html" title="template class which expects a Stream class which provides the following additional methods" alt="" coords="502,79,661,104"/>
+<area shape="poly" title=" " alt="" coords="409,32,546,76,545,81,408,37"/>
 <area shape="rect" href="classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,152,149,177"/>
-<area shape="poly" title=" " alt="" coords="80,118,80,152,75,152,75,118"/>
+<area shape="poly" title=" " alt="" coords="142,115,93,154,90,150,139,110"/>
+<area shape="rect" href="classfatfs_1_1Esp32SdmmcIO.html" title="Accessing an SD card via the ESP32 SDMMC interface using low&#45;level API." alt="" coords="173,152,336,177"/>
+<area shape="poly" title=" " alt="" coords="192,110,242,150,238,154,189,115"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -122,20 +124,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a789ece18313e9462ce3284944cc02856" id="r_a789ece18313e9462ce3284944cc02856"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
 <tr class="memdesc:a789ece18313e9462ce3284944cc02856"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system - implementation at end of header to avoid recursive include  <br /></td></tr>
 <tr class="separator:a789ece18313e9462ce3284944cc02856"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30df992369bb307901b4c6268ff9c079" id="r_a30df992369bb307901b4c6268ff9c079"><td class="memItemLeft" align="right" valign="top"><a id="a30df992369bb307901b4c6268ff9c079" name="a30df992369bb307901b4c6268ff9c079"></a>
-virtual DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_initialize</b> (BYTE pdrv)=0</td></tr>
+<tr class="memitem:a30df992369bb307901b4c6268ff9c079" id="r_a30df992369bb307901b4c6268ff9c079"><td class="memItemLeft" align="right" valign="top">virtual DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a30df992369bb307901b4c6268ff9c079">disk_initialize</a> (BYTE pdrv)=0</td></tr>
 <tr class="separator:a30df992369bb307901b4c6268ff9c079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7af652fff840de80154eb861f28ecacd" id="r_a7af652fff840de80154eb861f28ecacd"><td class="memItemLeft" align="right" valign="top"><a id="a7af652fff840de80154eb861f28ecacd" name="a7af652fff840de80154eb861f28ecacd"></a>
-virtual DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><b>disk_status</b> (BYTE pdrv)=0</td></tr>
+<tr class="memitem:a7af652fff840de80154eb861f28ecacd" id="r_a7af652fff840de80154eb861f28ecacd"><td class="memItemLeft" align="right" valign="top">virtual DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a7af652fff840de80154eb861f28ecacd">disk_status</a> (BYTE pdrv)=0</td></tr>
 <tr class="separator:a7af652fff840de80154eb861f28ecacd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5329786a5f3cd444a52f413500b22b52" id="r_a5329786a5f3cd444a52f413500b22b52"><td class="memItemLeft" align="right" valign="top"><a id="a5329786a5f3cd444a52f413500b22b52" name="a5329786a5f3cd444a52f413500b22b52"></a>
-virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_read</b> (BYTE pdrv, BYTE *buff, LBA_t sector, UINT count)=0</td></tr>
+<tr class="memitem:a5329786a5f3cd444a52f413500b22b52" id="r_a5329786a5f3cd444a52f413500b22b52"><td class="memItemLeft" align="right" valign="top">virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a5329786a5f3cd444a52f413500b22b52">disk_read</a> (BYTE pdrv, BYTE *buff, LBA_t sector, UINT count)=0</td></tr>
 <tr class="separator:a5329786a5f3cd444a52f413500b22b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbfc20c81a5579b2f7d1565f0c324a12" id="r_afbfc20c81a5579b2f7d1565f0c324a12"><td class="memItemLeft" align="right" valign="top"><a id="afbfc20c81a5579b2f7d1565f0c324a12" name="afbfc20c81a5579b2f7d1565f0c324a12"></a>
-virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_write</b> (BYTE pdrv, const BYTE *buff, LBA_t sector, UINT count)=0</td></tr>
+<tr class="memitem:afbfc20c81a5579b2f7d1565f0c324a12" id="r_afbfc20c81a5579b2f7d1565f0c324a12"><td class="memItemLeft" align="right" valign="top">virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#afbfc20c81a5579b2f7d1565f0c324a12">disk_write</a> (BYTE pdrv, const BYTE *buff, LBA_t sector, UINT count)=0</td></tr>
 <tr class="separator:afbfc20c81a5579b2f7d1565f0c324a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56fc90dc8879a3b83dba28e516def106" id="r_a56fc90dc8879a3b83dba28e516def106"><td class="memItemLeft" align="right" valign="top"><a id="a56fc90dc8879a3b83dba28e516def106" name="a56fc90dc8879a3b83dba28e516def106"></a>
-virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><b>disk_ioctl</b> (BYTE pdrv, ioctl_cmd_t cmd, void *buff)=0</td></tr>
+<tr class="memitem:a56fc90dc8879a3b83dba28e516def106" id="r_a56fc90dc8879a3b83dba28e516def106"><td class="memItemLeft" align="right" valign="top">virtual DRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a56fc90dc8879a3b83dba28e516def106">disk_ioctl</a> (BYTE pdrv, ioctl_cmd_t cmd, void *buff)=0</td></tr>
 <tr class="separator:a56fc90dc8879a3b83dba28e516def106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -147,6 +144,206 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FatFS interface definition. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a30df992369bb307901b4c6268ff9c079" name="a30df992369bb307901b4c6268ff9c079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30df992369bb307901b4c6268ff9c079">&#9670;&#160;</a></span>disk_initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DSTATUS fatfs::IO::disk_initialize </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a93e54bf48c983639e94cbe606cc755db">fatfs::Esp32SdmmcIO</a>.</p>
+
+</div>
+</div>
+<a id="a56fc90dc8879a3b83dba28e516def106" name="a56fc90dc8879a3b83dba28e516def106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56fc90dc8879a3b83dba28e516def106">&#9670;&#160;</a></span>disk_ioctl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DRESULT fatfs::IO::disk_ioctl </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ioctl_cmd_t&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a3cde19e38734e7422f62965121fbf575">fatfs::Esp32SdmmcIO</a>.</p>
+
+</div>
+</div>
+<a id="a5329786a5f3cd444a52f413500b22b52" name="a5329786a5f3cd444a52f413500b22b52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5329786a5f3cd444a52f413500b22b52">&#9670;&#160;</a></span>disk_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DRESULT fatfs::IO::disk_read </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BYTE *&#160;</td>
+          <td class="paramname"><em>buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LBA_t&#160;</td>
+          <td class="paramname"><em>sector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#aabe11a837e062594a30672a0e99a00a6">fatfs::Esp32SdmmcIO</a>.</p>
+
+</div>
+</div>
+<a id="a7af652fff840de80154eb861f28ecacd" name="a7af652fff840de80154eb861f28ecacd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7af652fff840de80154eb861f28ecacd">&#9670;&#160;</a></span>disk_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DSTATUS fatfs::IO::disk_status </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a63b9a2c2b61b6d49690d61f07ba2eec1">fatfs::Esp32SdmmcIO</a>.</p>
+
+</div>
+</div>
+<a id="afbfc20c81a5579b2f7d1565f0c324a12" name="afbfc20c81a5579b2f7d1565f0c324a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbfc20c81a5579b2f7d1565f0c324a12">&#9670;&#160;</a></span>disk_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual DRESULT fatfs::IO::disk_write </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const BYTE *&#160;</td>
+          <td class="paramname"><em>buff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LBA_t&#160;</td>
+          <td class="paramname"><em>sector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a2bd43de361737b60db34a65e36f46382">fatfs::Esp32SdmmcIO</a>.</p>
+
+</div>
+</div>
 <a id="a94ba9b7008533195be252507facba6ad" name="a94ba9b7008533195be252507facba6ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a94ba9b7008533195be252507facba6ad">&#9670;&#160;</a></span>mount()</h2>
 

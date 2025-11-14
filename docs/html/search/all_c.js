@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['ram_20drive_0',['RAM Drive',['../index.html#autotoc_md2',1,'']]],
-  ['ramio_1',['RamIO',['../classfatfs_1_1RamIO.html',1,'fatfs']]],
-  ['read_2',['read',['../classfatfs_1_1File.html#af993177e068fd4b8e356475aaecf6c98',1,'fatfs::File']]],
-  ['recursive_5fdirectory_5fiterator_3',['recursive_directory_iterator',['../classfatfs_1_1recursive__directory__iterator.html',1,'fatfs']]],
-  ['remove_4',['remove',['../classfatfs_1_1SDClass.html#afcc8463314ce1c3755dca187837355e1',1,'fatfs::SDClass']]]
+  ['p_5fio_0',['p_io',['../classfatfs_1_1FatFs.html#a47889a1f97f20e1cadabaf0fe6ffaf9c',1,'fatfs::FatFs']]],
+  ['peek_1',['peek',['../classfatfs_1_1File.html#a0bbd13dfa7544738b93030132e4217a1',1,'fatfs::File']]],
+  ['putbuff_2',['putbuff',['../structfatfs_1_1putbuff.html',1,'fatfs']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dirbuf_0',['DirBuf',['../classfatfs_1_1FatFs.html#a2d39c2dcf99d67310fcae82548458d2b',1,'fatfs::FatFs']]]
+  ['auto_5finit_0',['auto_init',['../classfatfs_1_1Esp32SdmmcIO.html#a26229f0fbc87609dc829fa86a24a833d',1,'fatfs::Esp32SdmmcIO']]]
 ];
