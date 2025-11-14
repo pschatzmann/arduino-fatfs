@@ -2,36 +2,51 @@
  * @file sdmmc-disk.ino
  * @brief Example demonstrating ESP32 SDMMC interface with Arduino SD API
  * 
+ * ⚠️ EXPERIMENTAL: This driver is currently experiencing initialization issues
+ * with newer ESP-IDF versions (ESP_ERR_TIMEOUT 0x107 in sdmmc_host_reset).
+ * 
+ * RECOMMENDED ALTERNATIVE: Use Arduino's built-in SD_MMC library instead:
+ *   #include <SD_MMC.h>
+ *   SD_MMC.begin();  // Works reliably with ESP-IDF 5.x
+ * 
+ * Or use SPI mode with this library (see sd-spi-disk example), which works well.
+ * 
  * This example shows how to use the ESP32's built-in SDMMC controller
  * to access an SD card with the familiar Arduino SD library API.
  * 
- * Hardware Setup:
- * - Connect SD card to ESP32 SDMMC pins:
- *   - CMD  -> GPIO15 (or custom)
- *   - CLK  -> GPIO14 (or custom)
- *   - D0   -> GPIO2  (or custom)
- *   - D1   -> GPIO4  (4-bit mode)
- *   - D2   -> GPIO12 (4-bit mode)
- *   - D3   -> GPIO13 (4-bit mode)
+ * IMPORTANT: ESP32 SDMMC uses FIXED pins that CANNOT be changed!
  * 
- * Note: Some ESP32 boards have SD card slots with pre-defined pins.
+ * Hardware Setup (1-bit mode):
+ * - CMD  -> GPIO15 (fixed, cannot change)
+ * - CLK  -> GPIO14 (fixed, cannot change)
+ * - D0   -> GPIO2  (fixed, cannot change)
+ * 
+ * Hardware Setup (4-bit mode - adds):
+ * - D1   -> GPIO4  (fixed, cannot change)
+ * - D2   -> GPIO12 (fixed, cannot change, may conflict with flash on some boards!)
+ * - D3   -> GPIO13 (fixed, cannot change)
+ * 
+ * Known Issues:
+ * - ESP_ERR_TIMEOUT (0x107) during sdmmc_host_init with ESP-IDF 5.x
+ * - May require older ESP-IDF versions (4.x) or specific board configurations
+ * - Arduino SD_MMC library uses different initialization that works reliably
+ * 
+ * Troubleshooting if you want to try anyway:
+ * 1. Ensure GPIO2, GPIO14, GPIO15 are not used by other peripherals
+ * 2. Try 1-bit mode if GPIO12 conflicts with flash
+ * 3. Check SD card is properly inserted and powered  
+ * 4. Consider SPI mode (sd-spi-disk example) which has better compatibility
  */
 
-#include <Arduino.h>
 #include "fatfs.h"
-#include "driver/Esp32SdmmcIO.h"
-#include "driver/sdcommon.h"
 
-using namespace fatfs;
-
-// Default frequency for SDMMC (20 MHz)
-#ifndef SDMMC_FREQ_DEFAULT
-#define SDMMC_FREQ_DEFAULT 20000
-#endif
+// Configuration - change these as needed
+#define USE_1BIT_MODE true    // Set to false for 4-bit mode (faster but uses more pins)
+#define SDMMC_FREQ_KHZ 20000  // 20 MHz
 
 // Create SDMMC driver and SD interface
-Esp32SdmmcIO sdmmc_driver(false, SDMMC_FREQ_DEFAULT);  // 4-bit, 20MHz
-SDClass SD{sdmmc_driver};  // SD interface using SDMMC driver
+Esp32SdmmcIO sdmmc_driver;
+SDClass SDMMC{sdmmc_driver};
 
 void setup() {
   Serial.begin(115200);
@@ -39,12 +54,31 @@ void setup() {
   
   Serial.println("\n=== ESP32 SDMMC with Arduino SD API ===\n");
 
-  // Initialize SD card (driver auto-initializes)
-  if (!SD.begin()) {
-    Serial.println("ERROR: SD Card initialization failed!");
+  // Print configuration
+  Serial.printf("Mode: %s\n", USE_1BIT_MODE ? "1-bit" : "4-bit");
+  Serial.printf("Frequency: %d kHz\n", SDMMC_FREQ_KHZ);
+  Serial.println("Fixed pins: CLK=14, CMD=15, D0=2" + String(USE_1BIT_MODE ? "" : ", D1=4, D2=12, D3=13"));
+  Serial.println();
+
+  // Initialize SDMMC driver
+  Serial.println("Initializing SDMMC driver...");
+  if (!sdmmc_driver.begin(USE_1BIT_MODE, SDMMC_FREQ_KHZ)) {
+    Serial.println("ERROR: SDMMC driver initialization failed!");
+    Serial.println();
+    Serial.println("Common causes:");
+    Serial.println("  1. SD card not inserted or bad connection");
+    Serial.println("  2. GPIO pins conflict (CLK=14, CMD=15, D0=2 must be free)");
+    if (!USE_1BIT_MODE) {
+      Serial.println("  3. GPIO12 conflict (try 1-bit mode if your board uses GPIO12 for flash)");
+    }
+    Serial.println("  4. Try SPI mode instead (see sd-spi-disk example)");
+    return;
+  }
+
+  // Mount filesystem
+  if (!SDMMC.begin()) {
+    Serial.println("ERROR: Filesystem mount failed!");
     Serial.println("Please check:");
-    Serial.println("  - SD card is inserted");
-    Serial.println("  - Wiring is correct");
     Serial.println("  - Card is formatted (FAT32 recommended)");
     return;
   }
@@ -103,7 +137,7 @@ void demonstrateFileOperations() {
   Serial.print("Creating file: ");
   Serial.println(filename);
   
-  File file = SD.open(filename, FILE_WRITE);
+  File file = SDMMC.open(filename, FILE_WRITE);
   if (file) {
     size_t bytesWritten = file.write((const uint8_t*)message, strlen(message));
     file.close();
@@ -119,7 +153,7 @@ void demonstrateFileOperations() {
   Serial.print("Reading file: ");
   Serial.println(filename);
   
-  file = SD.open(filename, FILE_READ);
+  file = SDMMC.open(filename, FILE_READ);
   if (file) {
     Serial.print("✓ Read: ");
     while (file.available()) {
@@ -146,7 +180,7 @@ void demonstrateFileOperations() {
 }
 
 void listDirectory(const char* path) {
-  File root = SD.open(path);
+  File root = SDMMC.open(path);
   if (!root) {
     Serial.println("Failed to open directory");
     return;
