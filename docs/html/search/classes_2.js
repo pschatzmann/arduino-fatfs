@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['fatfs_0',['fatfs',['../structfatfs_1_1FATFS.html',1,'fatfs::FATFS'],['../classfatfs_1_1FatFs.html',1,'fatfs::FatFs']]],
-  ['ffobjid_1',['FFOBJID',['../structfatfs_1_1FFOBJID.html',1,'fatfs']]],
-  ['fil_2',['FIL',['../structfatfs_1_1FIL.html',1,'fatfs']]],
-  ['file_3',['File',['../classfatfs_1_1File.html',1,'fatfs']]],
-  ['filinfo_4',['FILINFO',['../structfatfs_1_1FILINFO.html',1,'fatfs']]]
+  ['dir_0',['DIR',['../structfatfs_1_1DIR.html',1,'fatfs']]],
+  ['directory_5fentry_1',['directory_entry',['../structfatfs_1_1directory__entry.html',1,'fatfs']]],
+  ['directory_5fiterator_2',['directory_iterator',['../classfatfs_1_1directory__iterator.html',1,'fatfs']]]
 ];

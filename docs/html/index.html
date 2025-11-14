@@ -72,7 +72,8 @@ $(function() {
   <div class="headertitle"><div class="title">Arduino-FatFs </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> There are quite a few SD Arduino libraries out there: the most important is the <a href="https://github.com/arduino-libraries/SD">SD.h provided by Arduino</a> which is a wrapper for <a href="https://github.com/greiman/SdFat">SdFat from Bill Greiman</a> which itself is quite friendly, powerfull and fast.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://www.arduino.cc/reference/en/libraries/"><img src="https://img.shields.io/badge/Arduino-Library-blue.svg" alt="Arduino Library" style="pointer-events: none;" class="inline"/></a></p>
+<p>There are quite a few SD Arduino libraries out there: the most important is the <a href="https://github.com/arduino-libraries/SD">SD.h provided by Arduino</a> which is a wrapper for <a href="https://github.com/greiman/SdFat">SdFat from Bill Greiman</a> which itself is quite friendly, powerfull and fast.</p>
 <p>Bill's library provides some alternative SPI drivers to access the SD functionality, but it does not provide the functionality to store the data anywhere else and you can't use multiple SD drives that are attached to different SPI ports.</p>
 <p>I am providing the <a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs library</a> developed by ChaN that I have converted to C++ header only so that we can flexibly support multiple data access drivers and scenarios at the same time.</p>
 <p>The advantage of this library is, that it provides quite a few <b><a href="http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs">configuration options</a></b> and has a flexible <b>driver concept</b>, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. The FatFs library stops at the driver interface and does not provide any implementation.</p>
@@ -80,7 +81,7 @@ $(function() {
 <ul>
 <li>The data is stored in <b>RAM (or PSRAM)</b> (RamIO)</li>
 <li>Support for <b>multiple drives</b> with different drivers (MultiIO)</li>
-<li>SD via Arduino <b>SPI</b> (SDArduinoSPIIO)</li>
+<li>SD via Arduino <b>SPI</b> (ArduinoSpiIO)</li>
 </ul>
 <p>It is very easy to add new drivers, so any contribution will be welcome...</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -95,7 +96,7 @@ SPI SD</h1>
 <div class="line"><span class="preprocessor">#define SCLK 14</span></div>
 <div class="line"><span class="preprocessor">#define CS   15</span></div>
 <div class="line"> </div>
-<div class="line">SDArduinoSPIIO drv{CS, SPI}; <span class="comment">// SD driver managing CS and assign SPI</span></div>
+<div class="line">ArduinoSpiIO drv{CS, SPI}; <span class="comment">// SD driver managing CS and assign SPI</span></div>
 <div class="line">File file;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
@@ -141,7 +142,7 @@ Mutliple Drives</h1>
 <div class="line"><span class="preprocessor">#define SCLK 14</span></div>
 <div class="line"><span class="preprocessor">#define CS   15</span></div>
 <div class="line"> </div>
-<div class="line">SDArduinoSPIIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
+<div class="line">ArduinoSpiIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
 <div class="line">RamIO mem{100, 512}; <span class="comment">// 100 sector with 512 bytes</span></div>
 <div class="line">SDClass sd_sd{sd}; <span class="comment">// SD and assign driver</span></div>
 <div class="line">SDClass sd_mem{mem};</div>
@@ -166,7 +167,7 @@ Mutliple Drives</h1>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="preprocessor">#include &quot;SPI.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;driver/SDArduinoSPIIO.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;driver/ArduinoSpiIO.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;driver/RamIO.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;driver/MultiIO.h&quot;</span></div>
 <div class="line"> </div>
@@ -175,7 +176,7 @@ Mutliple Drives</h1>
 <div class="line"><span class="preprocessor">#define SCLK 14</span></div>
 <div class="line"><span class="preprocessor">#define CS   15</span></div>
 <div class="line"> </div>
-<div class="line">SDArduinoSPIIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
+<div class="line">ArduinoSpiIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
 <div class="line">RamIO mem{100, 512}; <span class="comment">// 100 sector with 512 bytes</span></div>
 <div class="line">MultiIO drv;</div>
 <div class="line"> </div>
@@ -205,6 +206,7 @@ Documentaion</h1>
 <li>Class Documentation<ul>
 <li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html">Arduino API</a></li>
 <li><a href="https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html">FatFs API</a></li>
+<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html">Directory Iterators</a></li>
 <li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__io.html">Media Access</a> </li>
 </ul>
 </li>

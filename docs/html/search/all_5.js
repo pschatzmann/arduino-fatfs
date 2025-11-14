@@ -34,7 +34,7 @@ var searchData=
   ['f_5funlink_31',['f_unlink',['../classfatfs_1_1FatFs.html#a649ef636311b3c0351c061c5c6e19e0b',1,'fatfs::FatFs']]],
   ['f_5futime_32',['f_utime',['../classfatfs_1_1FatFs.html#a19b6e45cca7aa52425c91f698ad2e21d',1,'fatfs::FatFs']]],
   ['f_5fwrite_33',['f_write',['../classfatfs_1_1FatFs.html#ab76f8e3e312bc62cf7e537aa4b46f3ba',1,'fatfs::FatFs']]],
-  ['fatfs_34',['fatfs',['../index.html',1,'Arduino-FatFs'],['../classfatfs_1_1FatFs.html',1,'fatfs::FatFs'],['../classfatfs_1_1FatFs.html#a65d766a423597135e0a5dc490c50cceb',1,'fatfs::FatFs::FatFs()'],['../structfatfs_1_1FATFS.html',1,'fatfs::FATFS']]],
+  ['fatfs_34',['fatfs',['../index.html',1,'Arduino-FatFs'],['../structfatfs_1_1FATFS.html',1,'fatfs::FATFS'],['../classfatfs_1_1FatFs.html#a65d766a423597135e0a5dc490c50cceb',1,'fatfs::FatFs::FatFs()'],['../classfatfs_1_1FatFs.html',1,'fatfs::FatFs']]],
   ['fatfsdir_35',['FatFsDir',['../classfatfs_1_1FatFs.html#aa9df6f05cfc015db08454d6aab2e9673',1,'fatfs::FatFs']]],
   ['ff_36',['ff',['../group__ff.html',1,'']]],
   ['ffobjid_37',['FFOBJID',['../structfatfs_1_1FFOBJID.html',1,'fatfs']]],

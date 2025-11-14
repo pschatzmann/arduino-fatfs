@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['set_5fcs_0',['set_cs',['../classfatfs_1_1SDArduinoSpiIO.html#aba23437e48abea37607e6e768c315a6c',1,'fatfs::SDArduinoSpiIO']]],
-  ['set_5fspi_5ffast_1',['set_spi_fast',['../classfatfs_1_1SDArduinoSpiIO.html#a15ca57add15055f0f1f7594dc5efc073',1,'fatfs::SDArduinoSpiIO']]],
-  ['setdriver_2',['setDriver',['../classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6',1,'fatfs::SDClass']]]
+  ['un_5fmount_0',['un_mount',['../classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856',1,'fatfs::IO::un_mount()'],['../classfatfs_1_1MultiIO.html#a38ff93fdfe0c9d2cf1aa57e14d63a61f',1,'fatfs::MultiIO::un_mount()']]],
+  ['update_5fstat_1',['update_stat',['../classfatfs_1_1File.html#aded768c258e6d516fc6d54fbcc760212',1,'fatfs::File']]]
 ];
