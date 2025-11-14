@@ -265,7 +265,7 @@ void setup() {
   printf("Initializing SD card...\n");
   SPI.begin(SCLK, MISO, MOSI);
   delay(100);
-  if (!SD.begin(CS, SPI)) {  // uses internal SDArduinoSpiIO driver
+  if (!SD.begin(CS, SPI)) {  // uses internal ArduinoSpiIO driver
     printf("SD card initialization failed!\n");
     while (true);
   }

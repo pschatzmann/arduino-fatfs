@@ -14,7 +14,7 @@ I have added the most important drivers to this project:  The drivers are writte
 
 - The data is stored in __RAM (or PSRAM)__ (RamIO)
 - Support for __multiple drives__ with different drivers (MultiIO)
-- SD via Arduino __SPI__ (SDArduinoSPIIO)
+- SD via Arduino __SPI__ (ArduinoSpiIO)
 
 It is very easy to add new drivers, so any contribution will be welcome...
 
@@ -31,7 +31,7 @@ Here is an example of setting up a SD drive using the Arduino ESP32 SPI API:
 #define SCLK 14
 #define CS   15
 
-SDArduinoSPIIO drv{CS, SPI}; // SD driver managing CS and assign SPI
+ArduinoSpiIO drv{CS, SPI}; // SD driver managing CS and assign SPI
 File file;
 
 void setup() {
@@ -88,7 +88,7 @@ You can also use your own separate SDClass instances:
 #define SCLK 14
 #define CS   15
 
-SDArduinoSPIIO sd{CS, SPI}; // driver managing CS and assign SPI
+ArduinoSpiIO sd{CS, SPI}; // driver managing CS and assign SPI
 RamIO mem{100, 512}; // 100 sector with 512 bytes
 SDClass sd_sd{sd}; // SD and assign driver
 SDClass sd_mem{mem};
@@ -117,7 +117,7 @@ Here is an example of setting up a multi drive scenario using the MultiIO diver:
 ```C++
 #include "SPI.h"
 #include "fatfs.h"
-#include "driver/SDArduinoSPIIO.h"
+#include "driver/ArduinoSpiIO.h"
 #include "driver/RamIO.h"
 #include "driver/MultiIO.h"
 
@@ -126,7 +126,7 @@ Here is an example of setting up a multi drive scenario using the MultiIO diver:
 #define SCLK 14
 #define CS   15
 
-SDArduinoSPIIO sd{CS, SPI}; // driver managing CS and assign SPI
+ArduinoSpiIO sd{CS, SPI}; // driver managing CS and assign SPI
 RamIO mem{100, 512}; // 100 sector with 512 bytes
 MultiIO drv;
 

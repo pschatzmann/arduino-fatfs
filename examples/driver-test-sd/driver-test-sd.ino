@@ -20,7 +20,7 @@
 #define SCLK 14
 #define CS 13
 
-SDArduinoSpiIO drv{CS, SPI};  // driver managing CS and assign SPI
+ArduinoSpiIO drv{CS, SPI};  // driver managing CS and assign SPI
 
 
 static DWORD pn(          /* Pseudo random number generator */

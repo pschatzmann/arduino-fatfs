@@ -6,7 +6,7 @@
 #define SCLK 14
 #define CS 13
 
-SDArduinoSpiIO sd{CS, SPI};  // driver managing CS and assign SPI
+ArduinoSpiIO sd{CS, SPI};  // driver managing CS and assign SPI
 SDClass SD1{sd};             // SD and assign driver
 File file;
 

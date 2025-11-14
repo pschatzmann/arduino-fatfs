@@ -343,7 +343,7 @@ class SDClass {
 
  protected:
 #ifdef ARDUINO
-  fatfs::SDArduinoSpiIO drv;
+  fatfs::ArduinoSpiIO drv;
 #endif
   FatFs fat_fs;
   uint8_t *work_buffer = nullptr;

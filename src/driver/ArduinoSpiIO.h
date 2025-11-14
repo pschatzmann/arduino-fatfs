@@ -38,10 +38,10 @@ namespace fatfs {
  * @ingroup io
  */
 
-class SDArduinoSpiIO : public BaseIO {
+class ArduinoSpiIO : public BaseIO {
  public:
-  SDArduinoSpiIO(int cs = -1, SPIClass &spi = SPI) { setSPI(cs, spi); }
-  SDArduinoSpiIO(SPIClass &spi) { setSPI(spi); }
+  ArduinoSpiIO(int cs = -1, SPIClass &spi = SPI) { setSPI(cs, spi); }
+  ArduinoSpiIO(SPIClass &spi) { setSPI(spi); }
 
   void setSPI(SPIClass &spi = SPI) {
     this->p_spi = &spi;
