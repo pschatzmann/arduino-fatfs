@@ -317,7 +317,7 @@ class ArduinoSpiIO : public BaseIO {
   void set_spi_fast(bool fast) { spi_settings = fast ? spi_fast : spi_slow; }
 
   /// update the CS pin
-  inline void set_cs(bool high) {
+  virtual void set_cs(bool high) {
     if (cs != -1) digitalWrite(cs, high);
   }
 
