@@ -10,6 +10,7 @@ namespace fatfs {
 
 /**
  * @brief Accessing a SD card via the Arduino SPI API: The CS pin is handled via a GPIO class
+ * that provides pinMode and digitalWrite methods.
  * @ingroup io
  */
 
