@@ -14,11 +14,16 @@ The advantage of this library is, that it provides quite a few __[configuration 
 
 I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
-- The data is stored in __RAM (or PSRAM)__ (RamIO)
-- The data is stored in a __host OS file__/disk image, desktop builds only (FileIO)
-- Support for __multiple drives__ with different drivers (MultiIO)
-- SD via Arduino __SPI__ (ArduinoSpiIO)
-- Export any driver as a __USB Mass Storage__ device via TinyUSB (TinyUsbMscIO)
+| Driver | Header | Storage | Platform | Notes |
+|---|---|---|---|---|
+| `RamIO` | [`driver/RamIO.h`](src/driver/RamIO.h) | RAM / PSRAM | any | Volatile - reformatted on every mount |
+| `FileIO` | [`driver/FileIO.h`](src/driver/FileIO.h) | Host OS file (`.img`) | desktop/native builds only | Persists across process runs; auto-formats only when the image is first created |
+| `ArduinoSpiIO` | [`driver/ArduinoSpiIO.h`](src/driver/ArduinoSpiIO.h) | SD card via Arduino SPI | any Arduino board | CS pin and SPI object are freely assignable |
+| `ArduinoSpiExtIO` | [`driver/ArduinoSpiIOExt.h`](src/driver/ArduinoSpiIOExt.h) | SD card via Arduino SPI | any Arduino board | Like `ArduinoSpiIO`, but CS is driven through a user-supplied GPIO expander class instead of the core's `digitalWrite` |
+| `Esp32SdmmcIO` | [`driver/Esp32SdmmcIO.h`](src/driver/Esp32SdmmcIO.h) | SD card via native SDMMC/SDIO | ESP32 (SDMMC-capable) | Faster than SPI; uses ESP-IDF's SDMMC driver directly |
+| `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - only needs `begin()`/`seek()`/`sectorCount()`/`eraseSector()` |
+| `MultiIO` | [`driver/MultiIO.h`](src/driver/MultiIO.h) | Aggregates other drivers | any | Mounts each added driver on its own logical drive number, e.g. `"0:"`, `"1:"` |
+| `TinyUsbMscIO` | [`driver/TinyUsbMscIO.h`](src/driver/TinyUsbMscIO.h) | Exposes another driver over USB | TinyUSB-capable boards | Not an `IO` implementation - answers USB host requests instead of FatFs |
 
 It is very easy to add new drivers, so any contribution will be welcome...
 
