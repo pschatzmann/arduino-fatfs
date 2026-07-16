@@ -18,7 +18,7 @@ I have added the most important drivers to this project:  The drivers are writte
 |---|---|---|---|---|
 | `RamIO` | [`driver/RamIO.h`](src/driver/RamIO.h) | RAM / PSRAM | any | Volatile - reformatted on every mount |
 | `FileIO` | [`driver/FileIO.h`](src/driver/FileIO.h) | Host OS file (`.img`) | desktop/native builds only | Persists across process runs; auto-formats only when the image is first created |
-| `ArduinoSpiIO` | [`driver/ArduinoSpiIO.h`](src/driver/ArduinoSpiIO.h) | SD card via Arduino SPI | any Arduino board | CS pin and SPI object are freely assignable |
+| `ArduinoSpiIO` | [`driver/ArduinoSpiIO.h`](src/driver/ArduinoSpiIO.h) | SD card via Arduino SPI | any Arduino board | CS pin, SPI object and post-init clock speed are freely assignable |
 | `ArduinoSpiExtIO` | [`driver/ArduinoSpiIOExt.h`](src/driver/ArduinoSpiIOExt.h) | SD card via Arduino SPI | any Arduino board | Like `ArduinoSpiIO`, but CS is driven through a user-supplied GPIO expander class instead of the core's `digitalWrite` |
 | `Esp32SdmmcIO` | [`driver/Esp32SdmmcIO.h`](src/driver/Esp32SdmmcIO.h) | SD card via native SDMMC/SDIO | ESP32 (SDMMC-capable) | Faster than SPI; uses ESP-IDF's SDMMC driver directly |
 | `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - only needs `begin()`/`seek()`/`sectorCount()`/`eraseSector()` |
@@ -52,6 +52,7 @@ Here is an example of setting up a SD drive using the Arduino ESP32 SPI API:
 #define CS   15
 
 ArduinoSpiIO drv{CS, SPI}; // SD driver managing CS and assign SPI
+// ArduinoSpiIO drv{CS, SPI, 10000000}; // same, but capped at 10MHz once the card is initialized (default: FF_SPI_SPEED_FAST, 20MHz)
 File file;
 
 void setup() {
