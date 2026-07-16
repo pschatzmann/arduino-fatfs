@@ -1,6 +1,7 @@
 # Arduino-FatFs
 
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
 There are quite a few SD Arduino libraries out there: the most important is the [SD.h provided by Arduino](https://github.com/arduino-libraries/SD) which is a wrapper for [SdFat from Bill Greiman](https://github.com/greiman/SdFat) which itself is quite friendly, powerfull and fast.
 
@@ -17,6 +18,17 @@ I have added the most important drivers to this project:  The drivers are writte
 - SD via Arduino __SPI__ (ArduinoSpiIO)
 
 It is very easy to add new drivers, so any contribution will be welcome...
+
+## Supported FAT Versions
+
+The default configuration in [`src/ff/ffconf.h`](src/ff/ffconf.h) supports:
+
+- __FAT12__ / __FAT16__ / __FAT32__
+- __exFAT__ (`FF_FS_EXFAT=1`, requires `FF_USE_LFN>=1`, which is also enabled by default)
+
+`f_mkfs()` defaults to `FM_ANY`, so it auto-selects the appropriate format (FAT12/16/32 or exFAT) based on the volume size. exFAT works out of the box for volumes up to ~2TB; `FF_LBA64` is disabled by default, so it does not currently support 64-bit LBA / GPT-partitioned volumes beyond that size. If you need that, set `FF_LBA64=1` in `src/ff/ffconf.h` (exFAT must stay enabled, since 64-bit LBA requires it).
+
+Sector size is fixed at 512 bytes (`FF_MIN_SS=FF_MAX_SS=512`); enabling variable sector sizes requires implementing `GET_SECTOR_SIZE` in the driver's `disk_ioctl()`.
 
 ## SPI SD
 
@@ -160,4 +172,8 @@ void loop() {}
     - [FatFs API](https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html)
     - [Directory Iterators](https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html)
     - [Drivers](https://pschatzmann.github.io/arduino-fatfs/html/group__io.html)
+
+# License
+
+The wrapper code in this repository (everything outside `src/ff/`) is licensed under the [MIT License](LICENSE.txt). It bundles [ChaN's FatFs](http://elm-chan.org/fsw/ff/00index_e.html) core (`src/ff/`) under FatFs's own permissive terms, reproduced in [LICENSE.txt](LICENSE.txt). See the top of `src/driver/ArduinoSpiIO.h` and `src/driver/Esp32SdmmcIO.h` for the (compatible, permissive) terms that apply to those two files specifically.
 

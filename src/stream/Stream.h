@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /**
  * Some simple but incomplete Arduino Emulation Classes to be used outside of Arduino
  */

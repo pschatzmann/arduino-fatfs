@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // Minimal std::filesystem-like shim on top of Arduino-FatFs
 // This header provides a directory iterator to ease porting code that expects
 // filesystem helpers. It is not a drop-in replacement for std::filesystem.

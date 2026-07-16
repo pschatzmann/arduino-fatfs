@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include "IO.h"
@@ -18,21 +19,22 @@ class MultiIO : public IO {
 
   void add(IO& io) { io_vector.push_back(&io); }
 
-  /// mount all the added drivers
-  FRESULT mount(FatFs& fs) override {
-    FRESULT rc;
+  /// mount all the added drivers, each on its own logical drive number
+  /// matching its index (requires FF_VOLUMES >= io_vector.size())
+  FRESULT mount(FatFs& fs, BYTE pdrv = 0) override {
+    FRESULT rc = FR_OK;
     for (int j = 0; j < io_vector.size(); j++) {
-      rc = io_vector[j]->mount(fs);
+      rc = io_vector[j]->mount(fs, j);
       if (rc != FR_OK) break;
     }
     return rc;
   }
 
   /// unmount all drivers
-  FRESULT un_mount(FatFs& fs) override {
+  FRESULT un_mount(FatFs& fs, BYTE pdrv = 0) override {
     FRESULT result = FR_OK;
     for (int j = 0; j < io_vector.size(); j++) {
-      auto rc = io_vector[j]->un_mount(fs);
+      auto rc = io_vector[j]->un_mount(fs, j);
       if (rc != FR_OK) result = rc;
     }
     return result;

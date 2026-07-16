@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include "IO.h"
 
@@ -39,7 +40,7 @@ class StreamIO : public IO {
     if (pdrv != 0) return RES_PARERR;
     if (status == STA_NOINIT) return RES_NOTRDY;
     p_stream->seek(sector * sector_size);
-    size_t len = sectorCount + sector_size;
+    size_t len = sectorCount * sector_size;
     size_t res = p_stream->readBytes(buff, len);
     return res == len ? RES_OK : RES_ERROR;
   }
@@ -49,7 +50,7 @@ class StreamIO : public IO {
     if (pdrv != 0) return RES_PARERR;
     if (status == STA_NOINIT) return RES_NOTRDY;
     p_stream->seek(sector * sector_size);
-    size_t len = sectorCount + sector_size;
+    size_t len = sectorCount * sector_size;
     size_t res = p_stream->write(buff, len);
     return res == len ? RES_OK : RES_ERROR;
   }
@@ -65,13 +66,13 @@ class StreamIO : public IO {
 
       case GET_SECTOR_COUNT: {  // Get drive capacity in unit of sector (DWORD)
         DWORD result = p_stream->sectorCount();
-        memcpy(buff, result, (sizeof(result)));
+        memcpy(buff, &result, (sizeof(result)));
         res = RES_OK;
       } break;
 
       case GET_BLOCK_SIZE: {  // Get erase block size in unit of sector (DWORD)
         DWORD result = 1;
-        memcpy(buff, result, (sizeof(result)));
+        memcpy(buff, &result, (sizeof(result)));
         res = RES_OK;
       } break;
 

@@ -1,5 +1,9 @@
 #pragma once
 
+// MMC/SD command and card-type constants, from the same ChaN diskio sample
+// that src/driver/ArduinoSpiIO.h is ported from - see that file's header
+// for the applicable permissive license terms.
+
 /* MMC/SD command */
 #define CMD0 (0)           /* GO_IDLE_STATE */
 #define CMD1 (1)           /* SEND_OP_COND (MMC) */
@@ -28,14 +32,5 @@
 #define CT_SD2		0x04		/* SD ver 2 */
 #define CT_SDC		(CT_SD1|CT_SD2)	/* SD */
 #define CT_BLOCK	0x08		/* Block addressing */
-
-/* MMC card type flags (MMC_GET_TYPE) */
-#define CT_MMC3		0x01		/* MMC ver 3 */
-#define CT_MMC4		0x02		/* MMC ver 4+ */
-//#define CT_MMC		0x03		/* MMC */
-#define CT_SDC1		0x04		/* SD ver 1 */
-#define CT_SDC2		0x08		/* SD ver 2+ */
-//#define CT_SDC		0x0C		/* SD */
-//#define CT_BLOCK	0x10		/* Block addressing */
 
 

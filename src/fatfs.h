@@ -7,8 +7,7 @@
 
   It uses the same API like the Arduino SD libaray.
 
-  License: GNU General Public License V3
-          (Because sdfatlib is licensed with this.)
+  SPDX-License-Identifier: MIT
 
   (C) Copyright 2022 Phil Schatzmann
 
@@ -82,9 +81,8 @@ class File : public Stream {
 
   /// Rather inefficient: to be avoided
   virtual int read() override {
-    UINT result;
     char buf[1] = {0};
-    readBytes((uint8_t *)buf, 1);
+    size_t result = readBytes((uint8_t *)buf, 1);
     return result == 1 ? buf[0] : -1;
   }
 
@@ -204,7 +202,7 @@ class File : public Stream {
     if (res) return 0;
 
 #if FF_MAX_SS != FF_MIN_SS
-    size_t sector_size = fil.ssize; /* Sector size (512, 1024, 2048 or 4096) */
+    size_t sector_size = fatfs->ssize; /* Sector size (512, 1024, 2048 or 4096) */
 #else
     size_t sector_size = FF_MAX_SS;
 #endif

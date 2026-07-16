@@ -1,4 +1,4 @@
-
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -19,6 +19,8 @@ class ArduinoSpiExtIO : public ArduinoSpiIO {
  public:
   ArduinoSpiExtIO(int cs = -1, SPIClass& spi = SPI) { setSPI(cs, spi); }
   ArduinoSpiExtIO(SPIClass& spi = SPI) { setSPI(spi); }
+
+  using ArduinoSpiIO::setSPI;
 
   void setSPI(int cs = -1, SPIClass& spi = SPI) {
     this->p_spi = &spi;
