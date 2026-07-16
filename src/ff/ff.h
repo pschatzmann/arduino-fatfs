@@ -22,7 +22,15 @@
 #include <cstdlib>
 #include "ffconf.h"  // FatFs configuration options
 #include "ffdef.h"   // common structures and defines
-#include "driver/IO.h"
+// Relative to ff/, not this file's own directory root: quote-includes
+// resolve relative to the including file's directory first, so a plain
+// "driver/IO.h" here would look for ff/driver/IO.h (which doesn't
+// exist) before falling back to whatever's on -I. That fallback only
+// works when this library's own src/ root happens to be on the
+// compiler's include path (true for a normal Library Manager install,
+// not necessarily true if someone vendors src/ into another project
+// without adding it to -I) -- see driver/IO.h's matching "../ff/ff.h".
+#include "../driver/IO.h"
 
 namespace fatfs {
 

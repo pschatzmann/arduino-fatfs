@@ -2,7 +2,12 @@
 #pragma once
 
 #include "IO.h"
-#include "fatfs.h"
+// fatfs.h lives at the src/ root, one level up from driver/ -- same
+// reasoning as ff/ff.h's "../driver/IO.h": a plain "fatfs.h" only
+// resolves via the -I fallback (this library's own src/ root on the
+// include path), which isn't guaranteed if src/ gets vendored into
+// another project instead of installed as a regular dependency.
+#include "../fatfs.h"
 
 namespace fatfs {
 
