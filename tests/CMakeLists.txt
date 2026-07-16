@@ -21,3 +21,13 @@ fatfs_add_test(test_ramio_diskio)
 fatfs_add_test(test_sdclass_ramio)
 fatfs_add_test(test_multiio)
 fatfs_add_test(test_streamio)
+fatfs_add_test(test_fileio)
+
+# TinyUsbMscIO needs Adafruit_TinyUSB.h, which needs real USB hardware to be
+# meaningful; exercised here against a minimal test-only stand-in instead
+# (support/tinyusb_stub/Adafruit_TinyUSB.h) that mimics just the
+# Adafruit_USBD_MSC surface TinyUsbMscIO calls.
+fatfs_add_test(test_tinyusb_msc)
+target_include_directories(test_tinyusb_msc PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/support/tinyusb_stub)
+target_compile_definitions(test_tinyusb_msc PRIVATE USE_TINYUSB)

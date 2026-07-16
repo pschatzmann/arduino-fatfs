@@ -15,8 +15,10 @@ The advantage of this library is, that it provides quite a few __[configuration 
 I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
 - The data is stored in __RAM (or PSRAM)__ (RamIO)
+- The data is stored in a __host OS file__/disk image, desktop builds only (FileIO)
 - Support for __multiple drives__ with different drivers (MultiIO)
 - SD via Arduino __SPI__ (ArduinoSpiIO)
+- Export any driver as a __USB Mass Storage__ device via TinyUSB (TinyUsbMscIO)
 
 It is very easy to add new drivers, so any contribution will be welcome...
 
@@ -80,6 +82,30 @@ void setup() {
 
     file = SD.open("test");
     Serial.println(file.size());
+}
+
+void loop() {}
+
+```
+
+## File-backed Disk Image (desktop/native builds)
+
+`FileIO` is like `RamIO`, but backed by a plain host OS file instead of RAM - it's for desktop/native builds only (guarded by `#ifndef ARDUINO`), mainly useful for tests and tooling that run on a PC rather than a microcontroller. Unlike `RamIO`, the data survives past the lifetime of one process: mounting an existing image reopens the filesystem already on it instead of reformatting it, and the resulting `.img` file can be inspected with ordinary OS tools (e.g. `mtools`' `mdir -i disk.img@@32256 ::`, `fsck.vfat`, a loopback mount, ...).
+
+```C++
+#include "fatfs.h"
+#include "driver/FileIO.h"
+
+FileIO drv{"disk.img", 2048, 512}; // 1MB image, created if it doesn't exist yet
+File file;
+
+void setup() {
+    // start SD - auto-formats disk.img only the first time it's created
+    SD.begin(drv);
+
+    file = SD.open("test", FILE_WRITE);
+    file.println("hello");
+    file.close();
 }
 
 void loop() {}
@@ -163,6 +189,13 @@ void setup() {
 void loop() {}
 
 ```
+
+## USB Mass Storage (TinyUSB)
+
+`TinyUsbMscIO` exposes an existing driver (RamIO, ArduinoSpiIO, ...) directly to a host PC over USB as a mass storage device, using the [Adafruit TinyUSB library](https://github.com/adafruit/Adafruit_TinyUSB_Arduino). Unlike the other drivers, it doesn't implement the `IO` interface itself - FatFs never calls into it. Instead it forwards USB read/write requests coming *from* the host straight to an existing `IO&`'s `disk_read()`/`disk_write()`. It can be used standalone (just export storage to the host, no local FatFs mount needed) or together with a local `SD.begin()`, as long as both sides aren't writing at the same time.
+
+Requires a TinyUSB-capable board/core (e.g. RP2040, SAMD21/51, nRF52, ESP32-S2/S3) with `USE_TINYUSB` defined; bringing up the USB stack itself is left to the sketch, the same way `ArduinoSpiIO` leaves `SPI.begin()` to the sketch.
+
 
 # Documentaion
 
