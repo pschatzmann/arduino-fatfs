@@ -1,4 +1,4 @@
-
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -17,15 +17,24 @@ namespace fatfs {
 template <typename GPIOClass>
 class ArduinoSpiExtIO : public ArduinoSpiIO {
  public:
-  ArduinoSpiExtIO(int cs = -1, SPIClass& spi = SPI) { setSPI(cs, spi); }
-  ArduinoSpiExtIO(SPIClass& spi = SPI) { setSPI(spi); }
+  ArduinoSpiExtIO(int cs = -1, SPIClass& spi = SPI,
+                  uint32_t speedHz = FF_SPI_SPEED_FAST) {
+    setSPI(cs, spi, speedHz);
+  }
+  ArduinoSpiExtIO(SPIClass& spi, uint32_t speedHz = FF_SPI_SPEED_FAST) {
+    setSPI(spi, speedHz);
+  }
 
-  void setSPI(int cs = -1, SPIClass& spi = SPI) {
+  using ArduinoSpiIO::setSPI;
+
+  void setSPI(int cs = -1, SPIClass& spi = SPI,
+              uint32_t speedHz = FF_SPI_SPEED_FAST) {
     this->p_spi = &spi;
     this->cs = cs;
     if (cs != -1) {
       gpio.pinMode(cs, OUTPUT);
     }
+    setSpeed(speedHz);
   }
 
  protected:

@@ -1,7 +1,13 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include "IO.h"
-#include "fatfs.h"
+// fatfs.h lives at the src/ root, one level up from driver/ -- same
+// reasoning as ff/ff.h's "../driver/IO.h": a plain "fatfs.h" only
+// resolves via the -I fallback (this library's own src/ root on the
+// include path), which isn't guaranteed if src/ gets vendored into
+// another project instead of installed as a regular dependency.
+#include "../fatfs.h"
 
 namespace fatfs {
 
@@ -18,21 +24,22 @@ class MultiIO : public IO {
 
   void add(IO& io) { io_vector.push_back(&io); }
 
-  /// mount all the added drivers
-  FRESULT mount(FatFs& fs) override {
-    FRESULT rc;
+  /// mount all the added drivers, each on its own logical drive number
+  /// matching its index (requires FF_VOLUMES >= io_vector.size())
+  FRESULT mount(FatFs& fs, BYTE pdrv = 0) override {
+    FRESULT rc = FR_OK;
     for (int j = 0; j < io_vector.size(); j++) {
-      rc = io_vector[j]->mount(fs);
+      rc = io_vector[j]->mount(fs, j);
       if (rc != FR_OK) break;
     }
     return rc;
   }
 
   /// unmount all drivers
-  FRESULT un_mount(FatFs& fs) override {
+  FRESULT un_mount(FatFs& fs, BYTE pdrv = 0) override {
     FRESULT result = FR_OK;
     for (int j = 0; j < io_vector.size(); j++) {
-      auto rc = io_vector[j]->un_mount(fs);
+      auto rc = io_vector[j]->un_mount(fs, j);
       if (rc != FR_OK) result = rc;
     }
     return result;

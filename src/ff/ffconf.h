@@ -169,8 +169,10 @@
 / Drive/Volume Configurations
 /---------------------------------------------------------------------------*/
 
-#define FF_VOLUMES		1
-/* Number of volumes (logical drives) to be used. (1-10) */
+#define FF_VOLUMES		4
+/* Number of volumes (logical drives) to be used. (1-10)
+/  MultiIO mounts each added driver on its own logical drive number, so this
+/  must be at least as large as the number of drivers ever added to a MultiIO. */
 
 
 #define FF_STR_VOLUME_ID	0

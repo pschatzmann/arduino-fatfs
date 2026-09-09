@@ -1,6 +1,8 @@
 # Arduino-FatFs
 
 [![Arduino Library](https://img.shields.io/badge/Arduino-Library-blue.svg)](https://www.arduino.cc/reference/en/libraries/)
+[![Build: CMake](https://img.shields.io/badge/Build-CMake-064F8C.svg?logo=cmake)](CMakeLists.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
 There are quite a few SD Arduino libraries out there: the most important is the [SD.h provided by Arduino](https://github.com/arduino-libraries/SD) which is a wrapper for [SdFat from Bill Greiman](https://github.com/greiman/SdFat) which itself is quite friendly, powerfull and fast.
 
@@ -12,11 +14,29 @@ The advantage of this library is, that it provides quite a few __[configuration 
 
 I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
-- The data is stored in __RAM (or PSRAM)__ (RamIO)
-- Support for __multiple drives__ with different drivers (MultiIO)
-- SD via Arduino __SPI__ (ArduinoSpiIO)
+| Driver | Header | Storage | Platform | Notes |
+|---|---|---|---|---|
+| `RamIO` | [`driver/RamIO.h`](src/driver/RamIO.h) | RAM / PSRAM | any | Volatile - reformatted on every mount |
+| `FileIO` | [`driver/FileIO.h`](src/driver/FileIO.h) | Host OS file (`.img`) | desktop/native builds only | Persists across process runs; auto-formats only when the image is first created |
+| `ArduinoSpiIO` | [`driver/ArduinoSpiIO.h`](src/driver/ArduinoSpiIO.h) | SD card via Arduino SPI | any Arduino board | CS pin, SPI object and post-init clock speed are freely assignable |
+| `ArduinoSpiExtIO` | [`driver/ArduinoSpiIOExt.h`](src/driver/ArduinoSpiIOExt.h) | SD card via Arduino SPI | any Arduino board | Like `ArduinoSpiIO`, but CS is driven through a user-supplied GPIO expander class instead of the core's `digitalWrite` |
+| `Esp32SdmmcIO` | [`driver/Esp32SdmmcIO.h`](src/driver/Esp32SdmmcIO.h) | SD card via native SDMMC/SDIO | ESP32 (SDMMC-capable) | Faster than SPI; uses ESP-IDF's SDMMC driver directly |
+| `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - only needs `begin()`/`seek()`/`sectorCount()`/`eraseSector()` |
+| `MultiIO` | [`driver/MultiIO.h`](src/driver/MultiIO.h) | Aggregates other drivers | any | Mounts each added driver on its own logical drive number, e.g. `"0:"`, `"1:"` |
+| `TinyUsbMscIO` | [`driver/TinyUsbMscIO.h`](src/driver/TinyUsbMscIO.h) | Exposes another driver over USB | TinyUSB-capable boards | Not an `IO` implementation - answers USB host requests instead of FatFs |
 
 It is very easy to add new drivers, so any contribution will be welcome...
+
+## Supported FAT Versions
+
+The default configuration in [`src/ff/ffconf.h`](src/ff/ffconf.h) supports:
+
+- __FAT12__ / __FAT16__ / __FAT32__
+- __exFAT__ (`FF_FS_EXFAT=1`, requires `FF_USE_LFN>=1`, which is also enabled by default)
+
+`f_mkfs()` defaults to `FM_ANY`, so it auto-selects the appropriate format (FAT12/16/32 or exFAT) based on the volume size. exFAT works out of the box for volumes up to ~2TB; `FF_LBA64` is disabled by default, so it does not currently support 64-bit LBA / GPT-partitioned volumes beyond that size. If you need that, set `FF_LBA64=1` in `src/ff/ffconf.h` (exFAT must stay enabled, since 64-bit LBA requires it).
+
+Sector size is fixed at 512 bytes (`FF_MIN_SS=FF_MAX_SS=512`); enabling variable sector sizes requires implementing `GET_SECTOR_SIZE` in the driver's `disk_ioctl()`.
 
 ## SPI SD
 
@@ -32,6 +52,7 @@ Here is an example of setting up a SD drive using the Arduino ESP32 SPI API:
 #define CS   15
 
 ArduinoSpiIO drv{CS, SPI}; // SD driver managing CS and assign SPI
+// ArduinoSpiIO drv{CS, SPI, 10000000}; // same, but capped at 10MHz once the card is initialized (default: FF_SPI_SPEED_FAST, 20MHz)
 File file;
 
 void setup() {
@@ -67,6 +88,30 @@ void setup() {
 
     file = SD.open("test");
     Serial.println(file.size());
+}
+
+void loop() {}
+
+```
+
+## File-backed Disk Image (desktop/native builds)
+
+`FileIO` is like `RamIO`, but backed by a plain host OS file instead of RAM - it's for desktop/native builds only (guarded by `#ifndef ARDUINO`), mainly useful for tests and tooling that run on a PC rather than a microcontroller. Unlike `RamIO`, the data survives past the lifetime of one process: mounting an existing image reopens the filesystem already on it instead of reformatting it, and the resulting `.img` file can be inspected with ordinary OS tools (e.g. `mtools`' `mdir -i disk.img@@32256 ::`, `fsck.vfat`, a loopback mount, ...).
+
+```C++
+#include "fatfs.h"
+#include "driver/FileIO.h"
+
+FileIO drv{"disk.img", 2048, 512}; // 1MB image, created if it doesn't exist yet
+File file;
+
+void setup() {
+    // start SD - auto-formats disk.img only the first time it's created
+    SD.begin(drv);
+
+    file = SD.open("test", FILE_WRITE);
+    file.println("hello");
+    file.close();
 }
 
 void loop() {}
@@ -151,6 +196,13 @@ void loop() {}
 
 ```
 
+## USB Mass Storage (TinyUSB)
+
+`TinyUsbMscIO` exposes an existing driver (RamIO, ArduinoSpiIO, ...) directly to a host PC over USB as a mass storage device, using the [Adafruit TinyUSB library](https://github.com/adafruit/Adafruit_TinyUSB_Arduino). Unlike the other drivers, it doesn't implement the `IO` interface itself - FatFs never calls into it. Instead it forwards USB read/write requests coming *from* the host straight to an existing `IO&`'s `disk_read()`/`disk_write()`. It can be used standalone (just export storage to the host, no local FatFs mount needed) or together with a local `SD.begin()`, as long as both sides aren't writing at the same time.
+
+Requires a TinyUSB-capable board/core (e.g. RP2040, SAMD21/51, nRF52, ESP32-S2/S3) with `USE_TINYUSB` defined; bringing up the USB stack itself is left to the sketch, the same way `ArduinoSpiIO` leaves `SPI.begin()` to the sketch.
+
+
 # Documentaion
 
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
@@ -160,4 +212,8 @@ void loop() {}
     - [FatFs API](https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html)
     - [Directory Iterators](https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html)
     - [Drivers](https://pschatzmann.github.io/arduino-fatfs/html/group__io.html)
+
+# License
+
+The wrapper code in this repository (everything outside `src/ff/`) is licensed under the [MIT License](LICENSE.txt). It bundles [ChaN's FatFs](http://elm-chan.org/fsw/ff/00index_e.html) core (`src/ff/`) under FatFs's own permissive terms, reproduced in [LICENSE.txt](LICENSE.txt). See the top of `src/driver/ArduinoSpiIO.h` and `src/driver/Esp32SdmmcIO.h` for the (compatible, permissive) terms that apply to those two files specifically.
 

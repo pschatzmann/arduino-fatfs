@@ -1,4 +1,42 @@
-FatFs License
+This repository contains code under more than one license. The C++ wrapper
+that makes up most of this project (fatfs.h, filesystem.h, the driver/
+implementations, the stream/ shim, tests and examples) is written by Phil
+Schatzmann and licensed under the MIT License below. It bundles ChaN's
+FatFs core (src/ff/) under FatFs's own permissive terms, and the SPI SD
+driver (src/driver/ArduinoSpiIO.h, src/driver/Esp32SdmmcIO.h) carries its
+own compatible permissive notice from its ChaN/kiwih origins - see the
+comment at the top of each of those files for the exact terms that apply
+to them.
+
+================================================================================
+Arduino-FatFs Wrapper License (MIT)
+================================================================================
+
+MIT License
+
+Copyright (c) 2022 Phil Schatzmann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+Bundled FatFs Core License (src/ff/)
+================================================================================
 
 FatFs has being developped as a personal project of the author, ChaN. It is free from the code anyone else wrote at current release. Following code block shows a copy of the FatFs license document that heading the source files.
 

@@ -26,6 +26,8 @@
 
 #pragma once
 
+#include <cstring>
+
 #include "BaseIO.h"
 #include "SPI.h"
 #include "sdcommon.h"
@@ -40,20 +42,34 @@ namespace fatfs {
 
 class ArduinoSpiIO : public BaseIO {
  public:
-  ArduinoSpiIO(int cs = -1, SPIClass &spi = SPI) { setSPI(cs, spi); }
-  ArduinoSpiIO(SPIClass &spi) { setSPI(spi); }
-
-  void setSPI(SPIClass &spi = SPI) {
-    this->p_spi = &spi;
-    this->cs = -1;
+  ArduinoSpiIO(int cs = -1, SPIClass &spi = SPI,
+               uint32_t speedHz = FF_SPI_SPEED_FAST) {
+    setSPI(cs, spi, speedHz);
+  }
+  ArduinoSpiIO(SPIClass &spi, uint32_t speedHz = FF_SPI_SPEED_FAST) {
+    setSPI(spi, speedHz);
   }
 
-  void setSPI(int cs = -1, SPIClass &spi = SPI) {
+  void setSPI(SPIClass &spi = SPI, uint32_t speedHz = FF_SPI_SPEED_FAST) {
+    this->p_spi = &spi;
+    this->cs = -1;
+    setSpeed(speedHz);
+  }
+
+  void setSPI(int cs = -1, SPIClass &spi = SPI,
+              uint32_t speedHz = FF_SPI_SPEED_FAST) {
     this->p_spi = &spi;
     this->cs = cs;
     if (cs != -1) {
       pinMode(cs, OUTPUT);
     }
+    setSpeed(speedHz);
+  }
+
+  /// Sets the SPI clock speed used once the card is initialized (the slow,
+  /// spec-mandated ~280kHz clock used during initialization is unaffected)
+  void setSpeed(uint32_t speedHz) {
+    spi_fast = SPISettings(speedHz, MSBFIRST, SPI_MODE0);
   }
 
   DSTATUS disk_initialize(BYTE drv /* Physical drive number (0) */
@@ -325,11 +341,14 @@ class ArduinoSpiIO : public BaseIO {
   inline BYTE xchg_spi(BYTE dat) { return p_spi->transfer(dat); }
 
   /* Receive multiple byte */
-  void rcvr_spi_multi(BYTE *buff, UINT btr) { 
-    // For receiving from SD card, send 0xFF dummy bytes while reading
-    for (UINT i = 0; i < btr; i++) {
-      buff[i] = xchg_spi(0xFF);
-    }
+  void rcvr_spi_multi(BYTE *buff, UINT btr) {
+    // SPIClass::transfer(buf, len) transmits buf's own contents while
+    // overwriting it with the received bytes, so pre-fill with the dummy
+    // 0xFF clock-out byte, then do the whole block in one call instead of
+    // looping single-byte transfers - lets the SPI HAL/DMA burst the
+    // transfer instead of paying per-byte call overhead each time.
+    memset(buff, 0xFF, btr);
+    p_spi->transfer(buff, btr);
   }
   
   /* Send multiple bytes */

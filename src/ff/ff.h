@@ -22,7 +22,15 @@
 #include <cstdlib>
 #include "ffconf.h"  // FatFs configuration options
 #include "ffdef.h"   // common structures and defines
-#include "driver/IO.h"
+// Relative to ff/, not this file's own directory root: quote-includes
+// resolve relative to the including file's directory first, so a plain
+// "driver/IO.h" here would look for ff/driver/IO.h (which doesn't
+// exist) before falling back to whatever's on -I. That fallback only
+// works when this library's own src/ root happens to be on the
+// compiler's include path (true for a normal Library Manager install,
+// not necessarily true if someone vendors src/ into another project
+// without adding it to -I) -- see driver/IO.h's matching "../ff/ff.h".
+#include "../driver/IO.h"
 
 namespace fatfs {
 
@@ -141,16 +149,23 @@ class FatFs {
 #if FF_VOLUMES < 1 || FF_VOLUMES > 10
 #error Wrong FF_VOLUMES setting
 #endif
-  FATFS* FatFsDir[FF_VOLUMES]; /*!< Pointer to the filesystem objects (logical
+  // Note: the upstream ChaN FatFs comment above promises these are
+  // "guaranteed zero/null at start-up" because they were originally C
+  // file-scope statics. That guarantee only holds for FatFs objects with
+  // static storage duration (e.g. the global `SD`); a stack- or
+  // heap-allocated FatFs (or one embedded as a member of another object)
+  // gets indeterminate values without an explicit initializer, so these
+  // are given one here.
+  FATFS* FatFsDir[FF_VOLUMES] = {}; /*!< Pointer to the filesystem objects (logical
                                   drives) */
-  WORD Fsid;                   /*!< Filesystem mount ID */
+  WORD Fsid = 0;                   /*!< Filesystem mount ID */
 
 #if FF_FS_RPATH != 0
-  BYTE CurrVol; /*!< Current drive */
+  BYTE CurrVol = 0; /*!< Current drive */
 #endif
 
 #if FF_FS_LOCK != 0
-  FILESEM Files[FF_FS_LOCK]; /*!< Open object lock semaphores */
+  FILESEM Files[FF_FS_LOCK] = {}; /*!< Open object lock semaphores */
 #endif
 
 #if FF_STR_VOLUME_ID

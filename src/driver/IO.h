@@ -1,4 +1,4 @@
-
+// SPDX-License-Identifier: MIT
 /**
  * @defgroup io IO
  * @ingroup main
@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include <cstdio>
 #include "../ff/ffdef.h"
 
 
@@ -73,10 +74,10 @@ enum ioctl_cmd_t {
 
 class IO {
  public:
-  /// mount the file system - implementation at end of header to avoid recursive include
-  virtual FRESULT mount(FatFs& fs);
-  /// unmount the file system - implementation at end of header to avoid recursive include
-  virtual FRESULT un_mount(FatFs& fs);
+  /// mount the file system at the given logical drive number (0..FF_VOLUMES-1) - implementation at end of header to avoid recursive include
+  virtual FRESULT mount(FatFs& fs, BYTE pdrv = 0);
+  /// unmount the file system at the given logical drive number - implementation at end of header to avoid recursive include
+  virtual FRESULT un_mount(FatFs& fs, BYTE pdrv = 0);
 
   virtual DSTATUS disk_initialize(BYTE pdrv) = 0;
   virtual DSTATUS disk_status(BYTE pdrv) = 0;
@@ -97,7 +98,15 @@ class IO {
 namespace fatfs {
 
 // Inline implementations (moved from IO.cpp)
-inline FRESULT IO::mount(FatFs& fs) { return fs.f_mount(&fatfs, "", 0); }
-inline FRESULT IO::un_mount(FatFs& fs) { return fs.f_unmount(""); }
+inline FRESULT IO::mount(FatFs& fs, BYTE pdrv) {
+  char path[6];
+  snprintf(path, sizeof(path), "%d:", pdrv);
+  return fs.f_mount(&fatfs, path, 0);
+}
+inline FRESULT IO::un_mount(FatFs& fs, BYTE pdrv) {
+  char path[6];
+  snprintf(path, sizeof(path), "%d:", pdrv);
+  return fs.f_unmount(path);
+}
 
 }  // namespace fatfs

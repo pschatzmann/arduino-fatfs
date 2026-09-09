@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include <stdlib.h>
@@ -25,23 +26,23 @@ class RamIO : public IO {
   }
 
   ~RamIO() {
-    for (int j = 0; j <= sector_count; j++) {
-      free(sectors[j]);
+    for (auto* ptr : sectors) {
+      free(ptr);
     }
-    delete[]work_buffer;
+    delete[] work_buffer;
   }
 
   // custom logic on mount: we need to format the drive - implementation at end of header
-  FRESULT mount(FatFs& fs) override;
+  FRESULT mount(FatFs& fs, BYTE pdrv = 0) override;
 
   DSTATUS disk_initialize(BYTE pdrv) override {
     if (pdrv != 0) return STA_NODISK;
     // allocate sectors
     if (sectors.size() == 0) {
-      for (int j = 0; j <= sector_count; j++) {
+      for (int j = 0; j < sector_count; j++) {
         uint8_t* ptr = nullptr;
 #ifdef ESP32
-        ptr = (uint8_t*)ps_malloc(sector_count * sector_size);
+        ptr = (uint8_t*)ps_malloc(sector_size);
 #endif
         if (ptr == nullptr) ptr = (uint8_t*)malloc(sector_size);
         memset(ptr, 0, sector_size);
@@ -60,7 +61,7 @@ class RamIO : public IO {
   DRESULT disk_read(BYTE pdrv, BYTE* buffer, LBA_t sectorNo, UINT sectorCount) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
-    if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) RES_ERROR;
+    if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) return RES_ERROR;
     for (int j = sectorNo; j < sectorNo + sectorCount; j++) {
       int idx = j - sectorNo;
       uint8_t* source = sectors[j];
@@ -73,7 +74,7 @@ class RamIO : public IO {
                      UINT sectorCount) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
-    if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) RES_ERROR;
+    if (sectors.size() == 0 || sectorNo + sectorCount > sector_count) return RES_ERROR;
     for (int j = sectorNo; j < sectorNo + sectorCount; j++) {
       int idx = j - sectorNo;
       uint8_t* target = sectors[j];
@@ -132,13 +133,15 @@ class RamIO : public IO {
 };
 
 // Inline implementation (moved from RamIO.cpp)
-inline FRESULT RamIO::mount(FatFs& fs) {
+inline FRESULT RamIO::mount(FatFs& fs, BYTE pdrv) {
   // the file system is empty so we need to format it
   if (work_buffer == nullptr) work_buffer = new uint8_t[FF_MAX_SS];
-  fs.f_mkfs("", nullptr, work_buffer, FF_MAX_SS);
+  char path[6];
+  snprintf(path, sizeof(path), "%d:", pdrv);
+  fs.f_mkfs(path, nullptr, work_buffer, FF_MAX_SS);
 
   // standard mount logic
-  return IO::mount(fs);
+  return IO::mount(fs, pdrv);
 }
 
 }  // namespace fatfs
