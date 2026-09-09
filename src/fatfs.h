@@ -43,7 +43,10 @@
 #include "fatfs-drivers.h"
 #include "ff/ff.h"
 
+#undef FILE_READ
 #define FILE_READ FA_READ
+
+#undef FILE_WRITE
 #define FILE_WRITE (FA_READ | FA_WRITE | FA_CREATE_ALWAYS | FA_OPEN_APPEND)
 
 namespace fatfs {
