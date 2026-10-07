@@ -116,7 +116,7 @@ class File : public Stream {
 
   bool seek(uint32_t pos) {
     if (isDirectory()) return 0;
-    return fs->f_lseek(&file, pos);
+    return fs->f_lseek(&file, pos) == FR_OK;
   }
 
   uint32_t position() {

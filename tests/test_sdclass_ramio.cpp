@@ -1,6 +1,7 @@
 /* SDClass/File round-trip test on a single RamIO drive.
  * Regression coverage for File::read() (single-byte reads used to compare
- * against an uninitialized variable) and File::readBytes()/write().
+ * against an uninitialized variable), File::readBytes()/write() and
+ * File::seek() (used to return false on success).
  */
 #include <cstring>
 
@@ -49,6 +50,14 @@ void setup() {
   // one more read() past EOF must consistently report EOF, not stale data
   CHECK(rf2.read() == -1, "read() past EOF did not return -1");
   rf2.close();
+
+  // seek() must report success and position the file
+  File rf3 = SD.open("test.txt", FILE_READ);
+  CHECK((bool)rf3, "could not reopen file for seeking");
+  CHECK(rf3.seek(4), "seek() did not report success");
+  CHECK(rf3.position() == 4, "seek() did not change the position");
+  CHECK(rf3.read() == 'q', "read() after seek() returned wrong data");
+  rf3.close();
 
   printf("PASS: SDClass/File round-trip on RamIO\n");
   TEST_EXIT_OK();
