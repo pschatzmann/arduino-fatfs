@@ -23,7 +23,7 @@ I have added the most important drivers to this project:  The drivers are writte
 | `Esp32SdmmcIO` | [`driver/Esp32SdmmcIO.h`](src/driver/Esp32SdmmcIO.h) | SD card via native SDMMC/SDIO | ESP32 (SDMMC-capable) | Faster than SPI; uses ESP-IDF's SDMMC driver directly |
 | `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - only needs `begin()`/`seek()`/`sectorCount()`/`eraseSector()` |
 | `MultiIO` | [`driver/MultiIO.h`](src/driver/MultiIO.h) | Aggregates other drivers | any | Mounts each added driver on its own logical drive number, e.g. `"0:"`, `"1:"` |
-| `MBDClientIO` | [`driver/MBDClientIO.h`](src/driver/MBDClientIO.h) | Remote NBD export (via arduino-mbd `NBDClient`) | any with a network `Client` | Uses a server's export as a 512 byte sector disk; needs the arduino-mbd `src` folder on the include path |
+| `NBDClientIO` | [`driver/NBDClientIO.h`](src/driver/NBDClientIO.h) | Remote NBD export (via arduino-nbd `NBDClient`) | any with a network `Client` | Uses a server's export as a 512 byte sector disk; needs the arduino-nbd `src` folder on the include path |
 | `TinyUsbMscIO` | [`driver/TinyUsbMscIO.h`](src/driver/TinyUsbMscIO.h) | Exposes another driver over USB | TinyUSB-capable boards | Not an `IO` implementation - answers USB host requests instead of FatFs |
 
 It is very easy to add new drivers, so any contribution will be welcome...
