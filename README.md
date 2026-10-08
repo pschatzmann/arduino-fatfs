@@ -4,7 +4,7 @@
 [![Build: CMake](https://img.shields.io/badge/Build-CMake-064F8C.svg?logo=cmake)](CMakeLists.txt)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
-There are quite a few SD Arduino libraries out there: the most important is the [SD.h provided by Arduino](https://github.com/arduino-libraries/SD) which is a wrapper for [SdFat from Bill Greiman](https://github.com/greiman/SdFat) which itself is quite friendly, powerfull and fast.
+There are quite a few SD Arduino libraries out there: the most important is the [SD.h provided by Arduino](https://github.com/arduino-libraries/SD) which is a wrapper for [SdFat from Bill Greiman](https://github.com/greiman/SdFat) which itself is quite friendly, powerful and fast.
 
 Bill's library provides some alternative SPI drivers to access the SD functionality, but it does not provide the functionality to store the data anywhere else and you can't use multiple SD drives that are attached to different SPI ports.
 
@@ -12,7 +12,7 @@ I am providing the [FatFs library](http://elm-chan.org/fsw/ff/00index_e.html) de
 
 The advantage of this library is, that it provides quite a few __[configuration options](http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs)__ and has a flexible __driver concept__, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. The FatFs library stops at the driver interface and does not provide any implementation. 
 
-I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefed fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
+I have added the most important drivers to this project:  The drivers are written in a flexible way and do not use any predefined fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following __driver implementations__:
 
 | Driver | Header | Storage | Platform | Notes |
 |---|---|---|---|---|
@@ -21,7 +21,7 @@ I have added the most important drivers to this project:  The drivers are writte
 | `ArduinoSpiIO` | [`driver/ArduinoSpiIO.h`](src/driver/ArduinoSpiIO.h) | SD card via Arduino SPI | any Arduino board | CS pin, SPI object and post-init clock speed are freely assignable |
 | `ArduinoSpiExtIO` | [`driver/ArduinoSpiIOExt.h`](src/driver/ArduinoSpiIOExt.h) | SD card via Arduino SPI | any Arduino board | Like `ArduinoSpiIO`, but CS is driven through a user-supplied GPIO expander class instead of the core's `digitalWrite` |
 | `Esp32SdmmcIO` | [`driver/Esp32SdmmcIO.h`](src/driver/Esp32SdmmcIO.h) | SD card via native SDMMC/SDIO | ESP32 (SDMMC-capable) | Faster than SPI; uses ESP-IDF's SDMMC driver directly |
-| `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - only needs `begin()`/`seek()`/`sectorCount()`/`eraseSector()` |
+| `StreamIO` | [`driver/StreamIO.h`](src/driver/StreamIO.h) | Any user-provided `Stream`-like class | any | Bring-your-own transport - needs `begin()`, `seek()`, `readBytes()`, `write()`, `flush()`, `sectorSize()`, `sectorCount()` and `eraseSector()` |
 | `MultiIO` | [`driver/MultiIO.h`](src/driver/MultiIO.h) | Aggregates other drivers | any | Mounts each added driver on its own logical drive number, e.g. `"0:"`, `"1:"` |
 | `NBDClientIO` | [`driver/NBDClientIO.h`](src/driver/NBDClientIO.h) | Remote Network Block Device (NBD) export (via arduino-nbd `NBDClient`) | any with a network `Client` | Uses a server's export as a 512 byte sector disk; needs the arduino-nbd `src` folder on the include path |
 | `TinyUsbMscIO` | [`driver/TinyUsbMscIO.h`](src/driver/TinyUsbMscIO.h) | Exposes another driver over USB | TinyUSB-capable boards | Not an `IO` implementation - answers USB host requests instead of FatFs |

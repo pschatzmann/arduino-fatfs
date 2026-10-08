@@ -3,8 +3,12 @@
 
 #ifndef ARDUINO
 
+#include <cstdint>
 #include <cstdio>
 #include <cstring>
+#ifndef _WIN32
+#include <sys/types.h>
+#endif
 #include "IO.h"
 
 namespace fatfs {
@@ -61,8 +65,7 @@ class FileIO : public IO {
   DRESULT disk_read(BYTE pdrv, BYTE* buff, LBA_t sector, UINT count) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
-    if (fseek(file, (long)(sector * sector_size), SEEK_SET) != 0)
-      return RES_ERROR;
+    if (seek_to(file, (uint64_t)sector * sector_size) != 0) return RES_ERROR;
     size_t n = fread(buff, sector_size, count, file);
     return n == count ? RES_OK : RES_ERROR;
   }
@@ -71,8 +74,7 @@ class FileIO : public IO {
                      UINT count) override {
     if (pdrv != 0) return RES_NOTRDY;
     if (status == STA_NOINIT) return RES_NOTRDY;
-    if (fseek(file, (long)(sector * sector_size), SEEK_SET) != 0)
-      return RES_ERROR;
+    if (seek_to(file, (uint64_t)sector * sector_size) != 0) return RES_ERROR;
     size_t n = fwrite(buff, sector_size, count, file);
     return n == count ? RES_OK : RES_ERROR;
   }
@@ -84,12 +86,21 @@ class FileIO : public IO {
         return fflush(file) == 0 ? RES_OK : RES_ERROR;
 
       case GET_SECTOR_COUNT: {
+        if (buff == nullptr) return RES_PARERR;
         DWORD result = (DWORD)sector_count;
         memcpy(buff, &result, sizeof(result));
         return RES_OK;
       }
 
+      case GET_SECTOR_SIZE: {
+        if (buff == nullptr) return RES_PARERR;
+        WORD result = (WORD)sector_size;
+        memcpy(buff, &result, sizeof(result));
+        return RES_OK;
+      }
+
       case GET_BLOCK_SIZE: {
+        if (buff == nullptr) return RES_PARERR;
         DWORD result = 1;
         memcpy(buff, &result, sizeof(result));
         return RES_OK;
@@ -109,6 +120,15 @@ class FileIO : public IO {
   DSTATUS status = STA_NOINIT;
   bool just_created = false;
 
+  /// seek with a 64 bit offset so that images above 2GB work on all hosts
+  static int seek_to(FILE* f, uint64_t pos) {
+#ifdef _WIN32
+    return _fseeki64(f, (__int64)pos, SEEK_SET);
+#else
+    return fseeko(f, (off_t)pos, SEEK_SET);
+#endif
+  }
+
   bool open_or_create() {
     file = fopen(path, "r+b");
     just_created = (file == nullptr);
@@ -118,11 +138,17 @@ class FileIO : public IO {
     }
     // grow (sparsely) to the requested size if the file is smaller, whether
     // freshly created or a pre-existing image that's too small
+    uint64_t wanted_size = (uint64_t)sector_count * sector_size;
+    if (seek_to(file, 0) != 0) return false;
     if (fseek(file, 0, SEEK_END) != 0) return false;
-    long current_size = ftell(file);
-    long wanted_size = (long)(sector_count * sector_size);
-    if (current_size < wanted_size) {
-      if (fseek(file, wanted_size - 1, SEEK_SET) != 0) return false;
+#ifdef _WIN32
+    __int64 current_size = _ftelli64(file);
+#else
+    off_t current_size = ftello(file);
+#endif
+    if (current_size < 0) return false;
+    if ((uint64_t)current_size < wanted_size) {
+      if (seek_to(file, wanted_size - 1) != 0) return false;
       uint8_t zero = 0;
       if (fwrite(&zero, 1, 1, file) != 1) return false;
       fflush(file);

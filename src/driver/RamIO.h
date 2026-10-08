@@ -107,11 +107,21 @@ class RamIO : public IO {
 
       case CTRL_TRIM: { /* Erase a block of sectors (used when _USE_ERASE == 1)
                          */
+        if (buffer == nullptr || status == STA_NOINIT) {
+          res = RES_PARERR;
+          break;
+        }
         DWORD range[2];
         // determine range
         memcpy(&range, buffer, sizeof(range));
+        // validate range: must be inside the drive and allocated
+        if (range[0] > range[1] || range[1] >= sector_count ||
+            sectors.size() != sector_count) {
+          res = RES_PARERR;
+          break;
+        }
         // clear memory
-        for (int j = range[0]; j <= range[1]; j++) {
+        for (DWORD j = range[0]; j <= range[1]; j++) {
           memset(sectors[j], 0, sector_size);
         }
         res = RES_OK; /* FatFs does not check result of this command */

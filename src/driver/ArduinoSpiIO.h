@@ -231,6 +231,7 @@ class ArduinoSpiIO : public BaseIO {
 
     if (drv) return RES_PARERR;               /* Check parameter */
     if (stat & STA_NOINIT) return RES_NOTRDY; /* Check if drive is ready */
+    if (buff == nullptr && cmd != CTRL_SYNC) return RES_PARERR; /* No buffer */
 
     res = RES_ERROR;
 

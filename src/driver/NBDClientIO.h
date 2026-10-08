@@ -87,11 +87,13 @@ class NBDClientIO : public BaseIO {
   /// Reads count sectors starting at sector
   DRESULT disk_read(BYTE drv, BYTE* buff, LBA_t sector, UINT count) override {
     if (drv != 0 || !count) return RES_PARERR;
-    if (!client.isConnected()) return RES_NOTRDY;
+    // the connection may have dropped: try to reconnect once
+    if (!client.isConnected() && (disk_initialize(drv) & STA_NOINIT))
+      return RES_NOTRDY;
     uint64_t offset = (uint64_t)sector * 512;
     uint64_t len = (uint64_t)count * 512;
     if (offset + len > client.size()) return RES_PARERR;
-    return transfer(offset, buff, (size_t)len, false) ? RES_OK : RES_ERROR;
+    return readRange(offset, buff, (size_t)len) ? RES_OK : RES_ERROR;
   }
 
 #if FF_IO_USE_WRITE
@@ -99,12 +101,13 @@ class NBDClientIO : public BaseIO {
   DRESULT disk_write(BYTE drv, const BYTE* buff, LBA_t sector,
                      UINT count) override {
     if (drv != 0 || !count) return RES_PARERR;
-    if (!client.isConnected()) return RES_NOTRDY;
+    if (!client.isConnected() && (disk_initialize(drv) & STA_NOINIT))
+      return RES_NOTRDY;
     if (client.isReadOnly()) return RES_WRPRT;
     uint64_t offset = (uint64_t)sector * 512;
     uint64_t len = (uint64_t)count * 512;
     if (offset + len > client.size()) return RES_PARERR;
-    return transfer(offset, const_cast<BYTE*>(buff), (size_t)len, true) ? RES_OK : RES_ERROR;
+    return writeRange(offset, buff, (size_t)len) ? RES_OK : RES_ERROR;
   }
 #endif
 
@@ -160,19 +163,35 @@ class NBDClientIO : public BaseIO {
   const char* export_name = "";
   volatile DSTATUS stat = STA_NOINIT;
 
-  /// Reads or writes len bytes at offset, split into the server's max payload
-  bool transfer(uint64_t offset, BYTE* data, size_t len, bool write) {
-    size_t max = client.maxPayload() > 0 ? (size_t)client.maxPayload()
-                                         : (size_t)0xFFFFFFFFUL;
+  /// Reads len bytes at offset, split into the server's max payload
+  bool readRange(uint64_t offset, BYTE* data, size_t len) {
+    size_t max = maxChunk();
     while (len > 0) {
       size_t n = len < max ? len : max;
-      bool ok = write ? client.write(offset, data, n) : client.read(offset, data, n);
-      if (!ok) return false;
+      if (!client.read(offset, data, n)) return false;
       offset += n;
       data += n;
       len -= n;
     }
     return true;
+  }
+
+  /// Writes len bytes at offset, split into the server's max payload
+  bool writeRange(uint64_t offset, const BYTE* data, size_t len) {
+    size_t max = maxChunk();
+    while (len > 0) {
+      size_t n = len < max ? len : max;
+      if (!client.write(offset, data, n)) return false;
+      offset += n;
+      data += n;
+      len -= n;
+    }
+    return true;
+  }
+
+  size_t maxChunk() {
+    return client.maxPayload() > 0 ? (size_t)client.maxPayload()
+                                   : (size_t)0xFFFFFFFFUL;
   }
 };
 

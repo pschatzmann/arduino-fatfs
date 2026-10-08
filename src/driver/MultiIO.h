@@ -28,8 +28,8 @@ class MultiIO : public IO {
   /// matching its index (requires FF_VOLUMES >= io_vector.size())
   FRESULT mount(FatFs& fs, BYTE pdrv = 0) override {
     FRESULT rc = FR_OK;
-    for (int j = 0; j < io_vector.size(); j++) {
-      rc = io_vector[j]->mount(fs, j);
+    for (size_t j = 0; j < io_vector.size(); j++) {
+      rc = io_vector[j]->mount(fs, (BYTE)j);
       if (rc != FR_OK) break;
     }
     return rc;
@@ -38,8 +38,8 @@ class MultiIO : public IO {
   /// unmount all drivers
   FRESULT un_mount(FatFs& fs, BYTE pdrv = 0) override {
     FRESULT result = FR_OK;
-    for (int j = 0; j < io_vector.size(); j++) {
-      auto rc = io_vector[j]->un_mount(fs, j);
+    for (size_t j = 0; j < io_vector.size(); j++) {
+      auto rc = io_vector[j]->un_mount(fs, (BYTE)j);
       if (rc != FR_OK) result = rc;
     }
     return result;

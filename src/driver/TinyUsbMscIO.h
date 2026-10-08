@@ -34,14 +34,19 @@ class TinyUsbMscIO {
  public:
   TinyUsbMscIO() = default;
   explicit TinyUsbMscIO(IO& driver) { begin(driver); }
+  ~TinyUsbMscIO() {
+    if (active == this) active = nullptr;
+  }
 
   /// Vendor/product/revision strings shown to the USB host - call before begin()
   void setID(const char* vendor, const char* product, const char* rev) {
     msc.setID(vendor, product, rev);
   }
 
-  /// Registers the driver and starts the USB MSC interface
+  /// Registers the driver and starts the USB MSC interface. Returns false if
+  /// another TinyUsbMscIO instance is already active (only one is supported).
   bool begin(IO& driver) {
+    if (active != nullptr && active != this) return false;
     p_io = &driver;
 
     if (p_io->disk_initialize(0) & STA_NOINIT) return false;
@@ -57,6 +62,7 @@ class TinyUsbMscIO {
     sector_size = sect_size;
 #endif
 
+    active = this;
     msc.setReadWriteCallback(msc_read_cb, msc_write_cb, msc_flush_cb);
     msc.setCapacity(sector_count, sector_size);
     msc.setUnitReady(true);
@@ -72,18 +78,20 @@ class TinyUsbMscIO {
 
  protected:
   Adafruit_USBD_MSC msc;
+  // callbacks have no context pointer: the active instance is kept statically
+  static inline TinyUsbMscIO* active = nullptr;
   static inline IO* p_io = nullptr;
   static inline uint16_t sector_size = FF_MAX_SS;
 
   static int32_t msc_read_cb(uint32_t lba, void* buffer, uint32_t bufsize) {
-    if (p_io == nullptr) return -1;
+    if (p_io == nullptr || sector_size == 0) return -1;
     UINT count = bufsize / sector_size;
     DRESULT res = p_io->disk_read(0, (BYTE*)buffer, lba, count);
     return res == RES_OK ? (int32_t)bufsize : -1;
   }
 
   static int32_t msc_write_cb(uint32_t lba, uint8_t* buffer, uint32_t bufsize) {
-    if (p_io == nullptr) return -1;
+    if (p_io == nullptr || sector_size == 0) return -1;
     UINT count = bufsize / sector_size;
     DRESULT res = p_io->disk_write(0, buffer, lba, count);
     return res == RES_OK ? (int32_t)bufsize : -1;

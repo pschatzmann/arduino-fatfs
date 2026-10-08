@@ -135,6 +135,7 @@ class File : public Stream {
     memset(&dir,0,sizeof(dir));
     memset(&file,0,sizeof(file));
     memset(&info, 0, sizeof(info));
+    dir_path = "";
     is_open = false;
   }
 
@@ -145,15 +146,26 @@ class File : public Stream {
 
   bool isDirectory(void) { return info.fattrib & AM_DIR; }
 
+  /// Returns the next entry of this directory. The returned File is bound to
+  /// the same FatFs instance and its path is relative to the volume root.
   File openNextFile(uint8_t mode = FA_READ) {
-    File result;
+    File result(fs);
+    if (fs == nullptr || !isDirectory()) return result;
     FRESULT rc = fs->f_findnext(&dir, &result.info);
-    if (rc == FR_OK) {
+    if (rc == FR_OK && result.info.fname[0] != 0) {
       result.is_open = true;
+      // build the full path: directory path + "/" + entry name
+      result.dir_path = dir_path;
+      String full_path = dir_path;
+      if (full_path.length() > 0 &&
+          full_path.c_str()[full_path.length() - 1] != '/') {
+        full_path += "/";
+      }
+      full_path += result.name();
       if (!result.isDirectory()) {
-        fs->f_open(&result.file, result.name(), mode);
+        result.is_open = fs->f_open(&result.file, full_path.c_str(), mode) == FR_OK;
       } else {
-        fs->f_opendir(&result.dir, result.name());
+        result.is_open = fs->f_opendir(&result.dir, full_path.c_str()) == FR_OK;
       }
     }
     return result;
@@ -188,10 +200,12 @@ class File : public Stream {
   FILINFO info = {0};
   FatFs *fs = nullptr;
   bool is_open = false;
+  String dir_path;  ///< path of the directory (used by openNextFile)
 
   /// update fs, info and is_open
   bool update_stat(FatFs &fat_fs, const char *filepath) {
-    is_open = fs->f_stat(filepath, &info) == FR_OK;
+    fs = &fat_fs;
+    is_open = fat_fs.f_stat(filepath, &info) == FR_OK;
     return is_open;
   }
 
@@ -213,7 +227,8 @@ class File : public Stream {
     // free sectors * sector size
     return (fre_clust * fatfs->csize) * sector_size;
 #else
-    return Stream::avaiableForWrite();
+    // free space is not available when FF_FS_MINIMIZE != 0
+    return 0;
 #endif
   }
 };
@@ -270,6 +285,7 @@ class SDClass {
       FRESULT result;
       if (file.isDirectory()) {
         result = fat_fs.f_opendir(&file.dir, filename);
+        file.dir_path = filename;
       } else {
         result = fat_fs.f_open(&file.file, filename, mode);
       }
@@ -302,7 +318,11 @@ class SDClass {
   }
   bool remove(const String &filepath) { return remove(filepath.c_str()); }
 
+  /// Delete an empty directory. Regular files are not removed.
   bool rmdir(const char *filepath) {
+    FILINFO info;
+    if (fat_fs.f_stat(filepath, &info) != FR_OK) return false;
+    if (!(info.fattrib & AM_DIR)) return false;
     return fat_fs.f_unlink(filepath) == FR_OK;
   }
   bool rmdir(const String &filepath) { return rmdir(filepath.c_str()); }
@@ -327,7 +347,7 @@ class SDClass {
 #endif
 
 #if FF_FS_MINIMIZE == 0
-  /// get free space in bytes
+  /// get free space in bytes (uses a temporary File bound to this volume)
   size_t free() { return File(&fat_fs).availableForWrite(); }
 #endif
 

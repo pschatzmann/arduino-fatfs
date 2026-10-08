@@ -34,27 +34,25 @@ namespace fatfs {
  * Example usage:
  * @code
  * #include "fatfs.h"
+ * #include "driver/Esp32SdmmcIO.h"
  * using namespace fatfs;
  *
- * // Method 1: Default constructor + begin()
+ * // Method 1: Default constructor + explicit begin()
  * Esp32SdmmcIO driver1;
- * FatFs fs1;
  *
  * void setup() {
  *   if (!driver1.begin(false, SDMMC_FREQ_DEFAULT)) {
  *     Serial.println("Card Mount Failed");
  *     return;
  *   }
- *   driver1.mount(fs1);
+ *   SD.begin(driver1);  // mounts the already initialized card
  * }
  *
- * // Method 2: Constructor with config (auto-init on mount)
+ * // Method 2: Constructor with config (card is initialized on first use)
  * Esp32SdmmcIO driver2(false, SDMMC_FREQ_DEFAULT);  // 4-bit, 20MHz
- * FatFs fs2;
  *
  * void setup() {
- *   // Card initializes automatically when mounting
- *   driver2.mount(fs2);
+ *   SD.begin(driver2);  // card initializes automatically when mounting
  * }
  * @endcode
  */
@@ -397,9 +395,14 @@ class Esp32SdmmcIO : public BaseIO {
 
       case MMC_GET_SDSTAT:
         if (buff && card) {
-          // Get SD status - this requires reading from the card
-          // For simplicity, return not implemented
-          res = RES_PARERR;
+          // SD Status is only defined for SD cards (ACMD13)
+          if (card->is_mmc) {
+            res = RES_PARERR;
+          } else if (read_sd_status(buff) == ESP_OK) {
+            res = RES_OK;
+          } else {
+            res = RES_ERROR;
+          }
         }
         break;
 
@@ -432,7 +435,7 @@ class Esp32SdmmcIO : public BaseIO {
    * @return Total sectors (0 if not initialized)
    */
   uint64_t totalSectors() const {
-    if (stat & STA_NOINIT || card == nullptr) return 0;
+    if ((stat & STA_NOINIT) || card == nullptr) return 0;
     return cardSize() / 512;
   }
 
@@ -455,6 +458,32 @@ class Esp32SdmmcIO : public BaseIO {
   uint32_t getFreqKHz() const { return card ? card->max_freq_khz : 0; }
 
  protected:
+  /// Reads the 64 byte SD Status register: CMD55 (RCA) followed by ACMD13
+  esp_err_t read_sd_status(void* buff) {
+    sdmmc_command_t cmd;
+
+    // CMD55: next command is an application specific command
+    memset(&cmd, 0, sizeof(cmd));
+    cmd.opcode = MMC_APP_CMD;
+    cmd.arg = (uint32_t)card->rca << 16;
+    cmd.flags = SCF_CMD_AC | SCF_RSP_R1;
+    esp_err_t err = card->host.do_transaction(card->host.slot, &cmd);
+    if (err != ESP_OK) return err;
+    if (cmd.error != ESP_OK) return cmd.error;
+
+    // ACMD13: read 64 bytes of SD status as a single data block
+    memset(&cmd, 0, sizeof(cmd));
+    cmd.opcode = SD_APP_SD_STATUS;
+    cmd.arg = 0;
+    cmd.flags = SCF_CMD_ADTC | SCF_RSP_R1;
+    cmd.data = buff;
+    cmd.datalen = 64;
+    cmd.blklen = 64;
+    err = card->host.do_transaction(card->host.slot, &cmd);
+    if (err != ESP_OK) return err;
+    return cmd.error;
+  }
+
   volatile DSTATUS stat = STA_NOINIT;  ///< Physical drive status
   BYTE CardType = 0;                   ///< Card type flags
   sdmmc_card_t* card;                  ///< Pointer to card structure
