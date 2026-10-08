@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writerange_0',['writeRange',['../classfatfs_1_1NBDClientIO.html#a5ef97c4557839b572906a7c42675cd31',1,'fatfs::NBDClientIO']]]
+  ['_7eesp32sdmmcio_0',['~Esp32SdmmcIO',['../classfatfs_1_1Esp32SdmmcIO.html#a71be62fa8e08ce2c702c10316e62623e',1,'fatfs::Esp32SdmmcIO']]]
 ];

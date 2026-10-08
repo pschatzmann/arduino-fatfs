@@ -1,5 +1,5 @@
 <map id="fatfs::SDClass" name="fatfs::SDClass">
-<area shape="rect" id="Node000001" title="SDClass: starting driver, access to files." alt="" coords="81,344,194,369"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="81,344,194,369"/>
 <area shape="rect" id="Node000002" href="$classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,256,149,281"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,291,131,342,127,345,91,294"/>
 <area shape="rect" id="Node000003" href="$classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="20,181,127,207"/>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['arduino_20fatfs_0',['Arduino-FatFs',['../index.html',1,'']]]
+  ['fatfs_0',['Tiny FATFS',['../index.html',1,'']]]
 ];

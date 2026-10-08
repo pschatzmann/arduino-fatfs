@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino FatFS: Arduino-FatFs</title>
+<title>Arduino FatFS: Tiny FATFS</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,226 +69,37 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Arduino-FatFs </div></div>
+  <div class="headertitle"><div class="title">Tiny FATFS </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://www.arduino.cc/reference/en/libraries/"><img src="https://img.shields.io/badge/Arduino-Library-blue.svg" alt="Arduino Library" style="pointer-events: none;" class="inline"/></a> <a href="CMakeLists.txt"><img src="https://img.shields.io/badge/Build-CMake-064F8C.svg?logo=cmake" alt="Build: CMake" style="pointer-events: none;" class="inline"/></a> <a href="LICENSE.txt"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" style="pointer-events: none;" class="inline"/></a></p>
 <p>There are quite a few SD Arduino libraries out there: the most important is the <a href="https://github.com/arduino-libraries/SD">SD.h provided by Arduino</a> which is a wrapper for <a href="https://github.com/greiman/SdFat">SdFat from Bill Greiman</a> which itself is quite friendly, powerful and fast.</p>
 <p>Bill's library provides some alternative SPI drivers to access the SD functionality, but it does not provide the functionality to store the data anywhere else and you can't use multiple SD drives that are attached to different SPI ports.</p>
 <p>I am providing the <a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs library</a> developed by ChaN that I have converted to C++ header only so that we can flexibly support multiple data access drivers and scenarios at the same time.</p>
-<p>The advantage of this library is, that it provides quite a few <b><a href="http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs">configuration options</a></b> and has a flexible <b>driver concept</b>, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. The FatFs library stops at the driver interface and does not provide any implementation.</p>
-<p>I have added the most important drivers to this project: The drivers are written in a flexible way and do not use any predefined fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc). We currently provide the following <b>driver implementations</b>:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Driver   </th><th class="markdownTableHeadNone">Header   </th><th class="markdownTableHeadNone">Storage   </th><th class="markdownTableHeadNone">Platform   </th><th class="markdownTableHeadNone">Notes    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>RamIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/RamIO.h"><code>driver/RamIO.h</code></a>   </td><td class="markdownTableBodyNone">RAM / PSRAM   </td><td class="markdownTableBodyNone">any   </td><td class="markdownTableBodyNone">Volatile - reformatted on every mount    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>FileIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/FileIO.h"><code>driver/FileIO.h</code></a>   </td><td class="markdownTableBodyNone">Host OS file (<code>.img</code>)   </td><td class="markdownTableBodyNone">desktop/native builds only   </td><td class="markdownTableBodyNone">Persists across process runs; auto-formats only when the image is first created    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>ArduinoSpiIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/ArduinoSpiIO.h"><code>driver/ArduinoSpiIO.h</code></a>   </td><td class="markdownTableBodyNone">SD card via Arduino SPI   </td><td class="markdownTableBodyNone">any Arduino board   </td><td class="markdownTableBodyNone">CS pin, SPI object and post-init clock speed are freely assignable    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>ArduinoSpiExtIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/ArduinoSpiIOExt.h"><code>driver/ArduinoSpiIOExt.h</code></a>   </td><td class="markdownTableBodyNone">SD card via Arduino SPI   </td><td class="markdownTableBodyNone">any Arduino board   </td><td class="markdownTableBodyNone">Like <code>ArduinoSpiIO</code>, but CS is driven through a user-supplied GPIO expander class instead of the core's <code>digitalWrite</code>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>Esp32SdmmcIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/Esp32SdmmcIO.h"><code>driver/Esp32SdmmcIO.h</code></a>   </td><td class="markdownTableBodyNone">SD card via native SDMMC/SDIO   </td><td class="markdownTableBodyNone">ESP32 (SDMMC-capable)   </td><td class="markdownTableBodyNone">Faster than SPI; uses ESP-IDF's SDMMC driver directly    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>StreamIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/StreamIO.h"><code>driver/StreamIO.h</code></a>   </td><td class="markdownTableBodyNone">Any user-provided <code>Stream</code>-like class   </td><td class="markdownTableBodyNone">any   </td><td class="markdownTableBodyNone">Bring-your-own transport - needs <code>begin()</code>, <code>seek()</code>, <code>readBytes()</code>, <code>write()</code>, <code>flush()</code>, <code>sectorSize()</code>, <code>sectorCount()</code> and <code>eraseSector()</code>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>MultiIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/MultiIO.h"><code>driver/MultiIO.h</code></a>   </td><td class="markdownTableBodyNone">Aggregates other drivers   </td><td class="markdownTableBodyNone">any   </td><td class="markdownTableBodyNone">Mounts each added driver on its own logical drive number, e.g. <code>"0:"</code>, <code>"1:"</code>    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>NBDClientIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/NBDClientIO.h"><code>driver/NBDClientIO.h</code></a>   </td><td class="markdownTableBodyNone">Remote Network Block Device (NBD) export (via arduino-nbd <code>NBDClient</code>)   </td><td class="markdownTableBodyNone">any with a network <code>Client</code>   </td><td class="markdownTableBodyNone">Uses a server's export as a 512 byte sector disk; needs the arduino-nbd <code>src</code> folder on the include path    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>TinyUsbMscIO</code>   </td><td class="markdownTableBodyNone"><a href="src/driver/TinyUsbMscIO.h"><code>driver/TinyUsbMscIO.h</code></a>   </td><td class="markdownTableBodyNone">Exposes another driver over USB   </td><td class="markdownTableBodyNone">TinyUSB-capable boards   </td><td class="markdownTableBodyNone">Not an <code>IO</code> implementation - answers USB host requests instead of FatFs   </td></tr>
-</table>
-<p>It is very easy to add new drivers, so any contribution will be welcome...</p>
+<p>The advantage of this library is, that it provides quite a few <b><a href="http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs">configuration options</a></b> and has a flexible <b>driver concept</b>, so that we can store the data potentially on a SD disk, in RAM, PSRAM, on remote devices etc.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Supported FAT Versions</h1>
-<p>The default configuration in <a href="src/ff/ffconf.h"><code>src/ff/ffconf.h</code></a> supports:</p>
-<ul>
-<li><b>FAT12</b> / <b>FAT16</b> / <b>FAT32</b></li>
-<li><b>exFAT</b> (<code>FF_FS_EXFAT=1</code>, requires <code>FF_USE_LFN&gt;=1</code>, which is also enabled by default)</li>
-</ul>
-<p><code>f_mkfs()</code> defaults to <code>FM_ANY</code>, so it auto-selects the appropriate format (FAT12/16/32 or exFAT) based on the volume size. exFAT works out of the box for volumes up to ~2TB; <code>FF_LBA64</code> is disabled by default, so it does not currently support 64-bit LBA / GPT-partitioned volumes beyond that size. If you need that, set <code>FF_LBA64=1</code> in <code><a class="el" href="ffconf_8h_source.html">src/ff/ffconf.h</a></code> (exFAT must stay enabled, since 64-bit LBA requires it).</p>
-<p>Sector size is fixed at 512 bytes (<code>FF_MIN_SS=FF_MAX_SS=512</code>); enabling variable sector sizes requires implementing <code>GET_SECTOR_SIZE</code> in the driver's <code>disk_ioctl()</code>.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-SPI SD</h1>
-<p>Here is an example of setting up a SD drive using the Arduino ESP32 SPI API:</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &quot;SPI.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define MISO 12</span></div>
-<div class="line"><span class="preprocessor">#define MOSI 13</span></div>
-<div class="line"><span class="preprocessor">#define SCLK 14</span></div>
-<div class="line"><span class="preprocessor">#define CS   15</span></div>
-<div class="line"> </div>
-<div class="line">ArduinoSpiIO drv{CS, SPI}; <span class="comment">// SD driver managing CS and assign SPI</span></div>
-<div class="line"><span class="comment">// ArduinoSpiIO drv{CS, SPI, 10000000}; // same, but capped at 10MHz once the card is initialized (default: FF_SPI_SPEED_FAST, 20MHz)</span></div>
-<div class="line">File file;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// start SPI and setup pins</span></div>
-<div class="line">    SPI.begin(SCLK, MISO, MOSI);</div>
-<div class="line">    <span class="comment">// start SD </span></div>
-<div class="line">    SD.begin(drv); </div>
-<div class="line"> </div>
-<div class="line">    file = SD.open(<span class="stringliteral">&quot;test&quot;</span>);</div>
-<div class="line">    Serial.println(file.size());</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-</div><!-- fragment --><p> This example demonstates the most generic way to set up things. Of cause it is still possible to do it the way the Arduino SD library posposes (and you don't need to define a driver for using SD SPI yourself): just call <code>SD.begin(CS);</code></p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-RAM Drive</h1>
-<p>Here is an example of setting up a SD drive in RAM:</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &quot;SPI.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line">RamIO drv{100, 512}; <span class="comment">// 100 sector with 512 bytes</span></div>
-<div class="line">File file;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// start SD </span></div>
-<div class="line">    SD.begin(drv); </div>
-<div class="line"> </div>
-<div class="line">    file = SD.open(<span class="stringliteral">&quot;test&quot;</span>);</div>
-<div class="line">    Serial.println(file.size());</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
-File-backed Disk Image (desktop/native builds)</h1>
-<p><code>FileIO</code> is like <code>RamIO</code>, but backed by a plain host OS file instead of RAM - it's for desktop/native builds only (guarded by <code>#ifndef ARDUINO</code>), mainly useful for tests and tooling that run on a PC rather than a microcontroller. Unlike <code>RamIO</code>, the data survives past the lifetime of one process: mounting an existing image reopens the filesystem already on it instead of reformatting it, and the resulting <code>.img</code> file can be inspected with ordinary OS tools (e.g. <code>mtools</code>' <code>mdir -i disk.img@@32256 ::</code>, <code>fsck.vfat</code>, a loopback mount, ...).</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;driver/FileIO.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line">FileIO drv{<span class="stringliteral">&quot;disk.img&quot;</span>, 2048, 512}; <span class="comment">// 1MB image, created if it doesn&#39;t exist yet</span></div>
-<div class="line">File file;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// start SD - auto-formats disk.img only the first time it&#39;s created</span></div>
-<div class="line">    SD.begin(drv);</div>
-<div class="line"> </div>
-<div class="line">    file = SD.open(<span class="stringliteral">&quot;test&quot;</span>, FILE_WRITE);</div>
-<div class="line">    file.println(<span class="stringliteral">&quot;hello&quot;</span>);</div>
-<div class="line">    file.close();</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
-Network Block Device (NBD)</h1>
-<p><code>NBDClientIO</code> uses an export from a Network Block Device server as the disk. It needs the arduino-nbd <code>src</code> folder on the include path, and any Arduino <code>Client</code> with network access (e.g. <code>WiFiClient</code>). Sectors are 512 bytes: sector N maps to byte offset N * 512 of the export.</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &lt;WiFi.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="NBDClientIO_8h.html">driver/NBDClientIO.h</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line">WiFiClient wifi;</div>
-<div class="line">nbd::NBDClient nbd_client(wifi);</div>
-<div class="line"><span class="comment">// host string must stay valid while the driver is in use</span></div>
-<div class="line">NBDClientIO drv{nbd_client, <span class="stringliteral">&quot;192.168.1.10&quot;</span>, nbd::NBD_DEFAULT_PORT, <span class="stringliteral">&quot;ram&quot;</span>};</div>
-<div class="line">File file;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// connects to the server on first mount</span></div>
-<div class="line">    SD.begin(drv);</div>
-<div class="line"> </div>
-<div class="line">    file = SD.open(<span class="stringliteral">&quot;test&quot;</span>);</div>
-<div class="line">    Serial.println(file.size());</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-<div class="ttc" id="aNBDClientIO_8h_html"><div class="ttname"><a href="NBDClientIO_8h.html">NBDClientIO.h</a></div><div class="ttdoc">FatFs driver that uses a remote NBD export (arduino-nbd NBDClient) as the storage device.</div></div>
-</div><!-- fragment --><p>If the export is read-only, the driver reports it as write protected and file writes fail.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
-Multiple Drives</h1>
-<p>You can also use your own separate SDClass instances:</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &quot;SPI.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define MISO 12</span></div>
-<div class="line"><span class="preprocessor">#define MOSI 13</span></div>
-<div class="line"><span class="preprocessor">#define SCLK 14</span></div>
-<div class="line"><span class="preprocessor">#define CS   15</span></div>
-<div class="line"> </div>
-<div class="line">ArduinoSpiIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
-<div class="line">RamIO mem{100, 512}; <span class="comment">// 100 sector with 512 bytes</span></div>
-<div class="line">SDClass sd_sd{sd}; <span class="comment">// SD and assign driver</span></div>
-<div class="line">SDClass sd_mem{mem};</div>
-<div class="line">File file;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// start SPI and setup pins</span></div>
-<div class="line">    SPI.begin(SCLK, MISO, MOSI);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// start SD </span></div>
-<div class="line">    sd_mem.begin(); </div>
-<div class="line">    sd_sd.begin(); </div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> file1 = sd_mem.open(<span class="stringliteral">&quot;0:test&quot;</span>);</div>
-<div class="line">    Serial.println(file1.size());</div>
-<div class="line">    <span class="keyword">auto</span> file2 = sd_sd.open(<span class="stringliteral">&quot;1:test&quot;</span>);</div>
-<div class="line">    Serial.println(file2.size());</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-</div><!-- fragment --><p>Here is an example of setting up a multi drive scenario using the MultiIO driver:</p>
-<div class="fragment"><div class="line"> ++</div>
-<div class="line"><span class="preprocessor">#include &quot;SPI.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="ArduinoSpiIO_8h.html">driver/ArduinoSpiIO.h</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;driver/RamIO.h&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;driver/MultiIO.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define MISO 12</span></div>
-<div class="line"><span class="preprocessor">#define MOSI 13</span></div>
-<div class="line"><span class="preprocessor">#define SCLK 14</span></div>
-<div class="line"><span class="preprocessor">#define CS   15</span></div>
-<div class="line"> </div>
-<div class="line">ArduinoSpiIO sd{CS, SPI}; <span class="comment">// driver managing CS and assign SPI</span></div>
-<div class="line">RamIO mem{100, 512}; <span class="comment">// 100 sector with 512 bytes</span></div>
-<div class="line">MultiIO drv;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">    <span class="comment">// start SPI and setup pins</span></div>
-<div class="line">    SPI.begin(SCLK, MISO, MOSI);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// setup MultiIO</span></div>
-<div class="line">    drv.add(sd);</div>
-<div class="line">    drv.add(mem);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// start all drives </span></div>
-<div class="line">    SD.begin(drv); </div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> file1 = SD.open(<span class="stringliteral">&quot;0:test&quot;</span>);</div>
-<div class="line">    Serial.println(file1.size());</div>
-<div class="line">    <span class="keyword">auto</span> file2 = SD.open(<span class="stringliteral">&quot;1:test&quot;</span>);</div>
-<div class="line">    Serial.println(file2.size());</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">void</span> loop() {}</div>
-<div class="ttc" id="aArduinoSpiIO_8h_html"><div class="ttname"><a href="ArduinoSpiIO_8h.html">ArduinoSpiIO.h</a></div><div class="ttdoc">FatFs driver for an SD card attached via the Arduino SPI API.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
-USB Mass Storage (TinyUSB)</h1>
-<p><code>TinyUsbMscIO</code> exposes an existing driver (RamIO, ArduinoSpiIO, ...) directly to a host PC over USB as a mass storage device, using the <a href="https://github.com/adafruit/Adafruit_TinyUSB_Arduino">Adafruit TinyUSB library</a>. Unlike the other drivers, it doesn't implement the <code>IO</code> interface itself - FatFs never calls into it. Instead it forwards USB read/write requests coming <em>from</em> the host straight to an existing <code>IO&amp;</code>'s <code>disk_read()</code>/<code>disk_write()</code>. It can be used standalone (just export storage to the host, no local FatFs mount needed) or together with a local <code>SD.begin()</code>, as long as both sides aren't writing at the same time.</p>
-<p>Requires a TinyUSB-capable board/core (e.g. RP2040, SAMD21/51, nRF52, ESP32-S2/S3) with <code>USE_TINYUSB</code> defined; bringing up the USB stack itself is left to the sketch, the same way <code>ArduinoSpiIO</code> leaves <code>SPI.begin()</code> to the sketch.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+Installation</h1>
+<p>For Arduino, you can download the library as zip and call Include Library -&gt; Add .ZIP Library. Or you can git clone this project into the Arduino libraries folder, e.g. with</p>
+<div class="fragment"><div class="line">cd ~/Documents/Arduino/libraries</div>
+<div class="line">git clone https://github.com/pschatzmann/TinyFATFS.git</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Documentation</h1>
 <ul>
+<li>Supported FAT Versions</li>
+<li>Desktop Build and Tests</li>
+<li>Driver Overview</li>
+<li>Driver Code Examples</li>
 <li><a href="https://www.arduino.cc/reference/en/libraries/sd/">Arduino SD API</a></li>
-<li><a href="http://elm-chan.org/fsw/ff/00index_e.html">FatFS Documentation</a></li>
+<li><a href="http://elm-chan.org/fsw/ff/00index_e.html">Original FatFS Documentation</a></li>
 <li>Class Documentation<ul>
-<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html">Arduino API</a></li>
-<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html">FatFs API</a></li>
-<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html">Directory Iterators</a></li>
-<li><a href="https://pschatzmann.github.io/arduino-fatfs/html/group__io.html">Drivers</a></li>
+<li><a href="https://pschatzmann.github.io/TinyFATFS/html/group__sd.html">Arduino API</a></li>
+<li><a href="https://pschatzmann.github.io/TinyFATFS/html/classfatfs_1_1FatFs.html">FatFs API</a></li>
+<li><a href="https://pschatzmann.github.io/TinyFATFS/html/group__iterator.html">Directory Iterators</a></li>
+<li><a href="https://pschatzmann.github.io/TinyFATFS/html/group__io.html">Drivers</a></li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 License</h1>
 <p>The wrapper code in this repository (everything outside <code>src/ff/</code>) is licensed under the <a href="LICENSE.txt">MIT License</a>. It bundles <a href="http://elm-chan.org/fsw/ff/00index_e.html">ChaN's FatFs</a> core (<code>src/ff/</code>) under FatFs's own permissive terms, reproduced in <a href="LICENSE.txt">LICENSE.txt</a>. See the top of <code><a class="el" href="ArduinoSpiIO_8h.html" title="FatFs driver for an SD card attached via the Arduino SPI API.">src/driver/ArduinoSpiIO.h</a></code> and <code><a class="el" href="Esp32SdmmcIO_8h.html" title="FatFs driver for ESP32 SDMMC interface using low-level API.">src/driver/Esp32SdmmcIO.h</a></code> for the (compatible, permissive) terms that apply to those two files specifically. </p>
 </div></div><!-- PageDoc -->

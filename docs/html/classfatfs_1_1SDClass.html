@@ -78,20 +78,15 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfatfs_1_1SDClass-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fatfs::SDClass Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino FatFs</a> &raquo; <a class="el" href="group__sd.html">sd</a></div></div></div>
+  <div class="headertitle"><div class="title">fatfs::SDClass Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classfatfs_1_1SDClass.html" title="SDClass: starting driver, access to files.">SDClass</a>: starting driver, access to files.  
- <a href="classfatfs_1_1SDClass.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="fatfs_8h_source.html">fatfs.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for fatfs::SDClass:</div>
 <div class="dyncontent">
 <div class="center"><img src="classfatfs_1_1SDClass__coll__graph.png" border="0" usemap="#afatfs_1_1SDClass_coll__map" alt="Collaboration graph"/></div>
 <map name="afatfs_1_1SDClass_coll__map" id="afatfs_1_1SDClass_coll__map">
-<area shape="rect" title="SDClass: starting driver, access to files." alt="" coords="81,344,194,369"/>
+<area shape="rect" title=" " alt="" coords="81,344,194,369"/>
 <area shape="rect" href="classfatfs_1_1ArduinoSpiIO.html" title="Accessing a SD card via the Arduino SPI API." alt="" coords="5,256,149,281"/>
 <area shape="poly" title=" " alt="" coords="96,291,131,342,127,345,91,294"/>
 <area shape="rect" href="classfatfs_1_1BaseIO.html" title="Empty IO implementation that we can use to test the compilation." alt="" coords="20,181,127,207"/>
@@ -179,6 +174,14 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> ()</td></t
 <a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getFatFs</b> ()</td></tr>
 <tr class="memdesc:a47c053f4dbb799c9b90096d9f957cd52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to low level FatFS api to use functionality not exposed by this API. <br /></td></tr>
 <tr class="separator:a47c053f4dbb799c9b90096d9f957cd52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87035a3c4cd0f8abd823a57abc198f88" id="r_a87035a3c4cd0f8abd823a57abc198f88"><td class="memItemLeft" align="right" valign="top"><a id="a87035a3c4cd0f8abd823a57abc198f88" name="a87035a3c4cd0f8abd823a57abc198f88"></a>
+<a class="el" href="classfatfs_1_1directory__iterator.html">fatfs::directory_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>directoryIterator</b> (const char *path=&quot;/&quot;)</td></tr>
+<tr class="memdesc:a87035a3c4cd0f8abd823a57abc198f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-recursive directory iterator over this volume (defined in <a class="el" href="filesystem_8h_source.html">filesystem.h</a>) <br /></td></tr>
+<tr class="separator:a87035a3c4cd0f8abd823a57abc198f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86cb4d7723d822b3cc9b4e84224e3399" id="r_a86cb4d7723d822b3cc9b4e84224e3399"><td class="memItemLeft" align="right" valign="top"><a id="a86cb4d7723d822b3cc9b4e84224e3399" name="a86cb4d7723d822b3cc9b4e84224e3399"></a>
+<a class="el" href="classfatfs_1_1recursive__directory__iterator.html">fatfs::recursive_directory_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><b>recursiveDirectoryIterator</b> (const char *path=&quot;/&quot;)</td></tr>
+<tr class="memdesc:a86cb4d7723d822b3cc9b4e84224e3399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursive directory iterator over this volume (defined in <a class="el" href="filesystem_8h_source.html">filesystem.h</a>) <br /></td></tr>
+<tr class="separator:a86cb4d7723d822b3cc9b4e84224e3399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fdb4dfc643332b0c49b1738c43177b6" id="r_a0fdb4dfc643332b0c49b1738c43177b6"><td class="memItemLeft" align="right" valign="top"><a id="a0fdb4dfc643332b0c49b1738c43177b6" name="a0fdb4dfc643332b0c49b1738c43177b6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDriver</b> (<a class="el" href="classfatfs_1_1IO.html">IO</a> &amp;driver)</td></tr>
 <tr class="memdesc:a0fdb4dfc643332b0c49b1738c43177b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the driver. <br /></td></tr>
@@ -206,9 +209,7 @@ Protected Attributes</h2></td></tr>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> = nullptr</td></tr>
 <tr class="separator:a2aa3890988a436e0ec259444e013f227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classfatfs_1_1SDClass.html" title="SDClass: starting driver, access to files.">SDClass</a>: starting driver, access to files. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a148e640a514a8f1abec78b26c77b42b3" name="a148e640a514a8f1abec78b26c77b42b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a148e640a514a8f1abec78b26c77b42b3">&#9670;&#160;</a></span>end()</h2>
 
@@ -336,8 +337,9 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="fatfs_8h_source.html">fatfs.h</a></li>
+<li>src/<a class="el" href="filesystem_8h_source.html">filesystem.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

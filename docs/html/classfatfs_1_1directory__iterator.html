@@ -91,6 +91,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a318931336465e8f4068fb8c9271cf721" id="r_a318931336465e8f4068fb8c9271cf721"><td class="memItemLeft" align="right" valign="top"><a id="a318931336465e8f4068fb8c9271cf721" name="a318931336465e8f4068fb8c9271cf721"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>directory_iterator</b> (const std::string &amp;rootPath)</td></tr>
 <tr class="separator:a318931336465e8f4068fb8c9271cf721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ac304a212e47b94f64187e90fa9e12" id="r_a73ac304a212e47b94f64187e90fa9e12"><td class="memItemLeft" align="right" valign="top"><a id="a73ac304a212e47b94f64187e90fa9e12" name="a73ac304a212e47b94f64187e90fa9e12"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>directory_iterator</b> (<a class="el" href="classfatfs_1_1FatFs.html">fatfs::FatFs</a> *fsPtr, const std::string &amp;rootPath)</td></tr>
+<tr class="memdesc:a73ac304a212e47b94f64187e90fa9e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate the volume of the given <a class="el" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm-chan.org/fsw/ff/00index_e.html.">FatFs</a> instance (e.g. an <a class="el" href="classfatfs_1_1SDClass.html">SDClass</a> volume) <br /></td></tr>
+<tr class="separator:a73ac304a212e47b94f64187e90fa9e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04307771193cc201b44d74e93b33b208" id="r_a04307771193cc201b44d74e93b33b208"><td class="memItemLeft" align="right" valign="top"><a id="a04307771193cc201b44d74e93b33b208" name="a04307771193cc201b44d74e93b33b208"></a>
 <a class="el" href="classfatfs_1_1directory__iterator.html">directory_iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> ()</td></tr>
 <tr class="separator:a04307771193cc201b44d74e93b33b208"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,7 +120,7 @@ static <a class="el" href="classfatfs_1_1directory__iterator.html">directory_ite
 <div class="line">  <span class="keyword">auto</span> entry = *it;</div>
 <div class="line">  printf(<span class="stringliteral">&quot;%s: %llu bytes\n&quot;</span>, entry.path.c_str(), entry.size);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassfatfs_1_1directory__iterator_html"><div class="ttname"><a href="classfatfs_1_1directory__iterator.html">fatfs::directory_iterator</a></div><div class="ttdoc">Iterator for non-recursive directory traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:43</div></div>
+<div class="ttc" id="aclassfatfs_1_1directory__iterator_html"><div class="ttname"><a href="classfatfs_1_1directory__iterator.html">fatfs::directory_iterator</a></div><div class="ttdoc">Iterator for non-recursive directory traversal.</div><div class="ttdef"><b>Definition</b> filesystem.h:45</div></div>
 </div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="filesystem_8h_source.html">filesystem.h</a></li>
 </ul>
