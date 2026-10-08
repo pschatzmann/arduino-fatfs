@@ -23,8 +23,12 @@ namespace fatfs {
  * The NBD protocol works with byte offsets, so the driver exposes the export
  * as 512 byte sectors: sector N starts at byte offset N * 512.
  *
+ * The host string is stored by pointer, not copied: it must stay valid
+ * for the lifetime of the driver.
+ *
  * Example:
  * @code
+ * #include <WiFi.h>
  * #include "fatfs.h"
  * #include "driver/NBDClientIO.h"
  *

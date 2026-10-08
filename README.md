@@ -120,7 +120,36 @@ void loop() {}
 ```
 
 
-## Mutliple Drives
+## Network Block Device (NBD)
+
+`NBDClientIO` uses an export from a Network Block Device server as the disk. It needs the arduino-nbd `src` folder on the include path, and any Arduino `Client` with network access (e.g. `WiFiClient`). Sectors are 512 bytes: sector N maps to byte offset N * 512 of the export.
+
+```C++
+#include <WiFi.h>
+#include "fatfs.h"
+#include "driver/NBDClientIO.h"
+
+WiFiClient wifi;
+nbd::NBDClient nbd_client(wifi);
+// host string must stay valid while the driver is in use
+NBDClientIO drv{nbd_client, "192.168.1.10", nbd::NBD_DEFAULT_PORT, "ram"};
+File file;
+
+void setup() {
+    // connects to the server on first mount
+    SD.begin(drv);
+
+    file = SD.open("test");
+    Serial.println(file.size());
+}
+
+void loop() {}
+
+```
+
+If the export is read-only, the driver reports it as write protected and file writes fail.
+
+## Multiple Drives
 
 
 You can also use your own separate SDClass instances:
@@ -158,7 +187,7 @@ void loop() {}
 
 ```
 
-Here is an example of setting up a multi drive scenario using the MultiIO diver:
+Here is an example of setting up a multi drive scenario using the MultiIO driver:
 
 ```C++
 #include "SPI.h"
@@ -204,7 +233,7 @@ void loop() {}
 Requires a TinyUSB-capable board/core (e.g. RP2040, SAMD21/51, nRF52, ESP32-S2/S3) with `USE_TINYUSB` defined; bringing up the USB stack itself is left to the sketch, the same way `ArduinoSpiIO` leaves `SPI.begin()` to the sketch.
 
 
-# Documentaion
+# Documentation
 
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
 - [FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
