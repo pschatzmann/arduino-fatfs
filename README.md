@@ -10,7 +10,7 @@ Bill's library provides some alternative SPI drivers to access the SD functional
 
 I am providing the [FatFs library](http://elm-chan.org/fsw/ff/00index_e.html) developed by ChaN that I have converted to C++ header only so that we can flexibly support multiple data access drivers and scenarios at the same time.
 
-The advantage of this library is, that it provides quite a few __[configuration options](http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs)__ and has a flexible __[driver concept](docs/driver-overview.md)__, so that we can store the data potentially on the SD, in SPI RAM, RAM, PSRAM etc. 
+The advantage of this library is, that it provides quite a few __[configuration options](http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs)__ and has a flexible __[driver concept](docs/driver-overview.md)__, so that we can store the data potentially on a SD disk, in RAM, PSRAM, on remote devices etc. 
 
 
 # Documentation
