@@ -6,7 +6,9 @@
 
 #pragma once
 
+#include <cstring>
 #include <string>
+#include <vector>
 #include "fatfs.h"
 
 namespace fatfs {
@@ -44,13 +46,15 @@ class directory_iterator {
  public:
   directory_iterator() : end_flag(true) {}
   explicit directory_iterator(const std::string& rootPath)
+      : directory_iterator(get_fatfs(), rootPath) {}
+  /// Iterate the volume of the given FatFs instance (e.g. an SDClass volume)
+  directory_iterator(fatfs::FatFs* fsPtr, const std::string& rootPath)
       : root(rootPath), end_flag(false) {
-    auto fs = get_fatfs();
-    if (!fs) {
+    if (!fsPtr) {
       end_flag = true;
       return;
     }
-    this->fs = fs;
+    this->fs = fsPtr;
 
     // Open directory using FatFs API
     FRESULT res = fs->f_opendir(&dir, root.empty() ? "/" : root.c_str());
@@ -137,13 +141,15 @@ class recursive_directory_iterator {
  public:
   recursive_directory_iterator() : end_flag(true) {}
   explicit recursive_directory_iterator(const std::string& rootPath)
+      : recursive_directory_iterator(get_fatfs(), rootPath) {}
+  /// Iterate the volume of the given FatFs instance (e.g. an SDClass volume)
+  recursive_directory_iterator(fatfs::FatFs* fsPtr, const std::string& rootPath)
       : end_flag(false) {
-    auto fs = get_fatfs();
-    if (!fs) {
+    if (!fsPtr) {
       end_flag = true;
       return;
     }
-    this->fs = fs;
+    this->fs = fsPtr;
 
     // Start with root directory
     if (!push_directory(rootPath.empty() ? "/" : rootPath)) {
@@ -250,4 +256,17 @@ class recursive_directory_iterator {
   bool end_flag{true};
 };
 
-}  // namespace fatfs_fs
+}  // namespace fatfs
+
+// SDClass member definitions: iterate the volume of this SDClass instance
+#if FF_ARDUINO_LEVEL == 1
+inline fatfs::directory_iterator fatfs::SDClass::directoryIterator(
+    const char* path) {
+  return fatfs::directory_iterator(getFatFs(), path);
+}
+
+inline fatfs::recursive_directory_iterator
+fatfs::SDClass::recursiveDirectoryIterator(const char* path) {
+  return fatfs::recursive_directory_iterator(getFatFs(), path);
+}
+#endif

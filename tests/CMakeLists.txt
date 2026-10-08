@@ -19,6 +19,7 @@ endfunction()
 
 fatfs_add_test(test_ramio_diskio)
 fatfs_add_test(test_sdclass_ramio)
+fatfs_add_test(test_directory_iterator)
 fatfs_add_test(test_multiio)
 fatfs_add_test(test_streamio)
 fatfs_add_test(test_fileio)

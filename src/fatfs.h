@@ -238,6 +238,10 @@ class File : public Stream {
  * @ingroup sd
  */
 
+// Directory iterators are defined in filesystem.h (include it to use them)
+class directory_iterator;
+class recursive_directory_iterator;
+
 class SDClass {
  public:
   SDClass() {
@@ -353,6 +357,13 @@ class SDClass {
 
   /// Access to low level FatFS api to use functionality not exposed by this API
   FatFs *getFatFs() { return &fat_fs; }
+
+  /// Non-recursive directory iterator over this volume (defined in filesystem.h)
+  fatfs::directory_iterator directoryIterator(const char *path = "/");
+
+  /// Recursive directory iterator over this volume (defined in filesystem.h)
+  fatfs::recursive_directory_iterator recursiveDirectoryIterator(
+      const char *path = "/");
 
   /// Set the driver
   void setDriver(IO &driver) { fat_fs.setDriver(driver); }
