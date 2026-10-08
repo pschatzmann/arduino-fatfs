@@ -19,7 +19,7 @@ For Arduino, you can download the library as zip and call Include Library -> Add
 
 ```bash
 cd ~/Documents/Arduino/libraries
-git clone https://github.com/pschatzmann/arduino-fatfs.git
+git clone https://github.com/pschatzmann/TinyFATFS.git
 ```
 
 # Documentation
