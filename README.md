@@ -19,7 +19,7 @@ The advantage of this library is, that it provides quite a few __[configuration 
 - [Driver Overview](docs/driver-overview.md)
 - [Driver Code Examples](docs/driver-examples.md)
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
-- [FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
+- [Original FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
 - Class Documentation
     - [Arduino API](https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html)
     - [FatFs API](https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html)
