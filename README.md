@@ -13,9 +13,19 @@ I am providing the [FatFs library](http://elm-chan.org/fsw/ff/00index_e.html) de
 The advantage of this library is, that it provides quite a few __[configuration options](http://elm-chan.org/fsw/ff/doc/config.html#use_mkfs)__ and has a flexible __[driver concept](docs/driver-overview.md)__, so that we can store the data potentially on a SD disk, in RAM, PSRAM, on remote devices etc. 
 
 
+# Installation
+
+For Arduino, you can download the library as zip and call Include Library -> Add .ZIP Library. Or you can git clone this project into the Arduino libraries folder, e.g. with
+
+```bash
+cd ~/Documents/Arduino/libraries
+git clone https://github.com/pschatzmann/arduino-fatfs.git
+```
+
 # Documentation
 
 - [Supported FAT Versions](docs/supported-fat-versions.md)
+- [Desktop Build and Tests](docs/desktop-build.md)
 - [Driver Overview](docs/driver-overview.md)
 - [Driver Code Examples](docs/driver-examples.md)
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
