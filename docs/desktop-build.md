@@ -11,7 +11,7 @@ The library can also be built and executed on a desktop (Linux, macOS, Windows) 
 ## Build
 
 ```bash
-cd arduino-fatfs
+cd TinyFATFS
 mkdir build
 cd build
 cmake ..

@@ -31,10 +31,10 @@ git clone https://github.com/pschatzmann/TinyFATFS.git
 - [Arduino SD API](https://www.arduino.cc/reference/en/libraries/sd/)
 - [Original FatFS Documentation](http://elm-chan.org/fsw/ff/00index_e.html)
 - Class Documentation
-    - [Arduino API](https://pschatzmann.github.io/arduino-fatfs/html/group__sd.html)
-    - [FatFs API](https://pschatzmann.github.io/arduino-fatfs/html/classfatfs_1_1FatFs.html)
-    - [Directory Iterators](https://pschatzmann.github.io/arduino-fatfs/html/group__iterator.html)
-    - [Drivers](https://pschatzmann.github.io/arduino-fatfs/html/group__io.html)
+    - [Arduino API](https://pschatzmann.github.io/TinyFATFS/html/group__sd.html)
+    - [FatFs API](https://pschatzmann.github.io/TinyFATFS/html/classfatfs_1_1FatFs.html)
+    - [Directory Iterators](https://pschatzmann.github.io/TinyFATFS/html/group__iterator.html)
+    - [Drivers](https://pschatzmann.github.io/TinyFATFS/html/group__io.html)
 
 # License
 
