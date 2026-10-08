@@ -14,7 +14,7 @@
 */
 
 /**
- * @defgroup main
+ * @defgroup main Arduino FatFs
  * @brief Arduino fatfs library
  * @author Phil Schatzmann
 

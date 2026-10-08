@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7eesp32sdmmcio_0',['~Esp32SdmmcIO',['../classfatfs_1_1Esp32SdmmcIO.html#a71be62fa8e08ce2c702c10316e62623e',1,'fatfs::Esp32SdmmcIO']]]
+  ['totalsectors_0',['totalSectors',['../classfatfs_1_1Esp32SdmmcIO.html#a8a71a15a6dca25afc1156af84b17de5c',1,'fatfs::Esp32SdmmcIO']]]
 ];

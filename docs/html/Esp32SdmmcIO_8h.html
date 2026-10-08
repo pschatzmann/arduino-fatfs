@@ -82,8 +82,8 @@ $(function() {
 <p>FatFs driver for ESP32 SDMMC interface using low-level API.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;BaseIO.h&quot;</code><br />
-<code>#include &lt;driver/sdmmc_host.h&gt;</code><br />
 <code>#include &lt;driver/sdmmc_defs.h&gt;</code><br />
+<code>#include &lt;driver/sdmmc_host.h&gt;</code><br />
 <code>#include &lt;sdmmc_cmd.h&gt;</code><br />
 <code>#include &quot;sdcommon.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -91,42 +91,32 @@ Include dependency graph for Esp32SdmmcIO.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="Esp32SdmmcIO_8h__incl.png" border="0" usemap="#asrc_2driver_2Esp32SdmmcIO_8h" alt=""/></div>
 <map name="asrc_2driver_2Esp32SdmmcIO_8h" id="asrc_2driver_2Esp32SdmmcIO_8h">
-<area shape="rect" title="FatFs driver for ESP32 SDMMC interface using low&#45;level API." alt="" coords="518,5,719,31"/>
-<area shape="rect" href="BaseIO_8h_source.html" title=" " alt="" coords="252,79,332,104"/>
-<area shape="poly" title=" " alt="" coords="567,33,346,81,345,76,566,28"/>
-<area shape="rect" title=" " alt="" coords="357,79,515,104"/>
-<area shape="poly" title=" " alt="" coords="590,33,480,76,478,71,588,28"/>
-<area shape="rect" title=" " alt="" coords="539,79,698,104"/>
-<area shape="poly" title=" " alt="" coords="621,31,621,65,616,65,616,31"/>
-<area shape="rect" title=" " alt="" coords="723,79,840,104"/>
-<area shape="poly" title=" " alt="" coords="646,28,743,71,741,75,644,33"/>
-<area shape="rect" href="sdcommon_8h_source.html" title=" " alt="" coords="864,79,971,104"/>
-<area shape="poly" title=" " alt="" coords="667,28,856,73,855,78,666,33"/>
-<area shape="rect" href="IO_8h_source.html" title=" " alt="" coords="268,152,316,177"/>
-<area shape="poly" title=" " alt="" coords="295,104,295,138,289,138,289,104"/>
-<area shape="rect" href="ffdef_8h_source.html" title=" " alt="" coords="5,299,93,324"/>
-<area shape="poly" title=" " alt="" coords="274,180,82,294,79,289,271,175"/>
-<area shape="rect" href="ff_8h_source.html" title=" " alt="" coords="258,225,326,251"/>
-<area shape="poly" title=" " alt="" coords="288,178,286,212,281,212,282,178"/>
-<area shape="rect" href="ff_2ffconf_8h_source.html" title=" " alt="" coords="95,372,166,397"/>
-<area shape="poly" title=" " alt="" coords="64,322,109,361,105,365,61,326"/>
-<area shape="poly" title=" " alt="" coords="296,225,298,191,303,191,302,225"/>
-<area shape="poly" title=" " alt="" coords="258,252,103,297,101,292,257,247"/>
-<area shape="poly" title=" " alt="" coords="259,248,207,267,181,281,159,300,143,328,136,358,131,357,138,326,155,297,178,277,205,262,257,243"/>
-<area shape="rect" title=" " alt="" coords="169,299,234,324"/>
-<area shape="poly" title=" " alt="" coords="279,253,229,292,225,288,276,249"/>
-<area shape="rect" href="ff-inc_8h_source.html" title=" " alt="" coords="259,299,325,324"/>
-<area shape="poly" title=" " alt="" coords="288,251,286,285,281,285,282,251"/>
-<area shape="rect" href="ffsystem-inc_8h_source.html" title=" " alt="" coords="349,299,464,324"/>
-<area shape="poly" title=" " alt="" coords="305,248,370,289,368,294,302,253"/>
-<area shape="rect" href="ffunicode-inc_8h_source.html" title=" " alt="" coords="489,299,607,324"/>
-<area shape="poly" title=" " alt="" coords="327,248,487,293,486,298,326,253"/>
-<area shape="poly" title=" " alt="" coords="267,326,171,369,168,364,265,322"/>
-<area shape="poly" title=" " alt="" coords="296,298,298,264,303,265,302,299"/>
-<area shape="rect" title=" " alt="" coords="255,372,329,397"/>
-<area shape="poly" title=" " alt="" coords="295,324,295,358,289,358,289,324"/>
-<area shape="poly" title=" " alt="" coords="393,301,328,260,331,255,396,296"/>
-<area shape="poly" title=" " alt="" coords="513,301,339,253,340,248,514,296"/>
+<area shape="rect" title="FatFs driver for ESP32 SDMMC interface using low&#45;level API." alt="" coords="366,5,567,31"/>
+<area shape="rect" href="BaseIO_8h_source.html" title=" " alt="" coords="100,79,180,104"/>
+<area shape="poly" title=" " alt="" coords="415,33,194,81,193,76,414,28"/>
+<area shape="rect" title=" " alt="" coords="205,79,363,104"/>
+<area shape="poly" title=" " alt="" coords="438,33,328,76,326,71,436,28"/>
+<area shape="rect" title=" " alt="" coords="387,79,546,104"/>
+<area shape="poly" title=" " alt="" coords="469,31,469,65,464,65,464,31"/>
+<area shape="rect" title=" " alt="" coords="571,79,688,104"/>
+<area shape="poly" title=" " alt="" coords="494,28,591,71,589,75,492,33"/>
+<area shape="rect" href="sdcommon_8h_source.html" title=" " alt="" coords="712,79,819,104"/>
+<area shape="poly" title=" " alt="" coords="515,28,704,73,703,78,514,33"/>
+<area shape="rect" href="IO_8h_source.html" title=" " alt="" coords="116,152,164,177"/>
+<area shape="poly" title=" " alt="" coords="143,104,143,138,137,138,137,104"/>
+<area shape="rect" title=" " alt="" coords="5,225,67,251"/>
+<area shape="poly" title=" " alt="" coords="125,180,66,219,63,215,122,175"/>
+<area shape="rect" href="ffdef_8h_source.html" title=" " alt="" coords="55,299,143,324"/>
+<area shape="poly" title=" " alt="" coords="139,179,108,286,103,285,134,177"/>
+<area shape="rect" href="ff_8h_source.html" title=" " alt="" coords="142,225,210,251"/>
+<area shape="poly" title=" " alt="" coords="141,177,158,213,153,215,137,179"/>
+<area shape="rect" href="ffconf_8h_source.html" title=" " alt="" coords="103,372,174,397"/>
+<area shape="poly" title=" " alt="" coords="108,323,128,359,123,361,103,326"/>
+<area shape="poly" title=" " alt="" coords="175,226,158,190,163,188,179,224"/>
+<area shape="poly" title=" " alt="" coords="165,253,123,291,120,287,162,249"/>
+<area shape="poly" title=" " alt="" coords="176,252,157,325,148,360,143,358,152,323,171,250"/>
+<area shape="rect" title=" " alt="" coords="218,299,283,324"/>
+<area shape="poly" title=" " alt="" coords="190,249,230,287,227,291,186,253"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

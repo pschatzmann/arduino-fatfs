@@ -71,6 +71,11 @@ $(function() {
 <div class="contents">
 <div class="textblock">Here is a list of all documented functions with links to the class documentation for each member:</div>
 
+<h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>ArduinoSpiIO()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiIO.html#ad1f980e50fb42bf5e1261c7aa01c1224">fatfs::ArduinoSpiIO</a></li>
+</ul>
+
+
 <h3><a id="index_b" name="index_b"></a>- b -</h3><ul>
 <li>begin()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a5d1844e0ce25bc812992db8136d16ce8">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1SDClass.html#a39f9ddc91156923efd06605b464964b1">fatfs::SDClass</a></li>
 </ul>
@@ -85,11 +90,11 @@ $(function() {
 
 
 <h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
-<li>disk_initialize()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a93e54bf48c983639e94cbe606cc755db">fatfs::Esp32SdmmcIO</a></li>
-<li>disk_ioctl()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a3cde19e38734e7422f62965121fbf575">fatfs::Esp32SdmmcIO</a></li>
-<li>disk_read()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#aabe11a837e062594a30672a0e99a00a6">fatfs::Esp32SdmmcIO</a></li>
-<li>disk_status()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a63b9a2c2b61b6d49690d61f07ba2eec1">fatfs::Esp32SdmmcIO</a></li>
-<li>disk_write()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a2bd43de361737b60db34a65e36f46382">fatfs::Esp32SdmmcIO</a></li>
+<li>disk_initialize()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a93e54bf48c983639e94cbe606cc755db">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1NBDClientIO.html#a50482341760d1db497c37c9f93b7e906">fatfs::NBDClientIO</a></li>
+<li>disk_ioctl()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a3cde19e38734e7422f62965121fbf575">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1NBDClientIO.html#a3f1aa207603a84425c5ec485783644ce">fatfs::NBDClientIO</a></li>
+<li>disk_read()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#aabe11a837e062594a30672a0e99a00a6">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1NBDClientIO.html#a0be9225c06d0235fe9fe9a5a1ca3cf6a">fatfs::NBDClientIO</a></li>
+<li>disk_status()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a63b9a2c2b61b6d49690d61f07ba2eec1">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1NBDClientIO.html#a329122cb10ba9b8f5e642d02bde1d9e9">fatfs::NBDClientIO</a></li>
+<li>disk_write()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a2bd43de361737b60db34a65e36f46382">fatfs::Esp32SdmmcIO</a>, <a class="el" href="classfatfs_1_1NBDClientIO.html#a7b61a96b2bfb5e9bc716a0bb9056591d">fatfs::NBDClientIO</a></li>
 </ul>
 
 
@@ -142,6 +147,7 @@ $(function() {
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
 <li>getCard()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#a812d427db20a53b027d6b01339a5f765">fatfs::Esp32SdmmcIO</a></li>
+<li>getClient()&#160;:&#160;<a class="el" href="classfatfs_1_1NBDClientIO.html#a4c314c46ba6ff3658caf9359281bf934">fatfs::NBDClientIO</a></li>
 <li>getcwd()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a66cd303525b8815a6d075c3068223e26">fatfs::SDClass</a></li>
 <li>getDIR()&#160;:&#160;<a class="el" href="classfatfs_1_1File.html#aac930785534e4a4bfac19a5425035367">fatfs::File</a></li>
 <li>getDriver()&#160;:&#160;<a class="el" href="classfatfs_1_1FatFs.html#ae8322ec346e375db4a4d060b570e969c">fatfs::FatFs</a>, <a class="el" href="classfatfs_1_1File.html#af0fbd207ff7da290dbcfc4220aaa21ed">fatfs::File</a>, <a class="el" href="classfatfs_1_1SDClass.html#abe1cde4e8b48bb5d66e7aec04d218d83">fatfs::SDClass</a></li>
@@ -160,12 +166,18 @@ $(function() {
 <h3><a id="index_m" name="index_m"></a>- m -</h3><ul>
 <li>mkdir()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a1c9d56862f52bf4c5388b918fdd5f4b1">fatfs::SDClass</a></li>
 <li>mkfs()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a5a9e12d066073cd76406d056c7f9daf2">fatfs::SDClass</a></li>
-<li>mount()&#160;:&#160;<a class="el" href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">fatfs::IO</a>, <a class="el" href="classfatfs_1_1MultiIO.html#aba9e355b466152bbe4eb38508dd00c5a">fatfs::MultiIO</a>, <a class="el" href="classfatfs_1_1RamIO.html#a8331946e7fd5f882a6b00856db1a423a">fatfs::RamIO</a></li>
+<li>mount()&#160;:&#160;<a class="el" href="classfatfs_1_1IO.html#a0917f44023aba90becc2fdd8f6a0a4ec">fatfs::IO</a>, <a class="el" href="classfatfs_1_1MultiIO.html#a49d61683cf29c9a19347f9b737734020">fatfs::MultiIO</a>, <a class="el" href="classfatfs_1_1RamIO.html#a111f1532db81544176c41c4e56861ce7">fatfs::RamIO</a></li>
+</ul>
+
+
+<h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>NBDClientIO()&#160;:&#160;<a class="el" href="classfatfs_1_1NBDClientIO.html#ad0bc435209210b73348abdd6351a50f2">fatfs::NBDClientIO</a></li>
 </ul>
 
 
 <h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
 <li>open()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a65eed368dd00b0bcc4c3eb7a9cf02d25">fatfs::SDClass</a></li>
+<li>openNextFile()&#160;:&#160;<a class="el" href="classfatfs_1_1File.html#a1486d929bfe250d986732d4447852c67">fatfs::File</a></li>
 </ul>
 
 
@@ -176,14 +188,19 @@ $(function() {
 
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
 <li>read()&#160;:&#160;<a class="el" href="classfatfs_1_1File.html#af993177e068fd4b8e356475aaecf6c98">fatfs::File</a></li>
+<li>read_sd_status()&#160;:&#160;<a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#ab05e08dca55d9bc1b64cb40009ef85d0">fatfs::Esp32SdmmcIO</a></li>
+<li>readRange()&#160;:&#160;<a class="el" href="classfatfs_1_1NBDClientIO.html#a344b342e19f1b0452abdcf1db460d6c4">fatfs::NBDClientIO</a></li>
 <li>remove()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#afcc8463314ce1c3755dca187837355e1">fatfs::SDClass</a></li>
+<li>rmdir()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a3801935632e077d083a72c3b9f1850b7">fatfs::SDClass</a></li>
 </ul>
 
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
-<li>set_cs()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiIO.html#afb2f2b2b331e7de86cdaf22b585d08c8">fatfs::ArduinoSpiIO</a></li>
+<li>set_cs()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiExtIO.html#a4bb0046d64e391529b03a95a108bb3d7">fatfs::ArduinoSpiExtIO&lt; GPIOClass &gt;</a>, <a class="el" href="classfatfs_1_1ArduinoSpiIO.html#a93110bcfed675bcf73c3a0e982841b6a">fatfs::ArduinoSpiIO</a></li>
 <li>set_spi_fast()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiIO.html#afb5f1e40502e47665072a2c683304cb4">fatfs::ArduinoSpiIO</a></li>
 <li>setDriver()&#160;:&#160;<a class="el" href="classfatfs_1_1SDClass.html#a0fdb4dfc643332b0c49b1738c43177b6">fatfs::SDClass</a></li>
+<li>setSpeed()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiIO.html#a24f5c005318bff566d5045d7005fe5c9">fatfs::ArduinoSpiIO</a></li>
+<li>setSPI()&#160;:&#160;<a class="el" href="classfatfs_1_1ArduinoSpiExtIO.html#aa157099b2df8be2e0b14c6c3d8a4ec2e">fatfs::ArduinoSpiExtIO&lt; GPIOClass &gt;</a>, <a class="el" href="classfatfs_1_1ArduinoSpiIO.html#aa157099b2df8be2e0b14c6c3d8a4ec2e">fatfs::ArduinoSpiIO</a></li>
 </ul>
 
 
@@ -193,8 +210,13 @@ $(function() {
 
 
 <h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
-<li>un_mount()&#160;:&#160;<a class="el" href="classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856">fatfs::IO</a>, <a class="el" href="classfatfs_1_1MultiIO.html#a38ff93fdfe0c9d2cf1aa57e14d63a61f">fatfs::MultiIO</a></li>
+<li>un_mount()&#160;:&#160;<a class="el" href="classfatfs_1_1IO.html#a15d3b5c681c36305058ac5c2e24590ab">fatfs::IO</a>, <a class="el" href="classfatfs_1_1MultiIO.html#a65f2f5d7d0e968b8f8003823f5f193b3">fatfs::MultiIO</a></li>
 <li>update_stat()&#160;:&#160;<a class="el" href="classfatfs_1_1File.html#aded768c258e6d516fc6d54fbcc760212">fatfs::File</a></li>
+</ul>
+
+
+<h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
+<li>writeRange()&#160;:&#160;<a class="el" href="classfatfs_1_1NBDClientIO.html#a5ef97c4557839b572906a7c42675cd31">fatfs::NBDClientIO</a></li>
 </ul>
 
 

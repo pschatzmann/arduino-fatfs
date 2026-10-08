@@ -87,6 +87,7 @@ class IO {
                              UINT count) = 0;
   virtual DRESULT disk_ioctl(BYTE pdrv, ioctl_cmd_t cmd, void* buff) = 0;
 
+  /// FatFs volume object used when this driver is mounted
   FATFS fatfs;
 };
 

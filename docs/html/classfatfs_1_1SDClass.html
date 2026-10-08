@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfatfs_1_1SDClass-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fatfs::SDClass Class Reference<div class="ingroups"><a class="el" href="group__main.html">Main</a> &raquo; <a class="el" href="group__sd.html">sd</a></div></div></div>
+  <div class="headertitle"><div class="title">fatfs::SDClass Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino FatFs</a> &raquo; <a class="el" href="group__sd.html">sd</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -152,6 +152,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (const Str
 <tr class="separator:a04ef1c38b1a9f082126c22b5d1d32359"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3801935632e077d083a72c3b9f1850b7" id="r_a3801935632e077d083a72c3b9f1850b7"><td class="memItemLeft" align="right" valign="top"><a id="a3801935632e077d083a72c3b9f1850b7" name="a3801935632e077d083a72c3b9f1850b7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const char *filepath)</td></tr>
+<tr class="memdesc:a3801935632e077d083a72c3b9f1850b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an empty directory. Regular files are not removed. <br /></td></tr>
 <tr class="separator:a3801935632e077d083a72c3b9f1850b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe89eb4445e12db4ebc35097c99cad10" id="r_abe89eb4445e12db4ebc35097c99cad10"><td class="memItemLeft" align="right" valign="top"><a id="abe89eb4445e12db4ebc35097c99cad10" name="abe89eb4445e12db4ebc35097c99cad10"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const String &amp;filepath)</td></tr>
@@ -172,7 +173,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mkfs</b> (int workBuf
 <tr class="separator:a5a9e12d066073cd76406d056c7f9daf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2459811363dba06fec0a95ac3a656c8" id="r_ab2459811363dba06fec0a95ac3a656c8"><td class="memItemLeft" align="right" valign="top"><a id="ab2459811363dba06fec0a95ac3a656c8" name="ab2459811363dba06fec0a95ac3a656c8"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> ()</td></tr>
-<tr class="memdesc:ab2459811363dba06fec0a95ac3a656c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">get free space in bytes <br /></td></tr>
+<tr class="memdesc:ab2459811363dba06fec0a95ac3a656c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">get free space in bytes (uses a temporary <a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> bound to this volume) <br /></td></tr>
 <tr class="separator:ab2459811363dba06fec0a95ac3a656c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c053f4dbb799c9b90096d9f957cd52" id="r_a47c053f4dbb799c9b90096d9f957cd52"><td class="memItemLeft" align="right" valign="top"><a id="a47c053f4dbb799c9b90096d9f957cd52" name="a47c053f4dbb799c9b90096d9f957cd52"></a>
 <a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getFatFs</b> ()</td></tr>

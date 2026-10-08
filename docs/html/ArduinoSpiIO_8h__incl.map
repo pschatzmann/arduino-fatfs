@@ -1,0 +1,26 @@
+<map id="src/driver/ArduinoSpiIO.h" name="src/driver/ArduinoSpiIO.h">
+<area shape="rect" id="Node000001" title="FatFs driver for an SD card attached via the Arduino SPI API." alt="" coords="94,5,277,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="9,79,76,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,33,79,75,77,70,161,28"/>
+<area shape="rect" id="Node000003" href="$BaseIO_8h_source.html" title=" " alt="" coords="100,79,180,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,32,157,69,152,66,176,30"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="205,79,259,104"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="195,30,219,66,215,69,191,32"/>
+<area shape="rect" id="Node000011" href="$sdcommon_8h_source.html" title=" " alt="" coords="284,79,391,104"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="211,28,301,70,299,75,209,33"/>
+<area shape="rect" id="Node000004" href="$IO_8h_source.html" title=" " alt="" coords="116,152,164,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="143,104,143,138,137,138,137,104"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,225,67,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="125,180,66,219,63,215,122,175"/>
+<area shape="rect" id="Node000006" href="$ffdef_8h_source.html" title=" " alt="" coords="55,299,143,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="139,179,108,286,103,285,134,177"/>
+<area shape="rect" id="Node000008" href="$ff_8h_source.html" title=" " alt="" coords="142,225,210,251"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="141,177,158,213,153,215,137,179"/>
+<area shape="rect" id="Node000007" href="$ffconf_8h_source.html" title=" " alt="" coords="103,372,174,397"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="108,323,128,359,123,361,103,326"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="175,226,158,190,163,188,179,224"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="165,253,123,291,120,287,162,249"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="176,252,157,325,148,360,143,358,152,323,171,250"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="218,299,283,324"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="190,249,230,287,227,291,186,253"/>
+</map>

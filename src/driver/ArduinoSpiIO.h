@@ -1,9 +1,7 @@
 /**
- ******************************************************************************
- * @file    user_diskio_spi.c
- * @brief   This file contains the implementation of the user_diskio_spi FatFs
- *          driver.
- ******************************************************************************
+ * @file ArduinoSpiIO.h
+ * @brief FatFs driver for an SD card attached via the Arduino SPI API.
+ *
  * Portions copyright (C) 2014, ChaN, all rights reserved.
  * Portions copyright (C) 2017, kiwih, all rights reserved.
  *
@@ -42,20 +40,24 @@ namespace fatfs {
 
 class ArduinoSpiIO : public BaseIO {
  public:
+  /// Uses the SPI object with the CS pin (-1: no CS pin handled by the driver)
   ArduinoSpiIO(int cs = -1, SPIClass &spi = SPI,
                uint32_t speedHz = FF_SPI_SPEED_FAST) {
     setSPI(cs, spi, speedHz);
   }
+  /// Uses the SPI object without a CS pin
   ArduinoSpiIO(SPIClass &spi, uint32_t speedHz = FF_SPI_SPEED_FAST) {
     setSPI(spi, speedHz);
   }
 
+  /// Assigns the SPI object without a CS pin
   void setSPI(SPIClass &spi = SPI, uint32_t speedHz = FF_SPI_SPEED_FAST) {
     this->p_spi = &spi;
     this->cs = -1;
     setSpeed(speedHz);
   }
 
+  /// Assigns the SPI object and the CS pin
   void setSPI(int cs = -1, SPIClass &spi = SPI,
               uint32_t speedHz = FF_SPI_SPEED_FAST) {
     this->p_spi = &spi;

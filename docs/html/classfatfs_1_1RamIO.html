@@ -78,7 +78,7 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfatfs_1_1RamIO-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fatfs::RamIO Class Reference<div class="ingroups"><a class="el" href="group__main.html">Main</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
+  <div class="headertitle"><div class="title">fatfs::RamIO Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino FatFs</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -114,9 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f0769f6b705b54daf60592e71cd2640" id="r_a5f0769f6b705b54daf60592e71cd2640"><td class="memItemLeft" align="right" valign="top"><a id="a5f0769f6b705b54daf60592e71cd2640" name="a5f0769f6b705b54daf60592e71cd2640"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RamIO</b> (int sectorCount, int sectorSize=FF_MAX_SS)</td></tr>
 <tr class="separator:a5f0769f6b705b54daf60592e71cd2640"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8331946e7fd5f882a6b00856db1a423a" id="r_a8331946e7fd5f882a6b00856db1a423a"><td class="memItemLeft" align="right" valign="top">FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1RamIO.html#a8331946e7fd5f882a6b00856db1a423a">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs) override</td></tr>
-<tr class="memdesc:a8331946e7fd5f882a6b00856db1a423a"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system - implementation at end of header to avoid recursive include  <br /></td></tr>
-<tr class="separator:a8331946e7fd5f882a6b00856db1a423a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a111f1532db81544176c41c4e56861ce7" id="r_a111f1532db81544176c41c4e56861ce7"><td class="memItemLeft" align="right" valign="top">FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1RamIO.html#a111f1532db81544176c41c4e56861ce7">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs, BYTE pdrv=0) override</td></tr>
+<tr class="memdesc:a111f1532db81544176c41c4e56861ce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system at the given logical drive number (0..FF_VOLUMES-1) - implementation at end of header to avoid recursive include  <br /></td></tr>
+<tr class="separator:a111f1532db81544176c41c4e56861ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa06aa84dde20636439d0ffe29fb8b2d" id="r_afa06aa84dde20636439d0ffe29fb8b2d"><td class="memItemLeft" align="right" valign="top">DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1RamIO.html#afa06aa84dde20636439d0ffe29fb8b2d">disk_initialize</a> (BYTE pdrv) override</td></tr>
 <tr class="separator:afa06aa84dde20636439d0ffe29fb8b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07e302beda551ce6b813d960186fe167" id="r_a07e302beda551ce6b813d960186fe167"><td class="memItemLeft" align="right" valign="top">DSTATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1RamIO.html#a07e302beda551ce6b813d960186fe167">disk_status</a> (BYTE pdrv) override</td></tr>
@@ -127,14 +127,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac7f381cf84a3249170e5729cbe23928a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83538c4d6fc5fcf2bec7dceed8261906" id="r_a83538c4d6fc5fcf2bec7dceed8261906"><td class="memItemLeft" align="right" valign="top">DRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1RamIO.html#a83538c4d6fc5fcf2bec7dceed8261906">disk_ioctl</a> (BYTE pdrv, ioctl_cmd_t cmd, void *buffer) override</td></tr>
 <tr class="separator:a83538c4d6fc5fcf2bec7dceed8261906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a789ece18313e9462ce3284944cc02856" id="r_a789ece18313e9462ce3284944cc02856"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
-<tr class="memdesc:a789ece18313e9462ce3284944cc02856"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system - implementation at end of header to avoid recursive include  <br /></td></tr>
-<tr class="separator:a789ece18313e9462ce3284944cc02856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d3b5c681c36305058ac5c2e24590ab" id="r_a15d3b5c681c36305058ac5c2e24590ab"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a15d3b5c681c36305058ac5c2e24590ab">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs, BYTE pdrv=0)</td></tr>
+<tr class="memdesc:a15d3b5c681c36305058ac5c2e24590ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system at the given logical drive number - implementation at end of header to avoid recursive include  <br /></td></tr>
+<tr class="separator:a15d3b5c681c36305058ac5c2e24590ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a856b5ea8bf96733be82333e091918bb0" id="r_a856b5ea8bf96733be82333e091918bb0"><td class="memItemLeft" align="right" valign="top"><a id="a856b5ea8bf96733be82333e091918bb0" name="a856b5ea8bf96733be82333e091918bb0"></a>
 <a class="el" href="structfatfs_1_1FATFS.html">FATFS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fatfs</b></td></tr>
+<tr class="memdesc:a856b5ea8bf96733be82333e091918bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm-chan.org/fsw/ff/00index_e.html.">FatFs</a> volume object used when this driver is mounted. <br /></td></tr>
 <tr class="separator:a856b5ea8bf96733be82333e091918bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -358,8 +359,8 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
 
 </div>
 </div>
-<a id="a8331946e7fd5f882a6b00856db1a423a" name="a8331946e7fd5f882a6b00856db1a423a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8331946e7fd5f882a6b00856db1a423a">&#9670;&#160;</a></span>mount()</h2>
+<a id="a111f1532db81544176c41c4e56861ce7" name="a111f1532db81544176c41c4e56861ce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a111f1532db81544176c41c4e56861ce7">&#9670;&#160;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -371,8 +372,18 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
           <td class="memname">FRESULT fatfs::RamIO::mount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;&#160;</td>
-          <td class="paramname"><em>fs</em></td><td>)</td>
+          <td class="paramname"><em>fs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -382,14 +393,14 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
 </table>
 </div><div class="memdoc">
 
-<p>mount the file system - implementation at end of header to avoid recursive include </p>
+<p>mount the file system at the given logical drive number (0..FF_VOLUMES-1) - implementation at end of header to avoid recursive include </p>
 
-<p>Reimplemented from <a class="el" href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">fatfs::IO</a>.</p>
+<p>Reimplemented from <a class="el" href="classfatfs_1_1IO.html#a0917f44023aba90becc2fdd8f6a0a4ec">fatfs::IO</a>.</p>
 
 </div>
 </div>
-<a id="a789ece18313e9462ce3284944cc02856" name="a789ece18313e9462ce3284944cc02856"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a789ece18313e9462ce3284944cc02856">&#9670;&#160;</a></span>un_mount()</h2>
+<a id="a15d3b5c681c36305058ac5c2e24590ab" name="a15d3b5c681c36305058ac5c2e24590ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d3b5c681c36305058ac5c2e24590ab">&#9670;&#160;</a></span>un_mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,8 +412,18 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
           <td class="memname">FRESULT fatfs::IO::un_mount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;&#160;</td>
-          <td class="paramname"><em>fs</em></td><td>)</td>
+          <td class="paramname"><em>fs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -412,9 +433,9 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>work_buffer</b> 
 </table>
 </div><div class="memdoc">
 
-<p>unmount the file system - implementation at end of header to avoid recursive include </p>
+<p>unmount the file system at the given logical drive number - implementation at end of header to avoid recursive include </p>
 
-<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#a38ff93fdfe0c9d2cf1aa57e14d63a61f">fatfs::MultiIO</a>.</p>
+<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#a65f2f5d7d0e968b8f8003823f5f193b3">fatfs::MultiIO</a>.</p>
 
 </div>
 </div>

@@ -76,9 +76,10 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classfatfs_1_1Esp32SdmmcIO-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fatfs::Esp32SdmmcIO Class Reference<div class="ingroups"><a class="el" href="group__main.html">Main</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
+  <div class="headertitle"><div class="title">fatfs::Esp32SdmmcIO Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino FatFs</a> &raquo; <a class="el" href="group__io.html">IO</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -172,18 +173,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memitem:adaa9093488f24e5632a4738dfbf2adfb" id="r_adaa9093488f24e5632a4738dfbf2adfb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1Esp32SdmmcIO.html#adaa9093488f24e5632a4738dfbf2adfb">getFreqKHz</a> () const</td></tr>
 <tr class="memdesc:adaa9093488f24e5632a4738dfbf2adfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get card frequency in kHz.  <br /></td></tr>
 <tr class="separator:adaa9093488f24e5632a4738dfbf2adfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94ba9b7008533195be252507facba6ad" id="r_a94ba9b7008533195be252507facba6ad"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
-<tr class="memdesc:a94ba9b7008533195be252507facba6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system - implementation at end of header to avoid recursive include  <br /></td></tr>
-<tr class="separator:a94ba9b7008533195be252507facba6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a789ece18313e9462ce3284944cc02856" id="r_a789ece18313e9462ce3284944cc02856"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a789ece18313e9462ce3284944cc02856">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs)</td></tr>
-<tr class="memdesc:a789ece18313e9462ce3284944cc02856"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system - implementation at end of header to avoid recursive include  <br /></td></tr>
-<tr class="separator:a789ece18313e9462ce3284944cc02856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0917f44023aba90becc2fdd8f6a0a4ec" id="r_a0917f44023aba90becc2fdd8f6a0a4ec"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a0917f44023aba90becc2fdd8f6a0a4ec">mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs, BYTE pdrv=0)</td></tr>
+<tr class="memdesc:a0917f44023aba90becc2fdd8f6a0a4ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">mount the file system at the given logical drive number (0..FF_VOLUMES-1) - implementation at end of header to avoid recursive include  <br /></td></tr>
+<tr class="separator:a0917f44023aba90becc2fdd8f6a0a4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d3b5c681c36305058ac5c2e24590ab" id="r_a15d3b5c681c36305058ac5c2e24590ab"><td class="memItemLeft" align="right" valign="top">virtual FRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1IO.html#a15d3b5c681c36305058ac5c2e24590ab">un_mount</a> (<a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;fs, BYTE pdrv=0)</td></tr>
+<tr class="memdesc:a15d3b5c681c36305058ac5c2e24590ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">unmount the file system at the given logical drive number - implementation at end of header to avoid recursive include  <br /></td></tr>
+<tr class="separator:a15d3b5c681c36305058ac5c2e24590ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a856b5ea8bf96733be82333e091918bb0" id="r_a856b5ea8bf96733be82333e091918bb0"><td class="memItemLeft" align="right" valign="top"><a id="a856b5ea8bf96733be82333e091918bb0" name="a856b5ea8bf96733be82333e091918bb0"></a>
 <a class="el" href="structfatfs_1_1FATFS.html">FATFS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fatfs</b></td></tr>
+<tr class="memdesc:a856b5ea8bf96733be82333e091918bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm-chan.org/fsw/ff/00index_e.html.">FatFs</a> volume object used when this driver is mounted. <br /></td></tr>
 <tr class="separator:a856b5ea8bf96733be82333e091918bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab05e08dca55d9bc1b64cb40009ef85d0" id="r_ab05e08dca55d9bc1b64cb40009ef85d0"><td class="memItemLeft" align="right" valign="top"><a id="ab05e08dca55d9bc1b64cb40009ef85d0" name="ab05e08dca55d9bc1b64cb40009ef85d0"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_sd_status</b> (void *buff)</td></tr>
+<tr class="memdesc:ab05e08dca55d9bc1b64cb40009ef85d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the 64 byte SD Status register: CMD55 (RCA) followed by ACMD13. <br /></td></tr>
+<tr class="separator:ab05e08dca55d9bc1b64cb40009ef85d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -224,32 +233,30 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
 <div class="textblock"><p>Accessing an SD card via the ESP32 SDMMC interface using low-level API. </p>
 <p>This driver uses the ESP32's built-in SDMMC controller for high-speed SD card access via the ESP-IDF low-level driver API. It supports both 1-bit and 4-bit bus modes with custom pin configuration.</p>
 <p>Example usage: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;fatfs.h&quot;</span></div>
-<div class="line"><span class="keyword">using namespace </span>fatfs;</div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="Esp32SdmmcIO_8h.html">driver/Esp32SdmmcIO.h</a>&quot;</span></div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_variable" href="classfatfs_1_1IO.html#a856b5ea8bf96733be82333e091918bb0">fatfs</a>;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Method 1: Default constructor + begin()</span></div>
+<div class="line"><span class="comment">// Method 1: Default constructor + explicit begin()</span></div>
 <div class="line"><a class="code hl_class" href="classfatfs_1_1Esp32SdmmcIO.html">Esp32SdmmcIO</a> driver1;</div>
-<div class="line"><a class="code hl_class" href="classfatfs_1_1FatFs.html">FatFs</a> fs1;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">  <span class="keywordflow">if</span> (!driver1.<a class="code hl_function" href="classfatfs_1_1Esp32SdmmcIO.html#a5d1844e0ce25bc812992db8136d16ce8">begin</a>(<span class="keyword">false</span>, SDMMC_FREQ_DEFAULT)) {</div>
 <div class="line">    Serial.println(<span class="stringliteral">&quot;Card Mount Failed&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">return</span>;</div>
 <div class="line">  }</div>
-<div class="line">  driver1.<a class="code hl_function" href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">mount</a>(fs1);</div>
+<div class="line">  SD.<a class="code hl_function" href="classfatfs_1_1Esp32SdmmcIO.html#a5d1844e0ce25bc812992db8136d16ce8">begin</a>(driver1);  <span class="comment">// mounts the already initialized card</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Method 2: Constructor with config (auto-init on mount)</span></div>
+<div class="line"><span class="comment">// Method 2: Constructor with config (card is initialized on first use)</span></div>
 <div class="line"><a class="code hl_class" href="classfatfs_1_1Esp32SdmmcIO.html">Esp32SdmmcIO</a> driver2(<span class="keyword">false</span>, SDMMC_FREQ_DEFAULT);  <span class="comment">// 4-bit, 20MHz</span></div>
-<div class="line"><a class="code hl_class" href="classfatfs_1_1FatFs.html">FatFs</a> fs2;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
-<div class="line">  <span class="comment">// Card initializes automatically when mounting</span></div>
-<div class="line">  driver2.mount(fs2);</div>
+<div class="line">  SD.begin(driver2);  <span class="comment">// card initializes automatically when mounting</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassfatfs_1_1Esp32SdmmcIO_html"><div class="ttname"><a href="classfatfs_1_1Esp32SdmmcIO.html">fatfs::Esp32SdmmcIO</a></div><div class="ttdoc">Accessing an SD card via the ESP32 SDMMC interface using low-level API.</div><div class="ttdef"><b>Definition</b> Esp32SdmmcIO.h:60</div></div>
+<div class="ttc" id="aEsp32SdmmcIO_8h_html"><div class="ttname"><a href="Esp32SdmmcIO_8h.html">Esp32SdmmcIO.h</a></div><div class="ttdoc">FatFs driver for ESP32 SDMMC interface using low-level API.</div></div>
+<div class="ttc" id="aclassfatfs_1_1Esp32SdmmcIO_html"><div class="ttname"><a href="classfatfs_1_1Esp32SdmmcIO.html">fatfs::Esp32SdmmcIO</a></div><div class="ttdoc">Accessing an SD card via the ESP32 SDMMC interface using low-level API.</div><div class="ttdef"><b>Definition</b> Esp32SdmmcIO.h:59</div></div>
 <div class="ttc" id="aclassfatfs_1_1Esp32SdmmcIO_html_a5d1844e0ce25bc812992db8136d16ce8"><div class="ttname"><a href="classfatfs_1_1Esp32SdmmcIO.html#a5d1844e0ce25bc812992db8136d16ce8">fatfs::Esp32SdmmcIO::begin</a></div><div class="ttdeci">bool begin(bool mode1bit=false, int max_freq_khz=SDMMC_FREQ_DEFAULT)</div><div class="ttdoc">Initialize the SDMMC interface and mount the SD card.</div><div class="ttdef"><b>Definition</b> Esp32SdmmcIO.h:117</div></div>
-<div class="ttc" id="aclassfatfs_1_1FatFs_html"><div class="ttname"><a href="classfatfs_1_1FatFs.html">fatfs::FatFs</a></div><div class="ttdoc">API for FatFS See http://elm-chan.org/fsw/ff/00index_e.html.</div><div class="ttdef"><b>Definition</b> ff.h:34</div></div>
-<div class="ttc" id="aclassfatfs_1_1IO_html_a94ba9b7008533195be252507facba6ad"><div class="ttname"><a href="classfatfs_1_1IO.html#a94ba9b7008533195be252507facba6ad">fatfs::IO::mount</a></div><div class="ttdeci">virtual FRESULT mount(FatFs &amp;fs)</div><div class="ttdoc">mount the file system - implementation at end of header to avoid recursive include</div><div class="ttdef"><b>Definition</b> IO.h:100</div></div>
+<div class="ttc" id="aclassfatfs_1_1IO_html_a856b5ea8bf96733be82333e091918bb0"><div class="ttname"><a href="classfatfs_1_1IO.html#a856b5ea8bf96733be82333e091918bb0">fatfs::IO::fatfs</a></div><div class="ttdeci">FATFS fatfs</div><div class="ttdoc">FatFs volume object used when this driver is mounted.</div><div class="ttdef"><b>Definition</b> IO.h:91</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a043c1cdf9bb0a0d39b499a06fefc905a" name="a043c1cdf9bb0a0d39b499a06fefc905a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a043c1cdf9bb0a0d39b499a06fefc905a">&#9670;&#160;</a></span>Esp32SdmmcIO() <span class="overload">[1/2]</span></h2>
@@ -857,8 +864,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
 
 </div>
 </div>
-<a id="a94ba9b7008533195be252507facba6ad" name="a94ba9b7008533195be252507facba6ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94ba9b7008533195be252507facba6ad">&#9670;&#160;</a></span>mount()</h2>
+<a id="a0917f44023aba90becc2fdd8f6a0a4ec" name="a0917f44023aba90becc2fdd8f6a0a4ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0917f44023aba90becc2fdd8f6a0a4ec">&#9670;&#160;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -870,8 +877,18 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
           <td class="memname">FRESULT fatfs::IO::mount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;&#160;</td>
-          <td class="paramname"><em>fs</em></td><td>)</td>
+          <td class="paramname"><em>fs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -881,9 +898,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
 </table>
 </div><div class="memdoc">
 
-<p>mount the file system - implementation at end of header to avoid recursive include </p>
+<p>mount the file system at the given logical drive number (0..FF_VOLUMES-1) - implementation at end of header to avoid recursive include </p>
 
-<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#aba9e355b466152bbe4eb38508dd00c5a">fatfs::MultiIO</a>, and <a class="el" href="classfatfs_1_1RamIO.html#a8331946e7fd5f882a6b00856db1a423a">fatfs::RamIO</a>.</p>
+<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#a49d61683cf29c9a19347f9b737734020">fatfs::MultiIO</a>, and <a class="el" href="classfatfs_1_1RamIO.html#a111f1532db81544176c41c4e56861ce7">fatfs::RamIO</a>.</p>
 
 </div>
 </div>
@@ -915,8 +932,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
 
 </div>
 </div>
-<a id="a789ece18313e9462ce3284944cc02856" name="a789ece18313e9462ce3284944cc02856"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a789ece18313e9462ce3284944cc02856">&#9670;&#160;</a></span>un_mount()</h2>
+<a id="a15d3b5c681c36305058ac5c2e24590ab" name="a15d3b5c681c36305058ac5c2e24590ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d3b5c681c36305058ac5c2e24590ab">&#9670;&#160;</a></span>un_mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -928,8 +945,18 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
           <td class="memname">FRESULT fatfs::IO::un_mount </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classfatfs_1_1FatFs.html">FatFs</a> &amp;&#160;</td>
-          <td class="paramname"><em>fs</em></td><td>)</td>
+          <td class="paramname"><em>fs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>pdrv</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -939,9 +966,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_max_freq_khz</b><
 </table>
 </div><div class="memdoc">
 
-<p>unmount the file system - implementation at end of header to avoid recursive include </p>
+<p>unmount the file system at the given logical drive number - implementation at end of header to avoid recursive include </p>
 
-<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#a38ff93fdfe0c9d2cf1aa57e14d63a61f">fatfs::MultiIO</a>.</p>
+<p>Reimplemented in <a class="el" href="classfatfs_1_1MultiIO.html#a65f2f5d7d0e968b8f8003823f5f193b3">fatfs::MultiIO</a>.</p>
 
 </div>
 </div>

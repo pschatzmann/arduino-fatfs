@@ -79,7 +79,7 @@ $(function() {
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classfatfs_1_1File-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">fatfs::File Class Reference<div class="ingroups"><a class="el" href="group__main.html">Main</a> &raquo; <a class="el" href="group__sd.html">sd</a></div></div></div>
+  <div class="headertitle"><div class="title">fatfs::File Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino FatFs</a> &raquo; <a class="el" href="group__sd.html">sd</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -181,8 +181,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> (char *na
 <tr class="memitem:a45c1e33b634adef2f6182ce748fcb49b" id="r_a45c1e33b634adef2f6182ce748fcb49b"><td class="memItemLeft" align="right" valign="top"><a id="a45c1e33b634adef2f6182ce748fcb49b" name="a45c1e33b634adef2f6182ce748fcb49b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDirectory</b> (void)</td></tr>
 <tr class="separator:a45c1e33b634adef2f6182ce748fcb49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1486d929bfe250d986732d4447852c67" id="r_a1486d929bfe250d986732d4447852c67"><td class="memItemLeft" align="right" valign="top"><a id="a1486d929bfe250d986732d4447852c67" name="a1486d929bfe250d986732d4447852c67"></a>
-<a class="el" href="classfatfs_1_1File.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><b>openNextFile</b> (uint8_t mode=FA_READ)</td></tr>
+<tr class="memitem:a1486d929bfe250d986732d4447852c67" id="r_a1486d929bfe250d986732d4447852c67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfatfs_1_1File.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfatfs_1_1File.html#a1486d929bfe250d986732d4447852c67">openNextFile</a> (uint8_t mode=FA_READ)</td></tr>
 <tr class="separator:a1486d929bfe250d986732d4447852c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a567256495faec259d1d01a530e368a35" id="r_a567256495faec259d1d01a530e368a35"><td class="memItemLeft" align="right" valign="top"><a id="a567256495faec259d1d01a530e368a35" name="a567256495faec259d1d01a530e368a35"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>rewindDirectory</b> (void)</td></tr>
@@ -240,6 +239,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aae0af6e9a9359934e226748312b791a9" id="r_aae0af6e9a9359934e226748312b791a9"><td class="memItemLeft" align="right" valign="top"><a id="aae0af6e9a9359934e226748312b791a9" name="aae0af6e9a9359934e226748312b791a9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_open</b> = false</td></tr>
 <tr class="separator:aae0af6e9a9359934e226748312b791a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad813d5424b63a3d9c589c5c866307df" id="r_aad813d5424b63a3d9c589c5c866307df"><td class="memItemLeft" align="right" valign="top"><a id="aad813d5424b63a3d9c589c5c866307df" name="aad813d5424b63a3d9c589c5c866307df"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>dir_path</b></td></tr>
+<tr class="memdesc:aad813d5424b63a3d9c589c5c866307df"><td class="mdescLeft">&#160;</td><td class="mdescRight">path of the directory (used by openNextFile) <br /></td></tr>
+<tr class="separator:aad813d5424b63a3d9c589c5c866307df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -249,7 +252,35 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SDClass</b></td></tr
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> implementation for fatfs. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1486d929bfe250d986732d4447852c67" name="a1486d929bfe250d986732d4447852c67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1486d929bfe250d986732d4447852c67">&#9670;&#160;</a></span>openNextFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfatfs_1_1File.html">File</a> fatfs::File::openNextFile </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em> = <code>FA_READ</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the next entry of this directory. The returned <a class="el" href="classfatfs_1_1File.html" title="File implementation for fatfs.">File</a> is bound to the same <a class="el" href="classfatfs_1_1FatFs.html" title="API for FatFS See http://elm-chan.org/fsw/ff/00index_e.html.">FatFs</a> instance and its path is relative to the volume root. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="fatfs_8h_source.html">fatfs.h</a></li>
 </ul>
 </div><!-- contents -->
