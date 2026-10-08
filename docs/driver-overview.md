@@ -1,8 +1,8 @@
 # Driver Overview
 
-The FatFs library stops at the driver interface and does not provide any implementation. Tiny FATFS adds the most important drivers. The drivers are written in a flexible way and do not use any predefined fixed pins or ports: e.g. on the SPI driver you can assign the pins as part of SPI, define the CS pin and assign your desired SPI object (e.g. SPI, SPI1, SPI2 etc).
+FatFs defines a driver interface but does not implement any drivers. TinyFATFS provides a set of ready-to-use drivers. None of them hard-code pins or ports: for example, the SPI drivers let you choose the pins, the CS pin, and the SPI object (SPI, SPI1, SPI2, etc.).
 
-The following driver implementations are available:
+The following drivers are available:
 
 | Driver | Header | Storage | Platform | Notes |
 |---|---|---|---|---|
@@ -16,6 +16,6 @@ The following driver implementations are available:
 | `NBDClientIO` | [`driver/NBDClientIO.h`](../src/driver/NBDClientIO.h) | Remote Network Block Device (NBD) export (via arduino-nbd `NBDClient`) | any with a network `Client` | Uses a server's export as a 512 byte sector disk; needs the arduino-nbd `src` folder on the include path |
 | `TinyUsbMscIO` | [`driver/TinyUsbMscIO.h`](../src/driver/TinyUsbMscIO.h) | Exposes another driver over USB | TinyUSB-capable boards | Not an `IO` implementation - answers USB host requests instead of FatFs |
 
-It is very easy to add new drivers, so any contribution will be welcome...
+Adding a new driver is straightforward, and contributions are welcome.
 
-See [Driver Code Examples](driver-examples.md) for usage samples.
+For usage samples, see [Driver Code Examples](driver-examples.md).
