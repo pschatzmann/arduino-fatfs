@@ -233,14 +233,15 @@ class File : public Stream {
   }
 };
 
-/**
- * @brief SDClass: starting driver, access to files
- * @ingroup sd
- */
 
 // Directory iterators are defined in filesystem.h (include it to use them)
 class directory_iterator;
 class recursive_directory_iterator;
+
+/**
+ * @brief SDClass: starting driver, access to files: Accessed via SD object!
+ * @ingroup sd
+ */
 
 class SDClass {
  public:
