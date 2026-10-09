@@ -6,15 +6,15 @@
 #include <vector>
 #include "IO.h"
 
-#ifdef ESP32
+#if defined(ESP32) || defined(ARDUINO_ARCH_RP2040)
 #include "Arduino.h"
 #endif
 
 namespace fatfs {
 
 /**
- * @brief The data is stored in RAM. In a ESP32 when PSRAM has been activated we
- * store it is PSRAM.
+ * @brief The data is stored in RAM. On an ESP32 or RP2350 when PSRAM has been
+ * activated we store it in PSRAM.
  * @ingroup io
  */
 class RamIO : public IO {
@@ -43,8 +43,18 @@ class RamIO : public IO {
         uint8_t* ptr = nullptr;
 #ifdef ESP32
         ptr = (uint8_t*)ps_malloc(sector_size);
+#elif defined(ARDUINO_ARCH_RP2040) && defined(RP2350_PSRAM_CS)
+        // free() releases PSRAM blocks as well
+        ptr = (uint8_t*)pmalloc(sector_size);
 #endif
         if (ptr == nullptr) ptr = (uint8_t*)malloc(sector_size);
+        if (ptr == nullptr) {
+          // out of memory: release what we got and report the failure
+          for (auto* p : sectors) free(p);
+          sectors.clear();
+          status = STA_NOINIT;
+          return status;
+        }
         memset(ptr, 0, sector_size);
         sectors.push_back(ptr);
       }
